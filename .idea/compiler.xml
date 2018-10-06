@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wing-bus" />
+        <module name="wing-center" />
+        <module name="wing-center-client" />
+        <module name="wing-common" />
+        <module name="wing-db-pool-test" />
+        <module name="wing-hatchery-proto" />
+        <module name="wing-proxy" />
+        <module name="wing-server-common" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

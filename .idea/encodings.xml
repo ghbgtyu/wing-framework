@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-bus" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-center-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-center-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-hatchery" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-hatchery/wing-db-pool-test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-hatchery/wing-hatchery-proto" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-proxy" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wing-server-common" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

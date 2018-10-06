@@ -1,0 +1,17 @@
+syntax = "proto3";
+package com.wing.common.rpc.protobuf;
+option optimize_for = CODE_SIZE;
+
+message RpcMsg
+{
+     bool server=1;//是否服务器发起的消息
+     bool sync=2;//是否属于同步的消息
+     int64 seqId = 3;
+     int64 timestamp = 4;
+     int32 type = 5;
+     string content = 6;
+     bytes array = 7;//与content互斥
+     int32 msgType = 8;//协议编号
+     int64 roleId=9;
+
+}

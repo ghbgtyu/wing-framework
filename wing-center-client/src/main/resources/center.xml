@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<root>
+
+
+
+    <center>
+        <ip>127.0.0.1</ip>
+        <port>6379</port>
+        <index>2</index>
+    </center>
+
+
+
+
+
+</root>

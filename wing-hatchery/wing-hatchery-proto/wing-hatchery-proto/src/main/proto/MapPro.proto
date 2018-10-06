@@ -1,0 +1,12 @@
+syntax = "proto3";
+package com.wing.hatchery.test.protobuf;
+option optimize_for = CODE_SIZE;
+message TestObject {
+    map<string, MapVaule> map = 1;
+
+
+    message MapVaule {
+        int32 mapValue = 1;
+
+    }
+}
