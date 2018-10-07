@@ -15,6 +15,8 @@
     <modules>
         <module>wing-db-pool-test</module>
         <module>wing-hatchery-proto</module>
+        <module>glassfish-jersey</module>
+        <module>my-glassfish-jersey</module>
     </modules>
 
 
@@ -23,40 +25,53 @@
         <grpc.version>1.6.0</grpc.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.wing.common</groupId>
-            <artifactId>wing-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty</artifactId>
-            <version>${grpc.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-protobuf</artifactId>
-            <version>${grpc.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-stub</artifactId>
-            <version>${grpc.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>${protobuf.version}</version>
-        </dependency>
 
 
+    <dependencyManagement>
 
-    </dependencies>
+
+        <dependencies>
+            <dependency>
+                <groupId>com.wing.common</groupId>
+                <artifactId>wing-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-netty</artifactId>
+                <version>${grpc.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-protobuf</artifactId>
+                <version>${grpc.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-stub</artifactId>
+                <version>${grpc.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+
+
+
+
+
+
+        </dependencies>
+
+
+
+    </dependencyManagement>
+
 
     <build>
         <extensions>
