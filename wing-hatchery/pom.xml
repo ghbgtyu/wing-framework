@@ -15,7 +15,6 @@
     <modules>
         <module>wing-db-pool-test</module>
         <module>wing-hatchery-proto</module>
-        <module>glassfish-jersey</module>
         <module>my-glassfish-jersey</module>
     </modules>
 
