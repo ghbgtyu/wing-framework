@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import com.mokylin.cabal.common.security.Digests;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
@@ -127,5 +128,13 @@ public class Encodes {
 		} catch (UnsupportedEncodingException e) {
 			throw Exceptions.unchecked(e);
 		}
+	}
+
+	public static void main(String[] args) {
+		String password = "123.com";
+		String plainPassword = "123.com";
+		byte[] salt = Encodes.decodeHex(password.substring(0,16));
+		byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, 1024);
+		System.err.print(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
 	}
 }

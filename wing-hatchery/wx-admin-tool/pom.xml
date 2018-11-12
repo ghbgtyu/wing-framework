@@ -613,6 +613,28 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>properties/application.properties</include>
+                    <include>log4j2.properties</include>
+                    <include>version.properties</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>properties/application.properties</exclude>
+                    <exclude>**/*.svn</exclude>
+                    <exclude>**/*.gitignore</exclude>
+                    <exclude>**/Thumbs.db</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <finalName>wx-admin-tools</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
@@ -645,7 +667,140 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.2</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+
+                <!-- war 打包插件, 设定war包名称不带版本号 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.3</version>
+                    <configuration>
+                        <warName>${project.artifactId}</warName>
+                    </configuration>
+                </plugin>
+
+                <!-- tomcat7插件 -->
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>${tomcat.version}</version>
+                    <configuration>
+                        <port>${webserver.port}</port>
+                        <path>/${project.artifactId}</path>
+                        <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
+                    </configuration>
+                </plugin>
+
+                <!-- resource插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+
+                <!-- install插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+
+                <!-- clean插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.5</version>
+                </plugin>
+
+                <!-- ant插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>1.7</version>
+                </plugin>
+
+                <!-- dependency插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.5.1</version>
+                </plugin>
+
+
             </plugins>
         </pluginManagement>
     </build>
-</project>
+
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <lan>zh_CN</lan>
+                <jdbc.url>jdbc:mysql://localhost:3306/analysis?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+
+                <jdbc.username>root</jdbc.username>
+                <jdbc.password>root123</jdbc.password>
+                <!-->
+                 <global.jdbc.url>jdbc:mysql://192.168.1.27:3306/zmm-global?useUnicode=true&amp;characterEncoding=utf-8</global.jdbc.url>
+                 <log.jdbc.url>jdbc:mysql://192.168.1.34:5029/zmm_log1?useUnicode=true&amp;characterEncoding=utf-8</log.jdbc.url>
+                 <global.jdbc.username>linyu</global.jdbc.username>
+                 <global.jdbc.password>123456</global.jdbc.password>
+                 <log.jdbc.username>lingyu</log.jdbc.username>
+                 <log.jdbc.password>123.com,.</log.jdbc.password>
+                <-->
+                 <log.level>info</log.level>
+             </properties>
+             <activation>
+                 <activeByDefault>true</activeByDefault>
+             </activation>
+         </profile>
+         <profile>
+             <id>test</id>
+             <properties>
+                 <lan>zh_CN</lan>
+                 <jdbc.url>jdbc:mysql://localhost:3306/analysis?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+                 <!--><global.jdbc.url>jdbc:mysql://192.168.1.27:3306/zmm-global?useUnicode=true&amp;characterEncoding=utf-8</global.jdbc.url>
+                <log.jdbc.url>jdbc:mysql://192.168.1.66:5029/fengshen_log?useUnicode=true&amp;characterEncoding=utf-8</log.jdbc.url>
+                 <global.jdbc.username>linyu</global.jdbc.username>
+                <global.jdbc.password>123456</global.jdbc.password>
+                <log.jdbc.username>lingyu</log.jdbc.username>
+                <log.jdbc.password>123.com</log.jdbc.password>
+                <-->
+                <jdbc.username>root</jdbc.username>
+                <jdbc.password>root123</jdbc.password>
+
+
+                <log.level>info</log.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>zhanshen</id>
+            <properties>
+                <lan>zh_CN</lan>
+                <jdbc.url>jdbc:mysql://localhost:3306/analysis?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+                <!--> <global.jdbc.url>jdbc:mysql://192.168.1.27:3306/zhanshen_global?useUnicode=true&amp;characterEncoding=utf-8</global.jdbc.url>
+                 <log.jdbc.url>jdbc:mysql://10.4.17.32:5029/zhanshen_log?useUnicode=true&amp;characterEncoding=utf-8</log.jdbc.url>
+
+                 <global.jdbc.username>zhanshen</global.jdbc.username>
+                 <global.jdbc.password>123456</global.jdbc.password>
+                 <log.jdbc.username>zhanshen</log.jdbc.username>
+                 <log.jdbc.password>123456</log.jdbc.password>
+                    <-->
+                <jdbc.username>root</jdbc.username>
+                <jdbc.password>root123</jdbc.password>
+                 <log.level>info</log.level>
+             </properties>
+         </profile>
+     </profiles>
+ </project>

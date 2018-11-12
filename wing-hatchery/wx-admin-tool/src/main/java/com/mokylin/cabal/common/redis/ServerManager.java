@@ -40,7 +40,7 @@ public class ServerManager {
     public ServerManager() {
     }
 
-    @PostConstruct
+    //@PostConstruct
     public void init() {
         logger.info("项目启动-缓存初始化开始");
 

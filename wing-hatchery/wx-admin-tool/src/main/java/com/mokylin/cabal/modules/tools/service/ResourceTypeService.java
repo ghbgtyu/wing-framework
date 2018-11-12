@@ -38,7 +38,7 @@ public class ResourceTypeService {
     private static final String FILE_TYPE = "resourceType.txt";  //资源线
     private static Map<String, String> resourceMap = new HashMap<String, String>();   //资源线
 
-    @PostConstruct
+   // @PostConstruct
     public void init() {
 
         try {

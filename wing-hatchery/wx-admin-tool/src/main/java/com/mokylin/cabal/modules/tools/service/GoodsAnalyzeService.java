@@ -40,7 +40,7 @@ public class GoodsAnalyzeService{
     private List<Goods> xuniGoodsList = new ArrayList<Goods>();
 
 
-    @PostConstruct
+    //@PostConstruct
     public void init(){
 
         try{
