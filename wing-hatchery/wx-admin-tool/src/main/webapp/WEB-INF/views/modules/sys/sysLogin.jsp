@@ -59,7 +59,7 @@
 		</div>
         <div id="login-wraper">
             <form id="loginForm"  class="form login-form" action="${ctx}/login" method="post">
-                <legend><span style="color:#F0FFFF;">分析系统</span></legend>
+                <legend><span style="color:#F0FFFF;">合同管理系统</span></legend>
                 <div class="body">
 					<div class="control-group">
 						<div class="controls">

@@ -149,7 +149,7 @@ public class SystemService extends BaseService  {
 		byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
 		return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
 	}
-	
+
 	/**
 	 * 验证密码
 	 * @param plainPassword 明文密码

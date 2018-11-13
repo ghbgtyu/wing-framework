@@ -96,75 +96,75 @@
                            <%--<li><a href="?locale=en_US">English</a></li>--%>
                        <%--</ul>--%>
                  <%--</li>--%>
-                       <li>
-                 <div class="btn_private" style="width:120px" onclick="selectServer()" id="currentGameServer"><c:choose><c:when test="${not empty currentGameServerName}">${currentGameServerName}</c:when><c:otherwise>游戏服务器</c:otherwise></c:choose></div>
-                       </li>
-                 
+<%--  <li>
+<div class="btn_private" style="width:120px" onclick="selectServer()" id="currentGameServer"><c:choose><c:when test="${not empty currentGameServerName}">${currentGameServerName}</c:when><c:otherwise>游戏服务器</c:otherwise></c:choose></div>
+</li>--%>
 
-			  	 <li id="themeSwitch" class="dropdown">
-			       	<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="<spring:message code='theme.switch'/>"><i class="icon-th-large"></i></a>
-				    <ul class="dropdown-menu">
-				      <c:forEach items="${fns:getDictList('theme')}" var="dict"><li><a href="#" onclick="location='${pageContext.request.contextPath}/theme/${dict.value}?url='+location.href">${dict.label}</a></li></c:forEach>
-				    </ul>
-				    <!--[if lte IE 6]><script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->
-			     </li>
-			  	 <li class="dropdown">
-				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="个人信息"><spring:message code="Hello"/> , <shiro:principal property="loginName"/></a>
-				    <ul class="dropdown-menu">
-				      <li><a href="${ctx}/sys/user/info" target="mainFrame"><i class="icon-user"></i>&nbsp; <spring:message code="person.info"/></a></li>
-				      <li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame"><i class="icon-lock"></i>&nbsp;  <spring:message code="modify.passwod"/></a></li>
-				    </ul>
-			  	 </li>
-			  	 <li><a href="${ctx}/logout" title="<spring:message code="logout"/>">Logout</a></li>
-			  	 <li>&nbsp;</li>
-	           </ul>
-	         </div><!--/.nav-collapse -->
-	      </div>
-	    </div>
-        <tags:message content="${message}"/>
-        <form id="changeGameServerForm" action="" method="post" class="hide"></form>
-	    <div class="container-fluid">
-			<div id="content" class="row-fluid">
-				<div id="left">
-					<iframe id="menuFrame" name="menuFrame" src="${ctx}/sys/menu/tree?parentId=${firstMenuId}" style="overflow:visible;"
-						scrolling="yes" frameborder="no" width="100%" height="650"></iframe>
-				</div>
-				<div id="openClose" class="close">&nbsp;</div>
-				<div id="right">
-					<iframe id="mainFrame" name="mainFrame" src="" style="overflow:visible;"
-						scrolling="yes" frameborder="no" width="100%" height="650"></iframe>
-				</div>
-			</div>
-		    <div id="footer" class="row-fluid">
-	            Copyright &copy; 2012-${fns:getConfig('copyrightYear')} ${fns:getConfig('productName')} - Powered By <a href="https://github.com/mokylin/cabal" target="_blank">Cabal</a> ${fns:getConfig('version')}
-                <div class="pull-right">
-                    <a href="?locale=zh_CN">中文</a> |
-                    <a href="?locale=en_US">English</a>
-                </div>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		var leftWidth = "180"; // 左侧窗口大小
-		function wSize(){
-			var minHeight = 500, minWidth = 980;
-			var strs=getWindowSize().toString().split(",");
-			$("#menuFrame, #mainFrame, #openClose").height((strs[0]<minHeight?minHeight:strs[0])-$("#header").height()-$("#footer").height()-32);
-			$("#openClose").height($("#openClose").height()-5);
-			if(strs[1]<minWidth){
-				$("#main").css("width",minWidth-10);
-				$("html,body").css({"overflow":"auto","overflow-x":"auto","overflow-y":"auto"});
-			}else{
-				$("#main").css("width","auto");
-				$("html,body").css({"overflow":"hidden","overflow-x":"hidden","overflow-y":"hidden"});
-			}
-			$("#right").width($("#content").width()-$("#left").width()-$("#openClose").width()-5);
-		}
 
-        function changeGamePlatform(name){
-            $("#current_game_platform").html('<spring:message code='platform'/>:'+name);
-        }
-	</script>
-	<script src="${ctxStatic}/common/wsize.min.js" type="text/javascript"></script>
+<li id="themeSwitch" class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="<spring:message code='theme.switch'/>"><i class="icon-th-large"></i></a>
+<ul class="dropdown-menu">
+<c:forEach items="${fns:getDictList('theme')}" var="dict"><li><a href="#" onclick="location='${pageContext.request.contextPath}/theme/${dict.value}?url='+location.href">${dict.label}</a></li></c:forEach>
+</ul>
+<!--[if lte IE 6]><script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->
+</li>
+<li class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="个人信息"><spring:message code="Hello"/> , <shiro:principal property="loginName"/></a>
+<ul class="dropdown-menu">
+<li><a href="${ctx}/sys/user/info" target="mainFrame"><i class="icon-user"></i>&nbsp; <spring:message code="person.info"/></a></li>
+<li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame"><i class="icon-lock"></i>&nbsp;  <spring:message code="modify.passwod"/></a></li>
+</ul>
+</li>
+<li><a href="${ctx}/logout" title="<spring:message code="logout"/>">Logout</a></li>
+<li>&nbsp;</li>
+</ul>
+</div><!--/.nav-collapse -->
+</div>
+</div>
+<tags:message content="${message}"/>
+<form id="changeGameServerForm" action="" method="post" class="hide"></form>
+<div class="container-fluid">
+<div id="content" class="row-fluid">
+<div id="left">
+<iframe id="menuFrame" name="menuFrame" src="${ctx}/sys/menu/tree?parentId=${firstMenuId}" style="overflow:visible;"
+scrolling="yes" frameborder="no" width="100%" height="650"></iframe>
+</div>
+<div id="openClose" class="close">&nbsp;</div>
+<div id="right">
+<iframe id="mainFrame" name="mainFrame" src="" style="overflow:visible;"
+scrolling="yes" frameborder="no" width="100%" height="650"></iframe>
+</div>
+</div>
+<div id="footer" class="row-fluid">
+Copyright &copy; 2012-${fns:getConfig('copyrightYear')} ${fns:getConfig('productName')} - Powered By <a href="https://github.com/mokylin/cabal" target="_blank">Cabal</a> ${fns:getConfig('version')}
+<div class="pull-right">
+<a href="?locale=zh_CN">中文</a> |
+<a href="?locale=en_US">English</a>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+var leftWidth = "180"; // 左侧窗口大小
+function wSize(){
+var minHeight = 500, minWidth = 980;
+var strs=getWindowSize().toString().split(",");
+$("#menuFrame, #mainFrame, #openClose").height((strs[0]<minHeight?minHeight:strs[0])-$("#header").height()-$("#footer").height()-32);
+$("#openClose").height($("#openClose").height()-5);
+if(strs[1]<minWidth){
+$("#main").css("width",minWidth-10);
+$("html,body").css({"overflow":"auto","overflow-x":"auto","overflow-y":"auto"});
+}else{
+$("#main").css("width","auto");
+$("html,body").css({"overflow":"hidden","overflow-x":"hidden","overflow-y":"hidden"});
+}
+$("#right").width($("#content").width()-$("#left").width()-$("#openClose").width()-5);
+}
+
+function changeGamePlatform(name){
+$("#current_game_platform").html('<spring:message code='platform'/>:'+name);
+}
+</script>
+<script src="${ctxStatic}/common/wsize.min.js" type="text/javascript"></script>
 </body>
 </html>

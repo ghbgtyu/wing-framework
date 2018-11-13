@@ -144,45 +144,45 @@
 		</div>
 
         <div class="control-group">
-        <label class="control-label">平台权限:</label>
+			<%--<label class="control-label">平台权限:</label>--%>
         <%--<div class="controls">--%>
             <%--<input type="radio" name="isGlobal" value="1" onclick="doS();"/>全平台权限--%>
             <%--<input type="radio" name="isGlobal" value="0" onclick="$('#platformIds').show()"/>指定平台权限--%>
         <%--</div>--%>
-           <div class="controls" id="platformIds" style="display:true;">
-                <input type="checkbox" class="case" value="" id="selectAll" name="selectAll"/>选择全部
-                <input id="isGlobal" name="isGlobal" type="hidden" value="${role.isGlobal}"/>
-                <form:checkboxes path="gamePlatformIds" items="${allGamePlatforms}" itemLabel="name" itemValue="id" htmlEscape="false" cssClass="case required"/>
-            </div>
-        </div>
-		<div class="form-actions">
-			<shiro:hasPermission name="sys:role:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
-			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
-		</div>
-	</form:form>
+		<%-- <div class="controls" id="platformIds" style="display:true;">
+              <input type="checkbox" class="case" value="" id="selectAll" name="selectAll"/>选择全部
+              <input id="isGlobal" name="isGlobal" type="hidden" value="${role.isGlobal}"/>
+              <form:checkboxes path="gamePlatformIds" items="${allGamePlatforms}" itemLabel="name" itemValue="id" htmlEscape="false" cssClass="case required"/>
+          </div>--%>
+      </div>
+      <div class="form-actions">
+          <shiro:hasPermission name="sys:role:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
+          <input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
+      </div>
+  </form:form>
 
 <script type="text/javascript">
-    $(function(){
-        $("#selectAll").click(function () {
-            selectAll();
-        })
+  $(function(){
+      $("#selectAll").click(function () {
+          selectAll();
+      })
 
-        //当现有平台只有2个，以后新增平台之后，旧的角色根据isGlobal字段判断，进入修改界面之后则默认选择所有平台
-        var isGlobal = ${role.isGlobal};
-        if(isGlobal == 1){
-            $('.case').attr('checked', 'checked');
-            $("#isGlobal").val('1');
-        }
-    });
-    function selectAll(){
-        if($("#selectAll").attr("checked") == 'checked'){
-            $('.case').attr('checked', 'checked');
-            $("#isGlobal").val('1');
-        }else {
-            $('.case').removeAttr('checked');
-            $("#isGlobal").val('0');
-        }
-    }
+      //当现有平台只有2个，以后新增平台之后，旧的角色根据isGlobal字段判断，进入修改界面之后则默认选择所有平台
+      var isGlobal = ${role.isGlobal};
+      if(isGlobal == 1){
+          $('.case').attr('checked', 'checked');
+          $("#isGlobal").val('1');
+      }
+  });
+  function selectAll(){
+      if($("#selectAll").attr("checked") == 'checked'){
+          $('.case').attr('checked', 'checked');
+          $("#isGlobal").val('1');
+      }else {
+          $('.case').removeAttr('checked');
+          $("#isGlobal").val('0');
+      }
+  }
 </script>
 </body>
 </html>

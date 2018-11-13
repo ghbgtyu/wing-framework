@@ -81,13 +81,13 @@ public class RoleController extends BaseController {
 //		model.addAttribute("categoryList", categoryService.findByUser(false, null));
 		model.addAttribute("officeList", officeService.findAll());
         //model.addAttribute("gamePlatformList", GameServerUtils.getGamePlatformList());
-        model.addAttribute("allGamePlatforms",systemService.findAllGamePlatform());
+        //model.addAttribute("allGamePlatforms",systemService.findAllGamePlatform());
 		return "modules/sys/roleForm";
 	}
 	
 	@RequiresPermissions("sys:role:edit")
 	@RequestMapping(value = "save")
-	public String save(Role role, HttpServletRequest request, Model model,String isGlobal, String oldName, RedirectAttributes redirectAttributes) {
+	public String save(Role role, HttpServletRequest request, Model model, String oldName, RedirectAttributes redirectAttributes) {
 
 		if (!beanValidator(model, role)){
 			return form(role, model);
@@ -98,24 +98,24 @@ public class RoleController extends BaseController {
 		}
 
         //全平台权限
-        if(isGlobal == null || isGlobal.equals("")){
-            role.setIsGlobal("0");
-        }else {
-            role.setIsGlobal(isGlobal);
-        }
+//        if(isGlobal == null || isGlobal.equals("")){
+//            role.setIsGlobal("0");
+//        }else {
+//            role.setIsGlobal(isGlobal);
+//        }
 
         // save the transient instance before flushing: GamePlatform
 
-        List<GamePlatform> gamePlatformList = Lists.newArrayList();
-        List<String> gamePlatformIds = role.getGamePlatformIds();
-        if(gamePlatformIds != null){
-            for (GamePlatform r : systemService.findAllGamePlatform()){
-                if (gamePlatformIds.contains(r.getId())){
-                    gamePlatformList.add(r);
-                }
-            }
-            role.setGamePlatformList(gamePlatformList);
-        }
+//        List<GamePlatform> gamePlatformList = Lists.newArrayList();
+//        List<String> gamePlatformIds = role.getGamePlatformIds();
+//        if(gamePlatformIds != null){
+//            for (GamePlatform r : systemService.findAllGamePlatform()){
+//                if (gamePlatformIds.contains(r.getId())){
+//                    gamePlatformList.add(r);
+//                }
+//            }
+//            role.setGamePlatformList(gamePlatformList);
+//        }
 
 		systemService.saveRole(role);
 		addMessage(redirectAttributes, "保存角色'" + role.getName() + "'成功");
