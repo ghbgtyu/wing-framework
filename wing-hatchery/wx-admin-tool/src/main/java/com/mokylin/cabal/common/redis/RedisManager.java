@@ -36,7 +36,7 @@ public class RedisManager {
 		globalCache = new Redis(ip, port, index);
 	}
 
-	@PostConstruct
+	//@PostConstruct
 	public void init() {
 		globalCache = new Redis(ConfigConstants.REDIS_HOST, ConfigConstants.REDIS_PORT.intValue(), ConfigConstants.CHAT_REDIS_INDEX.intValue());
 		gameCache = new Redis(ConfigConstants.REDIS_HOST, ConfigConstants.REDIS_PORT.intValue(), ConfigConstants.GAME_REDIS_INDEX.intValue());
