@@ -17,6 +17,7 @@
         <module>wing-hatchery-proto</module>
         <module>my-glassfish-jersey</module>
         <module>wx-admin-tool</module>
+        <module>admin-tools</module>
 
     </modules>
 
