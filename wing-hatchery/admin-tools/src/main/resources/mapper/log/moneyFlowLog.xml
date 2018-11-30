@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="moneyFlowLog">
+
+
+    <select id="findMoneyConsumeLog" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+	    SELECT
+			money_flow_log.role_name role_name,
+			money_flow_log.money_type money_type,
+			money_flow_log.operate_type operate_type,
+			money_flow_log.`value` `value`,
+			money_flow_log.before_value before_value,
+			money_flow_log.after_value after_value,
+			money_flow_log.add_time add_time
+		FROM
+			money_flow_log
+		WHERE
+			money_flow_log.flow_type = 2
+			<if test="@Ognl@isNotBlank(moneyType)">and money_type <![CDATA[ = ]]>#{moneyType}</if>
+			<if test="@Ognl@isNotBlank(operateType)">and operate_type <![CDATA[ = ]]>#{operateType}</if>
+			<if test="@Ognl@isNotBlank(roleName)">and role_name like #{roleName}</if>
+			<if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(replace(#{createDateStart},'-',''),' ','')</if>
+			<if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(replace(#{createDateEnd},'-',''),' ','')</if>
+		ORDER BY
+			money_flow_log.log_time ASC
+    </select>
+    <select id="findMoneyGetLog" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+	    SELECT
+			money_flow_log.role_name role_name,
+			money_flow_log.money_type money_type,
+			money_flow_log.operate_type operate_type,
+			money_flow_log.`value` `value`,
+			money_flow_log.before_value before_value,
+			money_flow_log.after_value after_value,
+			money_flow_log.add_time add_time
+		FROM
+			money_flow_log
+		WHERE
+			money_flow_log.flow_type = 1
+			<if test="@Ognl@isNotBlank(moneyType)">and money_type <![CDATA[ = ]]>#{moneyType}</if>
+			<if test="@Ognl@isNotBlank(operateType)">and operate_type <![CDATA[ = ]]>#{operateType}</if>
+			<if test="@Ognl@isNotBlank(roleName)">and role_name like #{roleName}</if>
+			<if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(replace(#{createDateStart},'-',''),' ','')</if>
+			<if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(replace(#{createDateEnd},'-',''),' ','')</if>
+		ORDER BY
+			money_flow_log.log_time ASC
+    </select>
+</mapper>

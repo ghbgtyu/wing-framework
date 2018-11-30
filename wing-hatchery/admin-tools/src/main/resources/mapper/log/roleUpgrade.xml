@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="roleUpgrade">
+    <select id="findLevelLogReport" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+    	SELECT
+			role_upgrade.role_id role_id,
+			role_upgrade.role_name role_name,
+			role_upgrade.`level` `level`,
+			role_upgrade.upgrade_time upgrade_time,
+			role_upgrade.log_day log_day
+		FROM
+			role_upgrade
+		WHERE
+			1 = 1
+			<if test="@Ognl@isNotBlank(roleName)">and role_name like #{roleName}</if>
+			<if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(replace(#{createDateStart},'-',''),' ','')</if>
+			<if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(replace(#{createDateEnd},'-',''),' ','')</if>
+		ORDER BY
+			role_upgrade.`level` DESC
+    </select>
+</mapper>

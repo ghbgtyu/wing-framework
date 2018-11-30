@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="statRealTimeService">
+    <select id="findRealTimeServiceReport" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+			SELECT
+				stat_real_time_service.log_minute log_minute,
+				stat_real_time_service.pid pid,
+				stat_real_time_service.area_id area_id,
+				stat_real_time_service.ru ru,
+				stat_real_time_service.au au,
+				stat_real_time_service.num num,
+				stat_real_time_service.pa pa,
+				stat_real_time_service.pay_times pay_times,
+				stat_real_time_service.income income,
+				stat_real_time_service.pay_rate pay_rate,
+				stat_real_time_service.arpu arpu
+			FROM 
+				stat_real_time_service
+			WHERE
+				1 = 1
+          		<if test="@Ognl@isNotBlank(createDateStart)">and log_hour <![CDATA[ = ]]>replace(replace(#{createDateStart},'-',''),' ','')</if>
+			ORDER BY
+				stat_real_time_service.log_minute DESC
+    </select>
+        
+    <select id="findNewRegister" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+			SELECT
+				stat_real_time_service.log_day log_day,
+				stat_real_time_service.log_hour%100 log_hour,
+				stat_real_time_service.ru ru
+			FROM
+				stat_real_time_service
+			WHERE
+				1 = 1 
+				<if test="@Ognl@isNotBlank(createDateStart)">and stat_real_time_service.log_day <![CDATA[ = ]]>replace(replace(#{createDateStart},'-',''),' ','')</if>
+			    <if test="@Ognl@isNotBlank(serverIdList)">
+					AND area_id IN
+					<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+							#{item}
+					</foreach>
+				</if>				
+			ORDER BY 
+				log_hour ASC
+    </select>
+    <select id="findServerNewRegister" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+			SELECT DISTINCT
+				stat_real_time_service.log_day log_day,
+				stat_real_time_service.pid pid,
+				stat_real_time_service.area_id area_id,
+				SUM(stat_real_time_service.ru) sum_register
+			FROM
+				stat_real_time_service
+			WHERE
+				1 = 1
+				<if test="@Ognl@isNotBlank(createDateStart)">and stat_real_time_service.log_day <![CDATA[ = ]]>replace(replace(#{createDateStart},'-',''),' ','')</if>
+			    <if test="@Ognl@isNotBlank(serverIdList)">
+					AND area_id IN
+					<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+							#{item}
+					</foreach>
+				</if>				
+			GROUP BY
+				stat_real_time_service.log_day,
+				stat_real_time_service.pid,
+				stat_real_time_service.area_id
+    </select>
+
+	<!-- 在线数据时点分布 -->
+	<select id="onlinePointDis" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		 select DATE_FORMAT(log_day,'%Y-%m-%d')as logDay,
+				log_hour as logHour,
+				sum(num) as onlineCount
+		 from stat_real_time_service
+		 where log_day = #{day} 
+	    <if test="@Ognl@isNotBlank(serverIdList)">
+			AND area_id IN
+			<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+					#{item}
+			</foreach>
+		</if>		 
+		 GROUP BY log_hour
+		 ORDER BY log_hour desc
+	</select>
+    
+    
+	<!-- 在线数据时点分布对比 -->
+	<select id="onlinePointCompare" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+
+		select  DATE_FORMAT(log_day,'%Y-%m-%d')as logDay,
+
+					SUM(case log_hour  when CONCAT(#{day},'00') then num else 0 end) h0,
+					SUM(case log_hour  when CONCAT(#{day},'01') then num else 0 end) h1,
+					SUM(case log_hour  when CONCAT(#{day},'02') then num else 0 end) h2,
+					SUM(case log_hour  when CONCAT(#{day},'03') then num else 0 end) h3,
+					SUM(case log_hour  when CONCAT(#{day},'04') then num else 0 end) h4,
+					SUM(case log_hour  when CONCAT(#{day},'05') then num else 0 end) h5,
+					SUM(case log_hour  when CONCAT(#{day},'06') then num else 0 end) h6,
+					SUM(case log_hour  when CONCAT(#{day},'07') then num else 0 end) h7,
+					SUM(case log_hour  when CONCAT(#{day},'08') then num else 0 end) h8,
+					SUM(case log_hour  when CONCAT(#{day},'09') then num else 0 end) h9,
+					SUM(case log_hour  when CONCAT(#{day},'10') then num else 0 end) h10,
+					SUM(case log_hour  when CONCAT(#{day},'11') then num else 0 end) h11,
+					SUM(case log_hour  when CONCAT(#{day},'12') then num else 0 end) h12,
+					SUM(case log_hour  when CONCAT(#{day},'13') then num else 0 end) h13,
+					SUM(case log_hour  when CONCAT(#{day},'14') then num else 0 end) h14,
+					SUM(case log_hour  when CONCAT(#{day},'15') then num else 0 end) h15,
+					SUM(case log_hour  when CONCAT(#{day},'16') then num else 0 end) h16,
+					SUM(case log_hour  when CONCAT(#{day},'17') then num else 0 end) h17,
+					SUM(case log_hour  when CONCAT(#{day},'18') then num else 0 end) h18,
+					SUM(case log_hour  when CONCAT(#{day},'19') then num else 0 end) h19,
+					SUM(case log_hour  when CONCAT(#{day},'20') then num else 0 end) h20,
+					SUM(case log_hour  when CONCAT(#{day},'21') then num else 0 end) h21,
+					SUM(case log_hour  when CONCAT(#{day},'22') then num else 0 end) h22,
+					SUM(case log_hour  when CONCAT(#{day},'23') then num else 0 end) h23
+			from stat_real_time_service
+			where  log_day = #{day}
+			<if test="@Ognl@isNotBlank(serverIdList)">
+				AND area_id IN
+				<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+						#{item}
+				</foreach>
+			</if>
+			union
+			select  DATE_FORMAT(log_day,'%Y-%m-%d')as logDay,
+					SUM(case log_hour  when CONCAT(#{afterDay},'00') then num else 0 end) h0,
+					SUM(case log_hour  when CONCAT(#{afterDay},'01') then num else 0 end) h1,
+					SUM(case log_hour  when CONCAT(#{afterDay},'02') then num else 0 end) h2,
+					SUM(case log_hour  when CONCAT(#{afterDay},'03') then num else 0 end) h3,
+					SUM(case log_hour  when CONCAT(#{afterDay},'04') then num else 0 end) h4,
+					SUM(case log_hour  when CONCAT(#{afterDay},'05') then num else 0 end) h5,
+					SUM(case log_hour  when CONCAT(#{afterDay},'06') then num else 0 end) h6,
+					SUM(case log_hour  when CONCAT(#{afterDay},'07') then num else 0 end) h7,
+					SUM(case log_hour  when CONCAT(#{afterDay},'08') then num else 0 end) h8,
+					SUM(case log_hour  when CONCAT(#{afterDay},'09') then num else 0 end) h9,
+					SUM(case log_hour  when CONCAT(#{afterDay},'10') then num else 0 end) h10,
+					SUM(case log_hour  when CONCAT(#{afterDay},'11') then num else 0 end) h11,
+					SUM(case log_hour  when CONCAT(#{afterDay},'12') then num else 0 end) h12,
+					SUM(case log_hour  when CONCAT(#{afterDay},'13') then num else 0 end) h13,
+					SUM(case log_hour  when CONCAT(#{afterDay},'14') then num else 0 end) h14,
+					SUM(case log_hour  when CONCAT(#{afterDay},'15') then num else 0 end) h15,
+					SUM(case log_hour  when CONCAT(#{afterDay},'16') then num else 0 end) h16,
+					SUM(case log_hour  when CONCAT(#{afterDay},'17') then num else 0 end) h17,
+					SUM(case log_hour  when CONCAT(#{afterDay},'18') then num else 0 end) h18,
+					SUM(case log_hour  when CONCAT(#{afterDay},'19') then num else 0 end) h19,
+					SUM(case log_hour  when CONCAT(#{afterDay},'20') then num else 0 end) h20,
+					SUM(case log_hour  when CONCAT(#{afterDay},'21') then num else 0 end) h21,
+					SUM(case log_hour  when CONCAT(#{afterDay},'22') then num else 0 end) h22,
+					SUM(case log_hour  when CONCAT(#{afterDay},'23') then num else 0 end) h23
+			from stat_real_time_service
+			where  log_day = #{afterDay} 
+		    <if test="@Ognl@isNotBlank(serverIdList)">
+				AND area_id IN
+				<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+						#{item}
+				</foreach>
+			</if>
+	</select>
+
+    <!-- 充值消费时点分布 -->
+    <select id="findRechargeTimePointDistribution" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT
+            log_day,
+            log_hour,
+            sum(pa) pa, <!-- 充值用户 -->
+            sum(income) income, <!-- 充值金额 -->
+            sum(pa) / sum(au) pay_rate, <!-- 付费率 -->
+            sum(income) / sum(pa) arpu <!-- ARPU -->
+        FROM  stat_real_time_service
+        WHERE 1 = 1
+        <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
+	    <if test="@Ognl@isNotBlank(serverIdList)">
+			AND area_id IN
+			<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+					#{item}
+			</foreach>
+		</if>        
+        GROUP BY log_day, log_hour
+        ORDER BY log_day DESC, log_hour ASC
+    </select>
+    
+    <!-- 消费时点分布 -->
+    <select id="findConsumeTimePointDistribution" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT
+            log_day,
+            log_hour,
+            sum(consume_account) consume_account, <!-- 消费人数 -->
+            sum(consume_amount) consume_amount, <!-- 消费金额 -->
+            sum(consume_account) / sum(au) pay_rate, <!-- 付费率 -->
+            sum(consume_amount) / sum(consume_account) arpu <!-- ARPU -->
+        FROM  stat_real_time_service
+        WHERE 1 = 1
+        <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
+	    <if test="@Ognl@isNotBlank(serverIdList)">
+			AND area_id IN
+			<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+					#{item}
+			</foreach>
+		</if>        
+        GROUP BY log_day, log_hour
+        ORDER BY log_day DESC, log_hour ASC
+    </select>
+    
+    <!-- 消费绑定时点分布 -->
+    <select id="findConsumeBandingTimePointDistribution" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT
+            log_day,
+            log_hour,
+            sum(consume_banding_account) consume_account, <!-- 消费人数 -->
+            sum(consume_banding_amount) consume_amount, <!-- 消费金额 -->
+            sum(consume_banding_account) / sum(au) pay_rate, <!-- 付费率 -->
+            sum(consume_banding_amount) / sum(consume_banding_account) arpu <!-- ARPU -->
+        FROM  stat_real_time_service
+        WHERE 1 = 1 
+        <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
+	    <if test="@Ognl@isNotBlank(serverIdList)">
+			AND area_id IN
+			<foreach item="item" index="index" collection="serverIdList" open="(" separator="," close=")">
+					#{item}
+			</foreach>
+		</if>        
+        GROUP BY log_day, log_hour
+        ORDER BY log_day DESC, log_hour ASC
+    </select>
+</mapper>
