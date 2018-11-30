@@ -84,7 +84,7 @@
     <properties>
 
     <!-- version setting -->
-        <spring.version>4.3.9.RELEASE</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
         <!-- other setting -->
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
