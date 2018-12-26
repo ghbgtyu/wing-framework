@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.mokylin.cabal.common.utils.DateUtils;
 import com.mokylin.cabal.common.utils.URIBuilder;
-import com.mysql.jdbc.StringUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.ibatis.ognl.Ognl;
 import org.hibernate.annotations.SourceType;

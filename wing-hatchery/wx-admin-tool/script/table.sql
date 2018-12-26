@@ -459,3 +459,31 @@ COMMENT='用户-角色'
 BEGIN;
 INSERT INTO `sys_user_role` VALUES ('1', '1');
 COMMIT;
+
+
+
+
+-- ----------------------------
+-- Table structure for `bus_file`
+-- ----------------------------
+DROP TABLE IF EXISTS `bus_file`;
+CREATE TABLE `bus_file` (
+`id`  varchar(64) CHARACTER SET utf8 NOT NULL ,
+`file_id`  varchar(64) CHARACTER SET utf8  ,
+`upload_date`  datetime NULL ,
+`create_data` datetime NULL,
+`content`  varchar(255) CHARACTER SET utf8 NULL ,
+`upload_desc`  text CHARACTER SET utf8 NULL ,
+`doc_file_json_path`  text CHARACTER SET utf8 NULL ,
+`picture_file_json_path`  text CHARACTER SET utf8 NULL ,
+`other_file_json_path`  text CHARACTER SET utf8 NULL,
+`state`  int(32)  NOT NULL,
+`create_by`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者' ,
+`create_date`  datetime NULL DEFAULT NULL COMMENT '创建时间' ,
+`update_by`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新者' ,
+`update_date`  datetime NULL DEFAULT NULL COMMENT '更新时间' ,
+`remarks`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息' ,
+`del_flag`  char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '删除标记'
+)ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+COMMENT='文件存储';

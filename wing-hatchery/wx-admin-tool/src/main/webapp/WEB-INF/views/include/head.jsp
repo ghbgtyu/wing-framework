@@ -39,4 +39,5 @@
 
 <script type="text/javascript">
     BASE = '${ctx}';
+
 </script>

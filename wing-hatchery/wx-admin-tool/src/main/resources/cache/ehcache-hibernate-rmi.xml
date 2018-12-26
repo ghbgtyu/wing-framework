@@ -70,5 +70,10 @@
 	<cache name="com.mokylin.cabal.modules.sys.entity.User.roleList" maxEntriesLocalHeap="100" eternal="false" overflowToDisk="true" maxEntriesLocalDisk="100000">
 		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
 	</cache>
-	
+
+	<cache name="com.mokylin.cabal.modules.bus.entity.BusFile" maxEntriesLocalHeap="100" eternal="false" overflowToDisk="true" maxEntriesLocalDisk="100000">
+		<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+	</cache>
+
+
 </ehcache>

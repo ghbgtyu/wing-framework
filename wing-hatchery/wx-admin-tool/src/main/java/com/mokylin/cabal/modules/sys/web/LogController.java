@@ -40,7 +40,7 @@ public class LogController extends BaseController {
         Page<Log> page = logService.find(new Page<Log>(request, response), paramMap); 
         model.addAttribute("page", page);
         model.addAllAttributes(paramMap);
-		return "modules/sys/logList";
+		return "modules/sys/";
 	}
 
 }

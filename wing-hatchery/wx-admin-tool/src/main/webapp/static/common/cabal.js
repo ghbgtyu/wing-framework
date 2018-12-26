@@ -248,6 +248,68 @@ function selectSingleServer(){
     });
 }
 
+
+function openUploadDialog(id,fileId){
+    top.$.jBox.open("iframe:"+BASE+"/bus/file/uploadView?id="+id, "合同号："+fileId,1000,$(top.document).height()-350,{
+        buttons:{"关闭":true},submit:function(v, h, f){
+
+            if (v=="ok"){
+
+                h.find("iframe")[0].contentWindow.sure();
+                // var roleIds = h.find("iframe")[0].contentWindow.roleIds;
+                // var roleNames = h.find("iframe")[0].contentWindow.roleNames;
+                //
+                // $("#receiverNames").val(roleNames);
+                // $("#receiverUserIds").val(roleIds);
+
+                return true;
+            }
+        }, loaded:function(h){
+            $(".jbox-content", top.document).css("overflow-y","hidden");
+        }
+    });
+}
+function openUploadViewDialog(id,fileId){
+    top.$.jBox.open("iframe:"+BASE+"/bus/file/uploadDownView?id="+id, "合同号："+fileId,1300,$(top.document).height()-250,{
+        buttons:{"关闭":true},submit:function(v, h, f){
+
+            if (v=="ok"){
+
+                h.find("iframe")[0].contentWindow.sure();
+                // var roleIds = h.find("iframe")[0].contentWindow.roleIds;
+                // var roleNames = h.find("iframe")[0].contentWindow.roleNames;
+                //
+                // $("#receiverNames").val(roleNames);
+                // $("#receiverUserIds").val(roleIds);
+
+                return true;
+            }
+        }, loaded:function(h){
+            $(".jbox-content", top.document).css("overflow-y","hidden");
+        }
+    });
+}
+function openUploadViewDialog2(id,fileId){
+    top.$.jBox.open("iframe:"+BASE+"/bus/file/uploadDownView2?id="+id, "合同号："+fileId,1300,$(top.document).height()-250,{
+        buttons:{"关闭":true},submit:function(v, h, f){
+
+            if (v=="ok"){
+
+                h.find("iframe")[0].contentWindow.sure();
+                // var roleIds = h.find("iframe")[0].contentWindow.roleIds;
+                // var roleNames = h.find("iframe")[0].contentWindow.roleNames;
+                //
+                // $("#receiverNames").val(roleNames);
+                // $("#receiverUserIds").val(roleIds);
+
+                return true;
+            }
+        }, loaded:function(h){
+            $(".jbox-content", top.document).css("overflow-y","hidden");
+        }
+    });
+}
+
 function openGameUserDialog(){
     top.$.jBox.open("iframe:"+BASE+"/game/role/gameRoleDialog", "游戏角色列表",810,$(top.document).height()-240,{
         buttons:{"确定":"ok", "关闭":true},bottomText:"查询条件至少输入一项才可以查询",submit:function(v, h, f){
@@ -307,3 +369,46 @@ function exportXls(url) {
     $("form:first").submit();
     $("form:first").attr("action", oldUrl);
 }
+
+
+window.downloadFile = function (sUrl) {
+
+    //iOS devices do not support downloading. We have to inform user about this.
+    if (/(iP)/g.test(navigator.userAgent)) {
+        alert('Your device does not support files downloading. Please try again in desktop browser.');
+        return false;
+    }
+
+    //If in Chrome or Safari - download via virtual link click
+    if (window.downloadFile.isChrome || window.downloadFile.isSafari) {
+        //Creating new link node.
+        var link = document.createElement('a');
+        link.href = sUrl;
+
+        if (link.download !== undefined) {
+            //Set HTML5 download attribute. This will prevent file from opening if supported.
+            var fileName = sUrl.substring(sUrl.lastIndexOf('/') + 1, sUrl.length);
+            link.download = fileName;
+        }
+
+        //Dispatching click event.
+        if (document.createEvent) {
+            var e = document.createEvent('MouseEvents');
+            e.initEvent('click', true, true);
+            link.dispatchEvent(e);
+            return true;
+        }
+    }
+
+    // Force file download (whether supported by server).
+    if (sUrl.indexOf('?') === -1) {
+
+        sUrl += '?download';
+    }
+
+    window.open(sUrl, '_self');
+    return true;
+}
+
+window.downloadFile.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+window.downloadFile.isSafari = navigator.userAgent.toLowerCase().indexOf('safari') > -1;

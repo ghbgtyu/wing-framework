@@ -28,5 +28,8 @@
 
 	<cache name="com.mokylin.cabal.modules.sys.entity.User" maxEntriesLocalHeap="100" eternal="false" overflowToDisk="true" maxEntriesLocalDisk="100000" />
 	<cache name="com.mokylin.cabal.modules.sys.entity.User.roleList" maxEntriesLocalHeap="100" eternal="false" overflowToDisk="true" maxEntriesLocalDisk="100000" />
-	
+
+
+	<cache name="com.mokylin.cabal.modules.bus.entity.BusFile" maxEntriesLocalHeap="100" eternal="false" overflowToDisk="true" maxEntriesLocalDisk="100000" />
+
 </ehcache>

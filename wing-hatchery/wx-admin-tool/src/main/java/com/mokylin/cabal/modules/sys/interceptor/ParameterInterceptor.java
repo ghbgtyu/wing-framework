@@ -60,7 +60,8 @@ public class ParameterInterceptor extends HandlerInterceptorAdapter {
         User user = UserUtils.getUser();
 
         paramMap.put("currentUser", user);
-        paramMap.put("isGlobalPlatformPermission",UserUtils.hasAllPlatformPermission(user));
+        //paramMap.put("isGlobalPlatformPermission",UserUtils.hasAllPlatformPermission(user));
+        paramMap.put("isGlobalPlatformPermission",true);
         //paramMap.put("theSameRoleUserIdList",UserUtils.getTheSameRoleUserIds(user));
         paramMap.put("roleUserIdList",UserUtils.getTheSameRoleUserIds(user));
 
