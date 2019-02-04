@@ -1,38 +1,59 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <!DOCTYPE html>
 <html style="overflow-x:hidden;overflow-y:auto;">
 <head>
     <title>图标选择</title>
-	<%@include file="/WEB-INF/views/include/head.jsp" %>
+    <%@include file="/WEB-INF/views/include/head.jsp" %>
     <style type="text/css">
-		.the-icons {padding:25px 10px 15px;list-style:none;}
-		.the-icons li {float:left;width:22%;line-height:25px;margin:2px 5px;cursor:pointer;}
-		.the-icons i {margin:1px 5px;} .the-icons li:hover {background-color:#efefef;}
-        .the-icons li.active {background-color:#0088CC;color:#ffffff;}
+        .the-icons {
+            padding: 25px 10px 15px;
+            list-style: none;
+        }
+
+        .the-icons li {
+            float: left;
+            width: 22%;
+            line-height: 25px;
+            margin: 2px 5px;
+            cursor: pointer;
+        }
+
+        .the-icons i {
+            margin: 1px 5px;
+        }
+
+        .the-icons li:hover {
+            background-color: #efefef;
+        }
+
+        .the-icons li.active {
+            background-color: #0088CC;
+            color: #ffffff;
+        }
     </style>
     <script type="text/javascript">
-	    $(document).ready(function(){
-	    	$("#icons li").click(function(){
-	    		$("#icons li").removeClass("active");
-	    		$("#icons li i").removeClass("icon-white");
-	    		$(this).addClass("active");
-	    		$(this).children("i").addClass("icon-white");
-	    		$("#icon").val($(this).text());
-	    	});
-	    	$("#icons li").each(function(){
-	    		if ($(this).text()=="${value}"){
-	    			$(this).click();
-	    		}
-	    	});
-	    	$("#icons li").dblclick(function(){
-	    		top.$.jBox.getBox().find("button[value='ok']").trigger("click");
-	    	});
-	    });
+        $(document).ready(function () {
+            $("#icons li").click(function () {
+                $("#icons li").removeClass("active");
+                $("#icons li i").removeClass("icon-white");
+                $(this).addClass("active");
+                $(this).children("i").addClass("icon-white");
+                $("#icon").val($(this).text());
+            });
+            $("#icons li").each(function () {
+                if ($(this).text() == "${value}") {
+                    $(this).click();
+                }
+            });
+            $("#icons li").dblclick(function () {
+                top.$.jBox.getBox().find("button[value='ok']").trigger("click");
+            });
+        });
     </script>
 </head>
 <body>
-<input type="hidden" id="icon" value="${value}" />
+<input type="hidden" id="icon" value="${value}"/>
 <ul class="the-icons clearfix" id="icons">
     <li><i class="icon-glass"></i>glass</li>
     <li><i class="icon-music"></i>music</li>

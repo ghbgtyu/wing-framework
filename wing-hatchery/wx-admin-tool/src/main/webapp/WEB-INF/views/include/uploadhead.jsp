@@ -1,17 +1,20 @@
-<%@ page contentType="text/html;charset=UTF-8" %><meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta http-equiv="Cache-Control" content="no-store" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
-<meta name="author" content="http://mokylin.iteye.com"/><meta http-equiv="X-UA-Compatible" content="IE=7,IE=9,IE=10" />
+<%@ page contentType="text/html;charset=UTF-8" %>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Cache-Control" content="no-store"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta name="author" content="http://mokylin.iteye.com"/>
+<meta http-equiv="X-UA-Compatible" content="IE=7,IE=9,IE=10"/>
 
 
-
-<link href="${ctxStatic}/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="${ctxStatic}/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
 <script src="${ctxStatic}/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
 
 
 <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">-->
-<link href="${ctxStatic}/upload/bootstrap-file/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<link href="${ctxStatic}/upload/bootstrap-file/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-<!--<link rel="stylesheet" href="${ctxStatic}/upload/bootstrap-file/css/all.css" crossorigin="anonymous"  type="text/css">-->
+<!--<link rel="stylesheet" href="${ctxStatic}/upload/bootstrap-file/css/all.css" crossorigin="anonymous" type="text/css">-->
 <!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
 <!-- link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.5.1/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
 <!-- the font awesome icon library if using with `fas` theme (or Bootstrap 4.x). Note that default icons used in the plugin are glyphicons that are bundled only with Bootstrap 3.x. -->
@@ -36,7 +39,6 @@ dialog. bootstrap 4.x is supported. You can also use the bootstrap js 3.3.x vers
 <!-- following theme script is needed to use the Font Awesome 5.x theme (`fas`) -->
 <script src="${ctxStatic}/upload/bootstrap-file/themes/fas/theme.min.js"></script>
 <script src="${ctxStatic}/upload/bootstrap-file/themes/explorer-fas/theme.js" type="text/javascript"></script>
-
 
 
 <script src="${ctxStatic}/upload/base-file.js" type="text/javascript"></script>
