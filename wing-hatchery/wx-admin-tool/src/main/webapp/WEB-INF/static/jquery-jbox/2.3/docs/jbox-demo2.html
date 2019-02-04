@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Content-Language" content="utf-8" />
-    <meta name="Robots" content="all" />
-    <meta name="Author" content="KudyChen" />
-    <meta name="Copyright" content="KudyStudio.Com" />
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="utf-8"/>
+    <meta name="Robots" content="all"/>
+    <meta name="Author" content="KudyChen"/>
+    <meta name="Copyright" content="KudyStudio.Com"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
     <title>JBox Demo2</title>
     <script type="text/javascript" src="../jquery-1.4.2.min.js"></script>
     <!--jbox-->
-    <link id="skin" rel="stylesheet" href="../Skins2/Green/jbox.css" />
+    <link id="skin" rel="stylesheet" href="../Skins2/Green/jbox.css"/>
     <script type="text/javascript" src="../jquery.jBox-2.3.min.js"></script>
     <script type="text/javascript" src="../i18n/jquery.jBox-zh-CN.js"></script>
     <!--demo测试代码-->
@@ -18,82 +18,202 @@
     <!--demo代码高亮-->
     <script type="text/javascript" src="jbox-demo-depends/highlight/highlight.pack.js"></script>
     <script type="text/javascript" src="jbox-demo-depends/highlight/languages/javascript.js"></script>
-    <link rel="stylesheet" type="text/css" href="jbox-demo-depends/highlight/styles/magula.css" />
+    <link rel="stylesheet" type="text/css" href="jbox-demo-depends/highlight/styles/magula.css"/>
     <script type="text/javascript">
         skin2 = true;
         hljs.initHighlightingOnLoad();
     </script>
     <style type="text/css">
         /*页面样式*/
-        body {margin:0;padding:0;font:12px Verdana, Geneva, sans-serif;background:#66C6F6;}
-        ul{ margin:0; padding:0; list-style:none;}
-        a{color:#ff6600; text-decoration:none;}
-        a:hover{color:#ff9900; text-decoration:underline;}
-        .grid{ width:auto;width:920px !important;max-width:920px;min-width:800px; background:#FFF; margin:10px auto; border:10px solid #60B7DE;}
-        .logo{ width:460px; font:bold 40px "Comic Sans MS", cursive;  margin:10px 5px 5px 25px;}
-        .logo span{ font-size:13px; color:#999; margin:0 5px;}
-        .demo{ padding:5px;}
-        fieldset{ margin:20px; padding:16px;}
-        .content{ margin:10px 0 0 0;}
-        .content li { margin:5px;}
-        .btn{ border:0; background:#4D77A7; color:#FFF; font-size:12px; padding:6px 10px;  margin:5px 0;}
-        .copy{ height:30px; background:#E6EFF8; text-align:center; line-height:30px;}
-        .t{padding:20px;}
-        .update{padding:0 20px 20px 20px;}
-        .t li,.update li{ margin:10px 0; line-height:20px;}
-        .update{color:#069;padding-bottom:0;}
-        .sel-skin{position:absolute;top:300px;right:10px;width:120px; height:80px; padding:10px; background-color:#fff;color:#fff;}
+        body {
+            margin: 0;
+            padding: 0;
+            font: 12px Verdana, Geneva, sans-serif;
+            background: #66C6F6;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #ff9900;
+            text-decoration: underline;
+        }
+
+        .grid {
+            width: auto;
+            width: 920px !important;
+            max-width: 920px;
+            min-width: 800px;
+            background: #FFF;
+            margin: 10px auto;
+            border: 10px solid #60B7DE;
+        }
+
+        .logo {
+            width: 460px;
+            font: bold 40px "Comic Sans MS", cursive;
+            margin: 10px 5px 5px 25px;
+        }
+
+        .logo span {
+            font-size: 13px;
+            color: #999;
+            margin: 0 5px;
+        }
+
+        .demo {
+            padding: 5px;
+        }
+
+        fieldset {
+            margin: 20px;
+            padding: 16px;
+        }
+
+        .content {
+            margin: 10px 0 0 0;
+        }
+
+        .content li {
+            margin: 5px;
+        }
+
+        .btn {
+            border: 0;
+            background: #4D77A7;
+            color: #FFF;
+            font-size: 12px;
+            padding: 6px 10px;
+            margin: 5px 0;
+        }
+
+        .copy {
+            height: 30px;
+            background: #E6EFF8;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .t {
+            padding: 20px;
+        }
+
+        .update {
+            padding: 0 20px 20px 20px;
+        }
+
+        .t li, .update li {
+            margin: 10px 0;
+            line-height: 20px;
+        }
+
+        .update {
+            color: #069;
+            padding-bottom: 0;
+        }
+
+        .sel-skin {
+            position: absolute;
+            top: 300px;
+            right: 10px;
+            width: 120px;
+            height: 80px;
+            padding: 10px;
+            background-color: #fff;
+            color: #fff;
+        }
+
         /*jox应用测试样式*/
-        div.msg-div{ padding: 10px; }
-        div.msg-div p{ padding: 0px; margin:5px 0 0 0; }
-        div.msg-div .field{ padding: 0px; }
-        div.msg-div .field textarea{ width: 90%; height: 50px; resize:none; font-size:12px; }
-        .errorBlock{ background-color: #FFC6A5; border: solid 1px #ff0000; color: #ff0000; margin: 10px 10px 0 10px; padding:7px; font-weight: bold; }
+        div.msg-div {
+            padding: 10px;
+        }
+
+        div.msg-div p {
+            padding: 0px;
+            margin: 5px 0 0 0;
+        }
+
+        div.msg-div .field {
+            padding: 0px;
+        }
+
+        div.msg-div .field textarea {
+            width: 90%;
+            height: 50px;
+            resize: none;
+            font-size: 12px;
+        }
+
+        .errorBlock {
+            background-color: #FFC6A5;
+            border: solid 1px #ff0000;
+            color: #ff0000;
+            margin: 10px 10px 0 10px;
+            padding: 7px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <div class="sel-skin">
-        <ul>
-            <li>分组：<a href="jbox-demo.html" style="color:#fff">Skin</a> | <a href="jbox-demo2.html" style="color:#fff">Skin2</a>
-            <br /><br />皮肤：<select id="select-skin" name="select-skin" style="font-size:12px" onchange="changeSkin(this.value);">
-                    <option value="Green|#86ae00" style="background-color:#86ae00;color:White;">绿色</option>
-                    <option value="Blue|#0097d4" style="background-color:#0097d4;color:White;">蓝色</option>
-                    <option value="Pink|#bf0058" style="background-color:#bf0058;color:White;">粉红</option>
-                    <option value="Purple|#8e0674" style="background-color:#8e0674;color:White;">紫色</option>
-                    <option value="Yellow|#febb05" style="background-color:#febb05;color:White;">黄色</option>
-                    <option value="Gray|#ADADAD" style="background-color:#ADADAD;color:White;">灰色</option>
-                </select><br /><br />下载：<a href="http://kudystudio.com/jbox/jbox-v2.3.rar" style="color:#fff" target="_blank"><img src="jbox-demo-depends/down.png" width="16" style="width:16px;border:0; vertical-align:middle;" />jBox 2.3</a>
-            </li>
-        </ul>
+<div class="sel-skin">
+    <ul>
+        <li>分组：<a href="jbox-demo.html" style="color:#fff">Skin</a> | <a href="jbox-demo2.html"
+                                                                         style="color:#fff">Skin2</a>
+            <br/><br/>皮肤：<select id="select-skin" name="select-skin" style="font-size:12px"
+                                 onchange="changeSkin(this.value);">
+                <option value="Green|#86ae00" style="background-color:#86ae00;color:White;">绿色</option>
+                <option value="Blue|#0097d4" style="background-color:#0097d4;color:White;">蓝色</option>
+                <option value="Pink|#bf0058" style="background-color:#bf0058;color:White;">粉红</option>
+                <option value="Purple|#8e0674" style="background-color:#8e0674;color:White;">紫色</option>
+                <option value="Yellow|#febb05" style="background-color:#febb05;color:White;">黄色</option>
+                <option value="Gray|#ADADAD" style="background-color:#ADADAD;color:White;">灰色</option>
+            </select><br/><br/>下载：<a href="http://kudystudio.com/jbox/jbox-v2.3.rar" style="color:#fff" target="_blank"><img
+                    src="jbox-demo-depends/down.png" width="16" style="width:16px;border:0; vertical-align:middle;"/>jBox
+                2.3</a>
+        </li>
+    </ul>
+</div>
+
+<div class="grid">
+    <div>
+        <div class="logo">jBox<span>v2.3 beta</span></div>
+    </div>
+    <div style="padding: 20px 20px; clear:both;">
+        <div style="width:877px;height:124px;background-image:url(jbox-demo-depends/jbox.png);"></div>
     </div>
 
-	<div class="grid">
-       <div>
-            <div class="logo">jBox<span>v2.3 beta</span></div>
-       </div>
-       <div style="padding: 20px 20px; clear:both;"><div style="width:877px;height:124px;background-image:url(jbox-demo-depends/jbox.png);"></div></div>
+    <div style="padding: 0px 20px 20px 20px; clear:both;">
+        <div style="width:877px;height:124px;background-image:url(jbox-demo-depends/jbox2.png);"></div>
+    </div>
 
-       <div style="padding: 0px 20px 20px 20px; clear:both;"><div style="width:877px;height:124px;background-image:url(jbox-demo-depends/jbox2.png);"></div></div>
+    <div style="padding: 0px 20px 20px 20px; clear:both; font-weight:bold;color:#069;">
+        [<a href="http://kudystudio.com/jbox/jbox-v2.3.rar" target="_blank">点击下载</a>]
+        <br/><br/>
+        技术交流QQ群：172543951
+    </div>
 
-       <div style="padding: 0px 20px 20px 20px; clear:both; font-weight:bold;color:#069;">
-       [<a href="http://kudystudio.com/jbox/jbox-v2.3.rar" target="_blank">点击下载</a>]
-       <br /><br />
-       技术交流QQ群：172543951
-       </div>
-       
-       <div class="update">
-      	<ul>
-        	<li><strong style="color:#F00">[2011-11-11] jBox v2.3 正式版</strong></li>
-            <li style="text-indent:2em"> - [调整&修复] IE6下有iframe或页面有active、applet控件的情况下自动选择用iframe来遮罩。 </li>
+    <div class="update">
+        <ul>
+            <li><strong style="color:#F00">[2011-11-11] jBox v2.3 正式版</strong></li>
+            <li style="text-indent:2em"> - [调整&修复] IE6下有iframe或页面有active、applet控件的情况下自动选择用iframe来遮罩。</li>
             <li style="text-indent:2em"> - [修复] IE6下拖动窗口到右边时边框不可见的样式错误（依然还有20px，但影响不大）。</li>
             <li style="text-indent:2em"> - [修复] IE6下prompt相关方法与messager方法的图标最小高度不正确的样式修正。</li>
             <li style="text-indent:2em"> - [修复] IE6下messager方法的窗口在滚动条被拖动的时候位置不正确的bug。</li>
             <li style="text-indent:2em"> - [修复] 修复浏览器改变大小时遮罩层不完全的bug。</li>
         </ul>
-       </div>
-       <div class="update">
-      	<ul>
-        	<li><strong style="color:#F00">[2011-11-08] jBox v2.3 beta 版本更新</strong></li>
+    </div>
+    <div class="update">
+        <ul>
+            <li><strong style="color:#F00">[2011-11-08] jBox v2.3 beta 版本更新</strong></li>
             <li style="text-indent:2em"> - [新增] tip方法增加了 opacity 选项，它决定是否显示隔离层。</li>
             <li style="text-indent:2em"> - [新增] 增加了 showScrolling 选项，在显示jBox窗口时可以隐藏浏览器的滚动条。</li>
             <li style="text-indent:2em"> - [新增] 多个窗口共存时，点击某个窗口标题时，窗口自动处于最顶层。</li>
@@ -103,56 +223,62 @@
             <li style="text-indent:2em"> - [调整] 按空格键可直接执行默认按钮提交的事件（为保留此功能，按钮为焦点时不是很好看，但用户体验应该优先考虑）。</li>
             <li style="text-indent:2em"> - [修复] 修复在IE下多窗口状态切换时显示不了的Bug。</li>
         </ul>
-       </div>
-       <div class="update">
-      	<ul>
-        	<li><strong style="color:#F00">[2011-08-30] jBox v2.2 beta 版本更新</strong></li>
+    </div>
+    <div class="update">
+        <ul>
+            <li><strong style="color:#F00">[2011-08-30] jBox v2.2 beta 版本更新</strong></li>
             <li style="text-indent:2em"> - [新增] 新增另一套常用皮肤Skin2。</li>
             <li style="text-indent:2em"> - [调整] 此版本已把全局设置 showIcon改为true，同时还可以设置自定义标题图标。详情请看最下面的配置说明。</li>
             <li style="text-indent:2em"> - [修复] 修复浏览器改变大小时窗口可能消失的bug。</li>
         </ul>
-       </div>
-       <div class="update">
-      	<ul>
-        	<li><strong style="color:#F00">[2011-08-28] jBox v2.1 beta 版本更新</strong></li>
+    </div>
+    <div class="update">
+        <ul>
+            <li><strong style="color:#F00">[2011-08-28] jBox v2.1 beta 版本更新</strong></li>
             <li style="text-indent:2em"> - [新增] 美化界面皮肤，新增常用皮肤。每个皮肤下都有三个loading图标和两款按钮可以选择，默认使用第一个。</li>
             <li style="text-indent:2em"> - [新增] 加强 tip 方法的多个tip切换特效，还可以使用 loading 图标显示ajax交互提示。</li>
             <li style="text-indent:2em"> - [调整] 按钮由 a 标签改回 button 标签，使其可以按回车或空格键提交默认按钮。</li>
-            <li style="text-indent:2em"> - [调整] 此版本已把全局设置 showIcon、dragClone改为false，如果想启用请设置为true。另外，增加了一个 ajaxData 设置，方便提交ajax数据。详情请看最下面的配置说明。</li>
+            <li style="text-indent:2em"> - [调整] 此版本已把全局设置 showIcon、dragClone改为false，如果想启用请设置为true。另外，增加了一个 ajaxData
+                设置，方便提交ajax数据。详情请看最下面的配置说明。
+            </li>
             <li style="text-indent:2em"> - [修复] 修复在IE下多窗口状态切换时显示不了的Bug，其实，我觉得IE真的是太垃圾了。</li>
         </ul>
-       </div>
-       <div class="update">
-      	<ul>
-        	<li><strong style="color:#F00">[2011-07-24] jBox v2.0 beta 版本更新</strong></li>
+    </div>
+    <div class="update">
+        <ul>
+            <li><strong style="color:#F00">[2011-07-24] jBox v2.0 beta 版本更新</strong></li>
             <li style="text-indent:2em"> - [新增] 增加界面皮肤，可以制作自己喜欢的皮肤。</li>
             <li style="text-indent:2em"> - [新增] 增加窗口可以拖动的功能。</li>
             <li style="text-indent:2em"> - [新增] 增加 tip、messager 方法以方便用户交互提示。</li>
             <li style="text-indent:2em"> - [调整] 扩大选项可设置范围，更具个性化。</li>
             <li style="text-indent:2em"> - [调整] 优化与调整整体界面样式，扩大样式可设置范围。</li>
-            <li style="text-indent:2em"> - [调整] 优化与调整 open、prompt、alert、info、warning、success、error、confirm 方法以方便界面操作。</li>
+            <li style="text-indent:2em"> - [调整] 优化与调整 open、prompt、alert、info、warning、success、error、confirm 方法以方便界面操作。
+            </li>
             <li style="text-indent:2em"> - [修复] 修复在各个主流浏览器下的多个小BUG。</li>
         </ul>
-       </div>
-       <div class="update">
-      	<ul>
-        	<li><strong>[2009-11-30] jBox v1.0 初版本</strong></li>
+    </div>
+    <div class="update">
+        <ul>
+            <li><strong>[2009-11-30] jBox v1.0 初版本</strong></li>
         </ul>
-       </div>
-       <div class="t">
-          <ul>
-        	<li><strong>插件说明</strong></li>
-        	<li style="text-indent:2em"> - jBox 是一款基于 jQuery 的多功能对话框插件，能够实现网站的整体风格效果，给用户一个新的视觉享受。</li>
+    </div>
+    <div class="t">
+        <ul>
+            <li><strong>插件说明</strong></li>
+            <li style="text-indent:2em"> - jBox 是一款基于 jQuery 的多功能对话框插件，能够实现网站的整体风格效果，给用户一个新的视觉享受。</li>
             <li><strong>运行环境</strong></li>
-            <li style="text-indent:2em"> - 兼容 IE6+、Firefox、Chrome、Safari、Opera 等主流浏览器。<font color="#ff0000">备注：IE不支持边框的圆角样式，不推荐大家使用蛋痛的IE浏览器。</font></li>
+            <li style="text-indent:2em"> - 兼容 IE6+、Firefox、Chrome、Safari、Opera 等主流浏览器。<font color="#ff0000">备注：IE不支持边框的圆角样式，不推荐大家使用蛋痛的IE浏览器。</font>
+            </li>
             <li><strong>使用授权</strong></li>
-            <li style="text-indent:2em"> - jBox 永久免费使用，但是必须保留相关的版权信息。如果有好的建议，请Email: <a href="mailto:kudychen@gmail.com">kudychen@gmail.com</a>，jBox的完善需要大家的好建议。</li>
+            <li style="text-indent:2em"> - jBox 永久免费使用，但是必须保留相关的版权信息。如果有好的建议，请Email: <a
+                    href="mailto:kudychen@gmail.com">kudychen@gmail.com</a>，jBox的完善需要大家的好建议。
+            </li>
         </ul>
     </div>
 
-       <div style="padding: 0 20px">
-    	<ul>
-        	<li><strong>使用方法：</strong></li>
+    <div style="padding: 0 20px">
+        <ul>
+            <li><strong>使用方法：</strong></li>
             <li>
               <pre>
               <code class="javascript">
@@ -167,37 +293,42 @@
               </pre>
             </li>
         </ul>
-       </div>
+    </div>
 
-       <fieldset>
-        <input class="btn" type="button" onclick="show_jbox_set_defaults();" value="设置全局选项" />
-        <input class="btn" type="button" onclick="show_jbox_set_border(5);" value="边框设置为 5" />
-        <input class="btn" type="button" onclick="show_jbox_set_border(0);" value="边框设置为 0" />
-        <br />请根据自己的喜好修改全局设置以减少方法时传递的参数。<font color="red">另外，jBox的皮肤是很容易制作的，最简单的就是只修改CSS样式里的颜色，在会ＰＳ的情况下更是可以制作多样化的皮肤。</font>
-       </fieldset>
+    <fieldset>
+        <input class="btn" type="button" onclick="show_jbox_set_defaults();" value="设置全局选项"/>
+        <input class="btn" type="button" onclick="show_jbox_set_border(5);" value="边框设置为 5"/>
+        <input class="btn" type="button" onclick="show_jbox_set_border(0);" value="边框设置为 0"/>
+        <br/>请根据自己的喜好修改全局设置以减少方法时传递的参数。<font
+            color="red">另外，jBox的皮肤是很容易制作的，最简单的就是只修改CSS样式里的颜色，在会ＰＳ的情况下更是可以制作多样化的皮肤。</font>
+    </fieldset>
 
-       <fieldset><legend>$.jBox()</legend>
+    <fieldset>
+        <legend>$.jBox()</legend>
         <div class="content">
             <ul>
-           	    <li>函数原型：</li>
-             	<li style="text-indent:2em"><strong>$.jBox(content, options);</strong></li>
+                <li>函数原型：</li>
+                <li style="text-indent:2em"><strong>$.jBox(content, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox(content, options);</li>
                 <li>参数说明：</li>
                 <li style="text-indent:2em"> - <strong>content</strong>　(string,json)</li>
-                <li style="color:#999999;">　　　└ 可以是string或json。当是string时，需要加上前缀标识（html:、id:、get:、post:、iframe:），如果没有加标识，系统会自动加上html:，具体请看应用例子。当是json时，表示一个或多个状态，每个状态的默认值为 <a href="javascript:viewConfig('stateDefaults');" title="点击查看">$.jBox.stateDefaults</a>。
+                <li style="color:#999999;">　　　└
+                    可以是string或json。当是string时，需要加上前缀标识（html:、id:、get:、post:、iframe:），如果没有加标识，系统会自动加上html:，具体请看应用例子。当是json时，表示一个或多个状态，每个状态的默认值为
+                    <a href="javascript:viewConfig('stateDefaults');" title="点击查看">$.jBox.stateDefaults</a>。
                 </li>
                 <li style="text-indent:2em"> - <strong>options</strong>　[可选] (json)</li>
-                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a>。</li>
+                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a>。
+                </li>
 
                 <li style="color:#F00">
-                    <br /><strong>备注：如果想手动关闭jBox（不包括下面的tip与messager，它们另有方法），请调用　$.jBox.close(token)　方法。</strong>
+                    <br/><strong>备注：如果想手动关闭jBox（不包括下面的tip与messager，它们另有方法），请调用　$.jBox.close(token)　方法。</strong>
                 </li>
             </ul>
         </div>
-        <br />
+        <br/>
 
-示例（一）:    
-<pre>
+        示例（一）:
+        <pre>
 <code class="javascript">
 // 此例省略了前缀html:，前缀标识是不区分大小写的，也可以是HTML:
 var info = 'jQuery jBox&lt;br /&gt;&lt;br /&gt;版本：v2.0&lt;br /&gt;日期：2011-7-24&lt;br /&gt;';
@@ -205,31 +336,31 @@ info += '官网：&lt;a target="_blank" href="http://kudystudio.com/jbox"&gt;htt
 $.jBox.info(info);
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_1_1();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_1_1();" value="运　行"/></div>
 
-示例（二）:    
-<pre>
+        示例（二）:
+        <pre>
 <code class="javascript">
 // 显示id为id-html的div内部html，同时设置了bottomText
 $.jBox('id:id-html', { bottomText: '这是底部文字' });
 </code>
 </pre>
-<div id="id-html" style="display:none;">
-    <div style='padding:10px;'>这里是id为id-html的div内部html，同时设置了bottomText</div>
-</div>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_1_2();" value="运　行" /></div>
+        <div id="id-html" style="display:none;">
+            <div style='padding:10px;'>这里是id为id-html的div内部html，同时设置了bottomText</div>
+        </div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_1_2();" value="运　行"/></div>
 
-示例（三）:    
-<pre>
+        示例（三）:
+        <pre>
 <code class="javascript">
 // ajax get 页面ajax.html的内容并显示，例如要提交id=1，则地址应该为 ajax.html?id=1，post:前缀的使用与get:的一样
 $.jBox("get:ajax.html");
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_1_3();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_1_3();" value="运　行"/></div>
 
-示例（四）:    
-<pre>
+        示例（四）:
+        <pre>
 <code class="javascript">
 // 用iframe显示http://www.baidu.com的内容，并设置了标题、宽与高、按钮
 $.jBox("iframe:http://www.baidu.com", {
@@ -240,10 +371,10 @@ $.jBox("iframe:http://www.baidu.com", {
 });
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_1_4();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_1_4();" value="运　行"/></div>
 
-示例（五）:  
-<pre>
+        示例（五）:
+        <pre>
 <code class="javascript">
 var content = {
     state1: {
@@ -281,10 +412,10 @@ var content = {
 $.jBox(content);
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_1_5();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_1_5();" value="运　行"/></div>
 
-示例（六）:    
-<pre>
+        示例（六）:
+        <pre>
 <code class="javascript">
 var html = "&lt;div style='padding:10px;'&gt;输入姓名：&lt;input type='text' id='yourname' name='yourname' /&gt;&lt;/div&gt;";
 var submit = function (v, h, f) {
@@ -303,43 +434,54 @@ var submit = function (v, h, f) {
 $.jBox(html, { title: "你叫什么名字？", submit: submit });
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_1_6();" value="运　行" /></div>
-       </fieldset>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_1_6();" value="运　行"/></div>
+    </fieldset>
 
-       <fieldset><legend>$.jBox.open()</legend>
+    <fieldset>
+        <legend>$.jBox.open()</legend>
         <div class="content">
             <ul>
-           	    <li>函数原型：</li>
-             	<li style="text-indent:2em"><strong>$.jBox.open(content, title, width, height, options);</strong></li>
+                <li>函数原型：</li>
+                <li style="text-indent:2em"><strong>$.jBox.open(content, title, width, height, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.open(content, title, width, height, options);</li>
                 <li>参数说明：</li>
                 <li style="text-indent:2em"> - <strong>content</strong>　(string,json)</li>
-                <li style="color:#999999;">　　　└ 可以是string或json。当是string时，需要加上前缀标识（html:、id:、get:、post:、iframe:），如果没有加标识，系统会自动加上html:，具体请看应用例子。当是json时，表示一个或多个状态，每个状态的默认值为 <a href="javascript:viewConfig('stateDefaults');" title="点击查看">$.jBox.stateDefaults</a>。</li>
+                <li style="color:#999999;">　　　└
+                    可以是string或json。当是string时，需要加上前缀标识（html:、id:、get:、post:、iframe:），如果没有加标识，系统会自动加上html:，具体请看应用例子。当是json时，表示一个或多个状态，每个状态的默认值为
+                    <a href="javascript:viewConfig('stateDefaults');" title="点击查看">$.jBox.stateDefaults</a>。
+                </li>
                 <li style="text-indent:2em"> - <strong>title</strong>　[可选] (string)</li>
-                <li style="color:#999999;">　　　└ 窗口标题，值为null时为不显示标题，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults.title</a>。</li>
+                <li style="color:#999999;">　　　└ 窗口标题，值为null时为不显示标题，默认值为 <a href="javascript:viewConfig('defaults');"
+                                                                           title="点击查看">$.jBox.defaults.title</a>。
+                </li>
                 <li style="text-indent:2em"> - <strong>width</strong>　[可选] (string,number)</li>
-                <li style="color:#999999;">　　　└ 窗口宽度，值为'auto'或具体像素值（例如350），默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults.width</a>。</li>
+                <li style="color:#999999;">　　　└ 窗口宽度，值为'auto'或具体像素值（例如350），默认值为 <a
+                        href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults.width</a>。
+                </li>
                 <li style="text-indent:2em"> - <strong>height</strong>　[可选] (string,number)</li>
-                <li style="color:#999999;">　　　└ 窗口高度，值为'auto'或具体像素值（例如100），默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults.height</a>。</li>
+                <li style="color:#999999;">　　　└ 窗口高度，值为'auto'或具体像素值（例如100），默认值为 <a
+                        href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults.height</a>。
+                </li>
                 <li style="text-indent:2em"> - <strong>options</strong>　[可选] (json)</li>
-                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a>。</li>
+                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a>。
+                </li>
                 <li style="color:#F00">
-                    <br /><strong>备注：$.jBox.open() 只是 $.jBox() 的一个扩展，方便 title、width、height 参数的传递。</strong>
+                    <br/><strong>备注：$.jBox.open() 只是 $.jBox() 的一个扩展，方便 title、width、height 参数的传递。</strong>
                 </li>
             </ul>
         </div>
-        <br />
+        <br/>
 
-示例（一）:    
-<pre>
+        示例（一）:
+        <pre>
 <code class="javascript">
 $.jBox.open("iframe:http://www.baidu.com", "百度一下", 800, 350, { buttons: { '关闭': true} });
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_2_1();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_2_1();" value="运　行"/></div>
 
-示例（二）: <font color="#ff0000;">（content为Json对象，比较复杂一点的例子）</font>   
-<pre>
+        示例（二）: <font color="#ff0000;">（content为Json对象，比较复杂一点的例子）</font>
+        <pre>
 <code class="javascript">
 var html1 = '&lt;div class="msg-div"&gt;' +
             '&lt;p&gt;购买数量：&lt;/p&gt;&lt;div class="field"&gt;&lt;input type="text" id="amount" name="amount" value="1" /&gt;&lt;/div&gt;' +
@@ -425,89 +567,96 @@ states.state4 = {
 $.jBox.open(states, '提交订单', 450, 'auto');
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_2_2();" value="运　行" /></div>
-       </fieldset>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_2_2();" value="运　行"/></div>
+    </fieldset>
 
-       <fieldset><legend>$.jBox.prompt()</legend>
+    <fieldset>
+        <legend>$.jBox.prompt()</legend>
         <div class="content">
             <ul>
-           	    <li>函数原型：</li>
-             	<li style="text-indent:2em"><strong>$.jBox.prompt(content, title, icon, options);</strong></li>
+                <li>函数原型：</li>
+                <li style="text-indent:2em"><strong>$.jBox.prompt(content, title, icon, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.prompt(content, title, icon, options);</li>
                 <li>参数说明：</li>
                 <li style="text-indent:2em"> - <strong>content</strong>　(string)</li>
                 <li style="color:#999999;">　　　└ 只能是string，不支持前缀标识，默认值为''。</li>
                 <li style="text-indent:2em"> - <strong>title</strong>　[可选] (string)</li>
-                <li style="color:#999999;">　　　└ 窗口标题，值为null时为不显示标题，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults.title</a>。</li>
+                <li style="color:#999999;">　　　└ 窗口标题，值为null时为不显示标题，默认值为 <a href="javascript:viewConfig('defaults');"
+                                                                           title="点击查看">$.jBox.defaults.title</a>。
+                </li>
                 <li style="text-indent:2em"> - <strong>icon</strong>　[可选] (string)</li>
-                <li style="color:#999999;">　　　└ <font color="red">内容图标</font>，值为'none'时为不显示图标，可选值有'none'、'info'、'question'、'success'、'warning'、'error'，默认值为'none'。</li>
+                <li style="color:#999999;">　　　└ <font color="red">内容图标</font>，值为'none'时为不显示图标，可选值有'none'、'info'、'question'、'success'、'warning'、'error'，默认值为'none'。
+                </li>
                 <li style="text-indent:2em"> - <strong>options</strong>　[可选] (json)</li>
-                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a>。</li>
+                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a>。
+                </li>
 
                 <li style="color:#F00">
-                    <br /><strong>备注：以下几个方法由　$.jBox.prompt()　扩展而来，参数类似，请看下面的例子。</strong>
+                    <br/><strong>备注：以下几个方法由　$.jBox.prompt()　扩展而来，参数类似，请看下面的例子。</strong>
                 </li>
-             	<li style="text-indent:2em"><strong>$.jBox.alert(content, title, options);</strong></li>
+                <li style="text-indent:2em"><strong>$.jBox.alert(content, title, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.alert(content, title, options);</li>
-             	<li style="text-indent:2em"><strong>$.jBox.info(content, title, options);</strong></li>
+                <li style="text-indent:2em"><strong>$.jBox.info(content, title, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.info(content, title, options);</li>
-             	<li style="text-indent:2em"><strong>$.jBox.success(content, title, options);</strong></li>
+                <li style="text-indent:2em"><strong>$.jBox.success(content, title, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.success(content, title, options);</li>
-             	<li style="text-indent:2em"><strong>$.jBox.error(content, title, options);</strong></li>
+                <li style="text-indent:2em"><strong>$.jBox.error(content, title, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.error(content, title, options);</li>
-             	<li style="text-indent:2em"><strong>$.jBox.confirm(content, title, submit, options);</strong></li>
+                <li style="text-indent:2em"><strong>$.jBox.confirm(content, title, submit, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.confirm(content, title, submit, options);</li>
-             	<li style="text-indent:2em"><strong>$.jBox.warning(content, title, submit, options);</strong></li>
+                <li style="text-indent:2em"><strong>$.jBox.warning(content, title, submit, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.warning(content, title, submit, options);</li>
-                
-                <li style="color:#F00;">　　　 └ 上面方法中默认按钮的文字设置在 <a href="javascript:javascript:viewConfig('languageDefaults');" title="点击查看">$.jBox.languageDefaults</a></li>
+
+                <li style="color:#F00;">　　　 └ 上面方法中默认按钮的文字设置在 <a
+                        href="javascript:javascript:viewConfig('languageDefaults');" title="点击查看">$.jBox.languageDefaults</a>
+                </li>
             </ul>
         </div>
-        <br />
+        <br/>
 
-示例（一）:    
-<pre>
+        示例（一）:
+        <pre>
 <code class="javascript">
 //加了个其它参数closed
 $.jBox.prompt('Hello jBox', 'jBox', 'info', { closed: function () { alert('prompt is closed.'); } });
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_1();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_1();" value="运　行"/></div>
 
-示例（二）:    
-<pre>
+        示例（二）:
+        <pre>
 <code class="javascript">
 $.jBox.alert('Hello jBox', 'jBox');
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_2();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_2();" value="运　行"/></div>
 
-示例（三）:    
-<pre>
+        示例（三）:
+        <pre>
 <code class="javascript">
 $.jBox.info('Hello jBox', 'jBox');
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_3();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_3();" value="运　行"/></div>
 
-示例（四）:    
-<pre>
+        示例（四）:
+        <pre>
 <code class="javascript">
 $.jBox.success('Hello jBox', 'jBox');
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_4();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_4();" value="运　行"/></div>
 
-示例（五）:  
-<pre>
+        示例（五）:
+        <pre>
 <code class="javascript">
 $.jBox.error('Hello jBox', 'jBox');
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_5();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_5();" value="运　行"/></div>
 
-示例（六）:  
-<pre>
+        示例（六）:
+        <pre>
 <code class="javascript">
 var submit = function (v, h, f) {
     if (v == 'ok')
@@ -521,10 +670,10 @@ var submit = function (v, h, f) {
 $.jBox.confirm("确定吗？", "提示", submit);
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_6();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_6();" value="运　行"/></div>
 
-示例（六02）:  
-<pre>
+        示例（六02）:
+        <pre>
 <code class="javascript">
 var submit = function (v, h, f) {
     if (v == true)
@@ -538,10 +687,10 @@ var submit = function (v, h, f) {
 $.jBox.confirm("天使，做我女朋友吧？", "表白提示", submit, { buttons: { '恩': true, '好吖': false} });
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_6_2();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_6_2();" value="运　行"/></div>
 
-示例（七）:  
-<pre>
+        示例（七）:
+        <pre>
 <code class="javascript">
 var submit = function (v, h, f) {
     if (v == 'yes') {
@@ -560,68 +709,77 @@ var submit = function (v, h, f) {
 $.jBox.warning("内容已修改，是否保存？", "提示", submit);
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_3_7();" value="运　行" /></div>
-       </fieldset>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_3_7();" value="运　行"/></div>
+    </fieldset>
 
-       <fieldset><legend>$.jBox.tip()</legend>
+    <fieldset>
+        <legend>$.jBox.tip()</legend>
         <div class="content">
             <ul>
-           	    <li>函数原型：</li>
-             	<li style="text-indent:2em"><strong>$.jBox.tip(content, icon, options);</strong></li>
+                <li>函数原型：</li>
+                <li style="text-indent:2em"><strong>$.jBox.tip(content, icon, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.tip(content, icon, options);</li>
                 <li>参数说明：</li>
                 <li style="text-indent:2em"> - <strong>content</strong>　(string)</li>
                 <li style="color:#999999;">　　　└ 只能是string，不支持前缀标识，默认值为''。</li>
                 <li style="text-indent:2em"> - <strong>icon</strong>　[可选] (string)</li>
-                <li style="color:#999999;">　　　└ <font color="red">内容图标</font>，可选值有'info'、'success'、'warning'、'error'、'loading'，默认值为'info'，当为'loading'时，timeout值会被设置为0，表示不会自动关闭。</li>
+                <li style="color:#999999;">　　　└ <font color="red">内容图标</font>，可选值有'info'、'success'、'warning'、'error'、'loading'，默认值为'info'，当为'loading'时，timeout值会被设置为0，表示不会自动关闭。
+                </li>
                 <li style="text-indent:2em"> - <strong>options</strong>　[可选] (json)</li>
-                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('tipDefaults');" title="点击查看">$.jBox.tipDefaults</a>。</li>
+                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('tipDefaults');"
+                                                               title="点击查看">$.jBox.tipDefaults</a>。
+                </li>
 
                 <li style="color:#F00">
-                    <br /><strong>备注：如果想手动关闭tip，请调用　$.jBox.closeTip()　方法。</strong>
+                    <br/><strong>备注：如果想手动关闭tip，请调用　$.jBox.closeTip()　方法。</strong>
                 </li>
             </ul>
         </div>
-        <br />
+        <br/>
 
-示例（一）:    
-<pre>
+        示例（一）:
+        <pre>
 <code class="javascript">
 $.jBox.tip('Hello jBox');
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_4_1();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_4_1();" value="运　行"/></div>
 
-示例（二）:    
-<pre>
+        示例（二）:
+        <pre>
 <code class="javascript">
 //加了个其它参数focusId
 $.jBox.tip('关闭后设置输入框为焦点', 'info', { focusId: 'tip-input' });
 </code>
 </pre>
-<div style="text-align:right">输入框：<input type="text" id="tip-input" /> <input class="btn" type="button" onclick="demo_4_2();" value="运　行" /></div>
+        <div style="text-align:right">输入框：<input type="text" id="tip-input"/> <input class="btn" type="button"
+                                                                                     onclick="demo_4_2();" value="运　行"/>
+        </div>
 
-示例（三）:    
-<pre>
+        示例（三）:
+        <pre>
 <code class="javascript">
 //加了个其它参数closed
 $.jBox.tip('关闭后设置输入框为已选择', 'error', { closed: function () { $('#tip-input2').select(); } });
 </code>
 </pre>
-<div style="text-align:right">输入框：<input type="text" id="tip-input2" value="内容" /> <input class="btn" type="button" onclick="demo_4_3();" value="运　行" /></div>
+        <div style="text-align:right">输入框：<input type="text" id="tip-input2" value="内容"/> <input class="btn"
+                                                                                                 type="button"
+                                                                                                 onclick="demo_4_3();"
+                                                                                                 value="运　行"/></div>
 
-示例（四）:    
-<pre>
+        示例（四）:
+        <pre>
 <code class="javascript">
 $.jBox.tip("正在XX，你懂的...", 'loading');
 // 模拟2秒后完成操作
 window.setTimeout(function () { $.jBox.tip('XX已完成。', 'success'); }, 2000);
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_4_4();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_4_4();" value="运　行"/></div>
 
-示例（五）:    
-<pre>
+        示例（五）:
+        <pre>
 <code class="javascript">
 var submit = function (v, h, f) {
     if (v == 'ok') {
@@ -639,50 +797,58 @@ var submit = function (v, h, f) {
 $.jBox.confirm("确定要删除数据吗？", "提示", submit);
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_4_5();" value="运　行" /></div>
-       </fieldset>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_4_5();" value="运　行"/></div>
+    </fieldset>
 
-       <fieldset><legend>$.jBox.messager()</legend>
+    <fieldset>
+        <legend>$.jBox.messager()</legend>
         <div class="content">
             <ul>
-           	    <li>函数原型：</li>
-             	<li style="text-indent:2em"><strong>$.jBox.messager(content, title, timeout, options);</strong></li>
+                <li>函数原型：</li>
+                <li style="text-indent:2em"><strong>$.jBox.messager(content, title, timeout, options);</strong></li>
                 <li style="color:#999">　　　 └ 或者 jBox.messager(content, title, timeout, options);</li>
                 <li>参数说明：</li>
                 <li style="text-indent:2em"> - <strong>content</strong>　(string)</li>
                 <li style="color:#999999;">　　　└ 只能是string，不支持前缀标识，默认值为''。</li>
                 <li style="text-indent:2em"> - <strong>title</strong>　[可选] (string)</li>
-                <li style="color:#999999;">　　　└ 窗口标题，值为null时为不显示标题，默认值为 <a href="javascript:viewConfig('messagerDefaults');" title="点击查看">$.jBox.messagerDefaults.title</a>。</li>
+                <li style="color:#999999;">　　　└ 窗口标题，值为null时为不显示标题，默认值为 <a
+                        href="javascript:viewConfig('messagerDefaults');" title="点击查看">$.jBox.messagerDefaults.title</a>。
+                </li>
                 <li style="text-indent:2em"> - <strong>timeout</strong>　[可选] (number)</li>
-                <li style="color:#999999;">　　　└ 显示多少毫秒后自动关闭，如果为0则不自动关闭，默认值为 <a href="javascript:viewConfig('messagerDefaults');" title="点击查看">$.jBox.messagerDefaults.timeout</a>。</li>
+                <li style="color:#999999;">　　　└ 显示多少毫秒后自动关闭，如果为0则不自动关闭，默认值为 <a
+                        href="javascript:viewConfig('messagerDefaults');"
+                        title="点击查看">$.jBox.messagerDefaults.timeout</a>。
+                </li>
                 <li style="text-indent:2em"> - <strong>options</strong>　[可选] (json)</li>
-                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('messagerDefaults');" title="点击查看">$.jBox.messagerDefaults</a>。</li>
+                <li style="color:#999999;">　　　└ 其它参数选项，默认值为 <a href="javascript:viewConfig('messagerDefaults');"
+                                                               title="点击查看">$.jBox.messagerDefaults</a>。
+                </li>
 
                 <li style="color:#F00">
-                    <br /><strong>备注：如果想手动关闭messager，请调用　$.jBox.closeMessager()　方法。</strong>
+                    <br/><strong>备注：如果想手动关闭messager，请调用　$.jBox.closeMessager()　方法。</strong>
                 </li>
             </ul>
         </div>
-        <br />
+        <br/>
 
-示例（一）:    
-<pre>
+        示例（一）:
+        <pre>
 <code class="javascript">
 $.jBox.messager('Hello jBox', 'jBox');
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_5_1();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_5_1();" value="运　行"/></div>
 
-示例（二）:    
-<pre>
+        示例（二）:
+        <pre>
 <code class="javascript">
 $.jBox.messager("Hello jBox 2", "my title", null, { width: 350, showType: 'fade' });
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_5_2();" value="运　行" /></div>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_5_2();" value="运　行"/></div>
 
-示例（三）:    
-<pre>
+        示例（三）:
+        <pre>
 <code class="javascript">
 $.jBox.messager("Hello jBox 3", "my title", 3000, {
     width: 350,
@@ -696,18 +862,24 @@ $.jBox.messager("Hello jBox 3", "my title", 3000, {
 });
 </code>
 </pre>
-<div style="text-align:right"><input class="btn" type="button" onclick="demo_5_3();" value="运　行" /></div>
-       </fieldset>
+        <div style="text-align:right"><input class="btn" type="button" onclick="demo_5_3();" value="运　行"/></div>
+    </fieldset>
 
-       <fieldset><legend>jBox 其它成员</legend>
+    <fieldset>
+        <legend>jBox 其它成员</legend>
         <div class="content">
             <ul>
-           	    <li>全局设置：</li>
-             	<li style="text-indent:2em"><strong><a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a></strong></li>
-             	<li style="text-indent:2em"><strong><a href="javascript:viewConfig('stateDefaults');" title="点击查看">$.jBox.stateDefaults</a></strong></li>
-             	<li style="text-indent:2em"><strong><a href="javascript:viewConfig('tipDefaults');" title="点击查看">$.jBox.tipDefaults</a></strong></li>
-             	<li style="text-indent:2em"><strong><a href="javascript:viewConfig('messagerDefaults');" title="点击查看">$.jBox.messagerDefaults</a></strong></li>
-             	<li style="text-indent:2em"><strong><a href="javascript:viewConfig('languageDefaults');" title="点击查看">$.jBox.languageDefaults</a></strong></li>
+                <li>全局设置：</li>
+                <li style="text-indent:2em"><strong><a href="javascript:viewConfig('defaults');" title="点击查看">$.jBox.defaults</a></strong>
+                </li>
+                <li style="text-indent:2em"><strong><a href="javascript:viewConfig('stateDefaults');" title="点击查看">$.jBox.stateDefaults</a></strong>
+                </li>
+                <li style="text-indent:2em"><strong><a href="javascript:viewConfig('tipDefaults');" title="点击查看">$.jBox.tipDefaults</a></strong>
+                </li>
+                <li style="text-indent:2em"><strong><a href="javascript:viewConfig('messagerDefaults');" title="点击查看">$.jBox.messagerDefaults</a></strong>
+                </li>
+                <li style="text-indent:2em"><strong><a href="javascript:viewConfig('languageDefaults');" title="点击查看">$.jBox.languageDefaults</a></strong>
+                </li>
                 <li>其它函数：</li>
                 <li style="text-indent:2em"> - <strong>$.jBox.setDefaults(configs);</strong></li>
                 <li style="color:#999999;">　　　└ 设置全局设置，请参考 demo.js 里的使用。</li>
@@ -737,10 +909,10 @@ $.jBox.messager("Hello jBox 3", "my title", 3000, {
                 <li style="color:#999999;">　　　└ 关闭提示（由 $.jBox.messager() 打开的）。</li>
             </ul>
         </div>
-        <br />
+        <br/>
 
-示例（iframe）:    
-<pre>
+        示例（iframe）:
+        <pre>
 <code class="javascript">
 // 调父窗口请用 parent 或 top，如果是多层iframe，需要调用多个parent
 var html = "&lt;div style='padding:10px;'&gt;输入点什么：&lt;input type='text' id='some' name='some' /&gt;&lt;/div&gt;";
@@ -758,14 +930,14 @@ var submit = function (v, h, f) {
 top.$.jBox(html, { title: "输入", submit: submit });
 </code>
 </pre>
-<div style="text-align:right">
-<iframe src="iframe.html" width="100%" height="50"></iframe>
-</div>
+        <div style="text-align:right">
+            <iframe src="iframe.html" width="100%" height="50"></iframe>
+        </div>
 
-       </fieldset>
+    </fieldset>
 
-<!-- 全局配置说明 -->
-<div id="defaults" style="display:none;">  
+    <!-- 全局配置说明 -->
+    <div id="defaults" style="display:none;">
 <pre class="config">
 <code class="javascript">
 $.jBox.defaults = {
@@ -801,9 +973,9 @@ $.jBox.defaults = {
 };
 </code>
 </pre>
-</div>
+    </div>
 
-<div id="stateDefaults" style="display:none;">  
+    <div id="stateDefaults" style="display:none;">
 <pre class="config">
 <code class="javascript">
 $.jBox.stateDefaults = {
@@ -816,9 +988,9 @@ $.jBox.stateDefaults = {
 };
 </code>
 </pre>
-</div>
+    </div>
 
-<div id="tipDefaults" style="display:none;">  
+    <div id="tipDefaults" style="display:none;">
 <pre class="config">
 <code class="javascript">
 $.jBox.tipDefaults = {
@@ -833,9 +1005,9 @@ $.jBox.tipDefaults = {
 };
 </code>
 </pre>
-</div>
+    </div>
 
-<div id="messagerDefaults" style="display:none;">  
+    <div id="messagerDefaults" style="display:none;">
 <pre class="config">
 <code class="javascript">
 $.jBox.messagerDefaults = {
@@ -858,9 +1030,9 @@ $.jBox.messagerDefaults = {
 };
 </code>
 </pre>
-</div>
+    </div>
 
-<div id="languageDefaults" style="display:none;">
+    <div id="languageDefaults" style="display:none;">
 <pre class="config">
 <code class="javascript">
 $.jBox.languageDefaults = {
@@ -872,16 +1044,18 @@ $.jBox.languageDefaults = {
 };
 </code>
 </pre>
-</div>
-
-       <div class="t">
-    	    <ul>
-                <li><strong>联系作者</strong></li>
-                <li style="text-indent:2em"> - QQ：65005153</li>
-                <li style="text-indent:2em"> - Email: <a href="mailto:kudychen@gmail.com">kudychen@gmail.com</a></li>
-            </ul>
-        </div>
-    	<div class="copy">Copyright &copy; 2005-2011 <a href="http://www.kudystudio.com/" target="_blank">kudystudio</a> All Rights Reserved.</div>
     </div>
+
+    <div class="t">
+        <ul>
+            <li><strong>联系作者</strong></li>
+            <li style="text-indent:2em"> - QQ：65005153</li>
+            <li style="text-indent:2em"> - Email: <a href="mailto:kudychen@gmail.com">kudychen@gmail.com</a></li>
+        </ul>
+    </div>
+    <div class="copy">Copyright &copy; 2005-2011 <a href="http://www.kudystudio.com/" target="_blank">kudystudio</a> All
+        Rights Reserved.
+    </div>
+</div>
 </body>
 </html>
