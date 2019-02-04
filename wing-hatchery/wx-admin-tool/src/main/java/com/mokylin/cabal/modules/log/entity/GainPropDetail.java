@@ -26,7 +26,7 @@ public class GainPropDetail extends MybatisBaseBean {
     private Date logDay;
 
 
-    @ExcelField(title="玩家角色账号", align=2, sort=20)
+    @ExcelField(title = "玩家角色账号", align = 2, sort = 20)
     public String getUserRoleId() {
         return userRoleId;
     }
@@ -35,7 +35,7 @@ public class GainPropDetail extends MybatisBaseBean {
         this.userRoleId = userRoleId;
     }
 
-    @ExcelField(title="玩家角色姓名", align=2, sort=30)
+    @ExcelField(title = "玩家角色姓名", align = 2, sort = 30)
     public String getUserName() {
         return userName;
     }
@@ -44,7 +44,7 @@ public class GainPropDetail extends MybatisBaseBean {
         this.userName = userName;
     }
 
-    @ExcelField(title="事件类型", align=2, sort=40)
+    @ExcelField(title = "事件类型", align = 2, sort = 40)
     public String getEventType() {
         return eventType;
     }
@@ -61,7 +61,7 @@ public class GainPropDetail extends MybatisBaseBean {
         this.times = times;
     }
 
-    @ExcelField(title="物品编号", align=2, sort=50)
+    @ExcelField(title = "物品编号", align = 2, sort = 50)
     public String getGoodsId() {
         return goodsId;
     }
@@ -70,7 +70,7 @@ public class GainPropDetail extends MybatisBaseBean {
         this.goodsId = goodsId;
     }
 
-    @ExcelField(title="物品名称", align=2, sort=60)
+    @ExcelField(title = "物品名称", align = 2, sort = 60)
     public String getGoodsName() {
         return goodsName;
     }
@@ -87,7 +87,7 @@ public class GainPropDetail extends MybatisBaseBean {
         this.count = count;
     }
 
-    @ExcelField(title="日志事件", align=2, sort=70)
+    @ExcelField(title = "日志事件", align = 2, sort = 70)
     public Date getLogTime() {
         return logTime;
     }

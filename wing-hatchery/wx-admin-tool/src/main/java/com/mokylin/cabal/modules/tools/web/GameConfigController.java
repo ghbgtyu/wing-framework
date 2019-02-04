@@ -40,11 +40,11 @@ public class GameConfigController extends BaseController {
 
     @Autowired
     private ResourceTypeService resourceTypeService;
-   
+
     @Autowired
     private OperationTypeService operationTypeService;
 
-    
+
     @ModelAttribute
     public ConfigFile get(@RequestParam(required = false) String id) {
         if (StringUtils.isNotBlank(id)) {
@@ -93,7 +93,7 @@ public class GameConfigController extends BaseController {
         parameter.put("fileName", fileName);
         parameter.put("newName", newName);
         parameter.put("filePath", filePath);
-        parameter.put("fileType",newName);
+        parameter.put("fileType", newName);
         String fullUploadPath = contextPath + filePath;
         new File(fullUploadPath).mkdirs();
         file.transferTo(new File(fullUploadPath + fileName));
@@ -101,12 +101,12 @@ public class GameConfigController extends BaseController {
         if (fileType.equals("jat")) {
             goodsAnalyzeService.refresh();
         } else {
-        	if(newName.equalsIgnoreCase("resourceType.txt")){       //资源县类型
-        		resourceTypeService.refresh(); 
-        	}else if(newName.equalsIgnoreCase("operation.txt")){   //操作类型
-        		operationTypeService.refresh();
-        	}
-          
+            if (newName.equalsIgnoreCase("resourceType.txt")) {       //资源县类型
+                resourceTypeService.refresh();
+            } else if (newName.equalsIgnoreCase("operation.txt")) {   //操作类型
+                operationTypeService.refresh();
+            }
+
         }
 
 

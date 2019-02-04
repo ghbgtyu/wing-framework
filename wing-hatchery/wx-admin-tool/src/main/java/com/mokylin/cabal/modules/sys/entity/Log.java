@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="https://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.modules.sys.entity;
@@ -33,121 +33,122 @@ import com.mokylin.cabal.common.utils.IdGen;
  */
 @Entity
 @Table(name = "sys_log")
-@DynamicInsert @DynamicUpdate
+@DynamicInsert
+@DynamicUpdate
 //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Log extends BaseEntity<Log> {
 
     private static final long serialVersionUID = -4164351581195873367L;
 
-    private String id;			// 日志编号
-	private String type; 		// 日志类型（1：接入日志；2：错误日志）
-	private User createBy;		// 创建者
-	private Date createDate;	// 日志创建时间
-	private String remoteAddr; 	// 操作用户的IP地址
-	private String requestUri; 	// 操作的URI
-	private String method; 		// 操作的方式
-	private String params; 		// 操作提交的数据
-	private String userAgent;	// 操作用户代理信息
-	private String exception; 	// 异常信息
-	
-	public static final String TYPE_ACCESS = "1";
-	public static final String TYPE_EXCEPTION = "2";
-	
-	public Log(){
-		super();
-	}
-	
-	public Log(String id){
-		this();
-		this.id = id;
-	}
+    private String id;            // 日志编号
+    private String type;        // 日志类型（1：接入日志；2：错误日志）
+    private User createBy;        // 创建者
+    private Date createDate;    // 日志创建时间
+    private String remoteAddr;    // 操作用户的IP地址
+    private String requestUri;    // 操作的URI
+    private String method;        // 操作的方式
+    private String params;        // 操作提交的数据
+    private String userAgent;    // 操作用户代理信息
+    private String exception;    // 异常信息
 
-	@PrePersist
-	public void prePersist(){
-		this.id = IdGen.uuid();
-	}
-	
-	@Id
-	public String getId() {
-		return id;
-	}
+    public static final String TYPE_ACCESS = "1";
+    public static final String TYPE_EXCEPTION = "2";
 
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	public String getType() {
-		return type;
-	}
+    public Log() {
+        super();
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public Log(String id) {
+        this();
+        this.id = id;
+    }
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@NotFound(action = NotFoundAction.IGNORE)
-	public User getCreateBy() {
-		return createBy;
-	}
+    @PrePersist
+    public void prePersist() {
+        this.id = IdGen.uuid();
+    }
 
-	public void setCreateBy(User createBy) {
-		this.createBy = createBy;
-	}
+    @Id
+    public String getId() {
+        return id;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getCreateDate() {
-		return createDate;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	
-	public String getRemoteAddr() {
-		return remoteAddr;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setRemoteAddr(String remoteAddr) {
-		this.remoteAddr = remoteAddr;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getUserAgent() {
-		return userAgent;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotFound(action = NotFoundAction.IGNORE)
+    public User getCreateBy() {
+        return createBy;
+    }
 
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
-	}
+    public void setCreateBy(User createBy) {
+        this.createBy = createBy;
+    }
 
-	public String getRequestUri() {
-		return requestUri;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-	public void setRequestUri(String requestUri) {
-		this.requestUri = requestUri;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public String getMethod() {
-		return method;
-	}
+    public String getRemoteAddr() {
+        return remoteAddr;
+    }
 
-	public void setMethod(String method) {
-		this.method = method;
-	}
+    public void setRemoteAddr(String remoteAddr) {
+        this.remoteAddr = remoteAddr;
+    }
 
-	public String getParams() {
-		return params;
-	}
+    public String getUserAgent() {
+        return userAgent;
+    }
 
-	public void setParams(String params) {
-		this.params = params;
-	}
-	
-	public String getException() {
-		return exception;
-	}
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
 
-	public void setException(String exception) {
-		this.exception = exception;
-	}
+    public String getRequestUri() {
+        return requestUri;
+    }
+
+    public void setRequestUri(String requestUri) {
+        this.requestUri = requestUri;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
+    }
+
+    public String getException() {
+        return exception;
+    }
+
+    public void setException(String exception) {
+        this.exception = exception;
+    }
 }

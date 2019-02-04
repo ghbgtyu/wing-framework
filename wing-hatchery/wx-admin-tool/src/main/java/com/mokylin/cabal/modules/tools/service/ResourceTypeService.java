@@ -38,7 +38,7 @@ public class ResourceTypeService {
     private static final String FILE_TYPE = "resourceType.txt";  //资源线
     private static Map<String, String> resourceMap = new HashMap<String, String>();   //资源线
 
-   // @PostConstruct
+    // @PostConstruct
     public void init() {
 
         try {
@@ -47,13 +47,13 @@ public class ResourceTypeService {
 
             parameter.put("fileType", FILE_TYPE);
             ConfigFile configFile = toolDaoTemplate.selectOne("configFile.selectOneByName", parameter);
-            if(configFile==null){
-                return ;
+            if (configFile == null) {
+                return;
             }
             String filePath = configFile.getFilePath();
             String fileName = configFile.getFileName();
             String fullFileName = contextPath + filePath + fileName;
-            fullFileName=URLDecoder.decode(fullFileName,"utf-8");//关键啊 ！
+            fullFileName = URLDecoder.decode(fullFileName, "utf-8");//关键啊 ！
             File file = FileUtils.getFile(fullFileName);
             if (file.isFile() && file.exists()) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
@@ -67,12 +67,12 @@ public class ResourceTypeService {
             }
 
         } catch (Exception e) {
-            LOG.error("解析事件类型配置文件出错", e); 
+            LOG.error("解析事件类型配置文件出错", e);
         }
     }
 
     public void refresh() {
-    	resourceMap.clear();
+        resourceMap.clear();
         init();
     }
 
@@ -83,8 +83,8 @@ public class ResourceTypeService {
         return resourceMap;
     }
 
-    public static String getResourceType(String key){
-        return  resourceMap.get(key);
+    public static String getResourceType(String key) {
+        return resourceMap.get(key);
     }
 
 

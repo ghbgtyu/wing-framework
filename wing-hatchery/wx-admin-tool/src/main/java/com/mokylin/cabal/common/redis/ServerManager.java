@@ -64,21 +64,21 @@ public class ServerManager {
         }
         logger.info("项目启动-缓存初始化,gameServerMap初始化结束，大小[{}]", gameServerMap.size());
 
-		List<Server> crossServerList = getRedisManager().getServerList(RedisConstant.KEY_SERVER_CROSS);
-		// 初始化 crossServerMap
-		for (Server server : crossServerList) {
-			if (server.getType() == 2) {// TODO shenggm 应该为getSubType
-				crossServerMap.put(server.getWorldId(), server);
-			}
-		}
-		logger.info("项目启动-缓存初始化,crossServerList初始化结束，大小[{}]", crossServerMap.size());
-		
-		// 初始化 crossServerMap
-		List<BaseCrossArea> crossAreas = redisManager.selectALLCrossAreaFromRedis();
-		for (BaseCrossArea b : crossAreas) {
-			crossAreaMap.put(b.getCrossAreaId(), b);
-		}
-		logger.info("项目启动-缓存初始化,crossAreaMap初始化结束，大小[{}]", crossAreaMap.size());
+        List<Server> crossServerList = getRedisManager().getServerList(RedisConstant.KEY_SERVER_CROSS);
+        // 初始化 crossServerMap
+        for (Server server : crossServerList) {
+            if (server.getType() == 2) {// TODO shenggm 应该为getSubType
+                crossServerMap.put(server.getWorldId(), server);
+            }
+        }
+        logger.info("项目启动-缓存初始化,crossServerList初始化结束，大小[{}]", crossServerMap.size());
+
+        // 初始化 crossServerMap
+        List<BaseCrossArea> crossAreas = redisManager.selectALLCrossAreaFromRedis();
+        for (BaseCrossArea b : crossAreas) {
+            crossAreaMap.put(b.getCrossAreaId(), b);
+        }
+        logger.info("项目启动-缓存初始化,crossAreaMap初始化结束，大小[{}]", crossAreaMap.size());
     }
 
     public Server getGameServer(int serverId) {
@@ -202,27 +202,29 @@ public class ServerManager {
 
     /**
      * 先保存平台，在保存服务器信息
+     *
      * @param server
      */
-    private void insertGameAreaAndGamePlatform(Server server){
+    private void insertGameAreaAndGamePlatform(Server server) {
         saveGamePlatform(server);
         insert(server);
     }
 
     /**
      * 如果平台不存在则保存平台
+     *
      * @param server
      */
-    private void saveGamePlatform(Server server){
+    private void saveGamePlatform(Server server) {
         MybatisParameter parameter = new MybatisParameter();
         parameter.put("pid", String.valueOf(server.getPlatformId()));
-        GamePlatform gamePlatform = toolDaoTemplate.selectOne("gamePlatform.findGamePlatformByPid",parameter);
-        if(gamePlatform == null){
+        GamePlatform gamePlatform = toolDaoTemplate.selectOne("gamePlatform.findGamePlatformByPid", parameter);
+        if (gamePlatform == null) {
             parameter.put("id", IdGen.uuid());
-            parameter.put("name",String.valueOf(server.getPlatformId()));
+            parameter.put("name", String.valueOf(server.getPlatformId()));
             parameter.put("pid", String.valueOf(server.getPlatformId()));
             parameter.put("description", String.valueOf(server.getPlatformId()));
-            toolDaoTemplate.insert("gamePlatform.insert",parameter);
+            toolDaoTemplate.insert("gamePlatform.insert", parameter);
         }
     }
 
@@ -232,7 +234,7 @@ public class ServerManager {
         if (map == null) {
             map = new GameAreaMap();
             gameAreaMap.put(server.getPlatformId(), map);
-            logger.info("gameAreaMap 添加数据，大小【{}】",gameAreaMap.size());
+            logger.info("gameAreaMap 添加数据，大小【{}】", gameAreaMap.size());
         }
         map.addGameArea(server);
         server.setOpenTime(new Date());
@@ -353,71 +355,82 @@ public class ServerManager {
         return result;
     }
 
-	/**
-	 * 获取国家战区信息
-	 * 
-	 * @return
-	 */
-	public List<BaseCrossArea> getCountryCrossArea() {
-		List<BaseCrossArea> result = new ArrayList<>();
-		for (BaseCrossArea b : crossAreaMap.values()) {
-			if (b.getCrossType() == SystemConstant.COUNTRY_CROSS) {
-				result.add(b);
-			}
-		}
-		return result;
-	}
-	/**
-	 * 获取所有战区信息
-	 * 
-	 * @return
-	 */
-	public List<BaseCrossArea> getAllCrossArea() {
-		return new ArrayList<>(crossAreaMap.values());
-	}
+    /**
+     * 获取国家战区信息
+     *
+     * @return
+     */
+    public List<BaseCrossArea> getCountryCrossArea() {
+        List<BaseCrossArea> result = new ArrayList<>();
+        for (BaseCrossArea b : crossAreaMap.values()) {
+            if (b.getCrossType() == SystemConstant.COUNTRY_CROSS) {
+                result.add(b);
+            }
+        }
+        return result;
+    }
 
-	/**
-	 * 添加战场区域
-	 * @param bca
-	 */
-	public void addCrossArea(BaseCrossArea bca) {
-		crossAreaMap.put(bca.getCrossAreaId(), bca);
-		redisManager.getCrossAreaCache().hset(RedisConstant.KEY_CROSS_AREA, bca.getCrossAreaId(), bca.toJson());
-	}
-	
-	/**
-	 * 通过战区类型和战区ID,获取指定的战区
-	 * @param crossAreaType 战区类型
-	 * @param wroldId 跨服服务器ID
-	 * @return
-	 */
-	public BaseCrossArea getCrossArea(String crossAreaType,String wroldId) {
-		return crossAreaMap.get(crossAreaType+"_"+wroldId);
-	}
-	/**
-	 * 删除所有战区信息
-	 */
-	public void removeAllCrossArea() {
-		crossAreaMap.clear();
-		redisManager.getCrossAreaCache().del(RedisConstant.KEY_CROSS_AREA);
-	}
-	/**
-	 * 删除指定的战区信息
-	 * @param bca
-	 */
-	public void removeCrossArea(BaseCrossArea bca) {
-		crossAreaMap.remove(bca.getCrossAreaId());
-		redisManager.getCrossAreaCache().hdel(RedisConstant.KEY_CROSS_AREA, bca.getCrossAreaId());;
-	}
-	/**
-	 * 删除指定的战区信息
-	 * @param crossAreaType 战区类型
-	 * @param crossAreaId 跨服服务器ID
-	 */
-	public void removeCrossAreaById(String crossAreaType,String crossAreaId) {
-		crossAreaMap.remove(crossAreaType+"_"+crossAreaId);
-		redisManager.getCrossAreaCache().hdel(RedisConstant.KEY_CROSS_AREA, crossAreaType+"_"+crossAreaId);;
-	}
+    /**
+     * 获取所有战区信息
+     *
+     * @return
+     */
+    public List<BaseCrossArea> getAllCrossArea() {
+        return new ArrayList<>(crossAreaMap.values());
+    }
+
+    /**
+     * 添加战场区域
+     *
+     * @param bca
+     */
+    public void addCrossArea(BaseCrossArea bca) {
+        crossAreaMap.put(bca.getCrossAreaId(), bca);
+        redisManager.getCrossAreaCache().hset(RedisConstant.KEY_CROSS_AREA, bca.getCrossAreaId(), bca.toJson());
+    }
+
+    /**
+     * 通过战区类型和战区ID,获取指定的战区
+     *
+     * @param crossAreaType 战区类型
+     * @param wroldId       跨服服务器ID
+     * @return
+     */
+    public BaseCrossArea getCrossArea(String crossAreaType, String wroldId) {
+        return crossAreaMap.get(crossAreaType + "_" + wroldId);
+    }
+
+    /**
+     * 删除所有战区信息
+     */
+    public void removeAllCrossArea() {
+        crossAreaMap.clear();
+        redisManager.getCrossAreaCache().del(RedisConstant.KEY_CROSS_AREA);
+    }
+
+    /**
+     * 删除指定的战区信息
+     *
+     * @param bca
+     */
+    public void removeCrossArea(BaseCrossArea bca) {
+        crossAreaMap.remove(bca.getCrossAreaId());
+        redisManager.getCrossAreaCache().hdel(RedisConstant.KEY_CROSS_AREA, bca.getCrossAreaId());
+        ;
+    }
+
+    /**
+     * 删除指定的战区信息
+     *
+     * @param crossAreaType 战区类型
+     * @param crossAreaId   跨服服务器ID
+     */
+    public void removeCrossAreaById(String crossAreaType, String crossAreaId) {
+        crossAreaMap.remove(crossAreaType + "_" + crossAreaId);
+        redisManager.getCrossAreaCache().hdel(RedisConstant.KEY_CROSS_AREA, crossAreaType + "_" + crossAreaId);
+        ;
+    }
+
     /**
      * 获取所有战区信息
      *

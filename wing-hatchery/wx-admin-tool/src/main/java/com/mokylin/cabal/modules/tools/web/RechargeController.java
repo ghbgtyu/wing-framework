@@ -70,15 +70,15 @@ public class RechargeController extends BaseController {
         List<Map> list = new ArrayList<Map>();
         recharge.setServerId(LookupContext.getCurrentServerId());
         //判断是按照角色名充值还是按照角色Id
-      
-        if(recharge.getRoleNames()!=null){
-        	 roleNameList = Arrays.asList(StringUtils.split(recharge.getRoleNames(), "\r\n"));
-             parameter.put("roleNameList", roleNameList);
-             list = gameDaoTemplate.selectListByServerId(LookupContext.getCurrentServerId(), "role.findRoleByRoleNameList", parameter);
-        }else{
-        	roleIdList = Arrays.asList(StringUtils.split(recharge.getRoleIds(), "\r\n"));
-             parameter.put("roleIdList", roleIdList);
-             list = gameDaoTemplate.selectListByServerId(LookupContext.getCurrentServerId(), "role.findRoleByRoleIdList", parameter);
+
+        if (recharge.getRoleNames() != null) {
+            roleNameList = Arrays.asList(StringUtils.split(recharge.getRoleNames(), "\r\n"));
+            parameter.put("roleNameList", roleNameList);
+            list = gameDaoTemplate.selectListByServerId(LookupContext.getCurrentServerId(), "role.findRoleByRoleNameList", parameter);
+        } else {
+            roleIdList = Arrays.asList(StringUtils.split(recharge.getRoleIds(), "\r\n"));
+            parameter.put("roleIdList", roleIdList);
+            list = gameDaoTemplate.selectListByServerId(LookupContext.getCurrentServerId(), "role.findRoleByRoleIdList", parameter);
         }
         String roleIds = "";
         String roleNames = "";
@@ -96,13 +96,13 @@ public class RechargeController extends BaseController {
 
         int size = Arrays.asList(StringUtils.split(roleIds, ",")).size();
         System.out.println(roleIdList.size());
-        if(roleNameList.size()!=0){
-        	if (roleNameList.size() != size) {
+        if (roleNameList.size() != 0) {
+            if (roleNameList.size() != size) {
                 addMessage(model, "输入的角色名数量和当前服查询到的玩家数量不一致");
                 return form(recharge, model);
             }
-        }else{
-        	if (roleIdList.size() != size) {
+        } else {
+            if (roleIdList.size() != size) {
                 addMessage(model, "输入的角色ID数量和当前服查询到的玩家数量不一致");
                 return form(recharge, model);
             }
@@ -145,41 +145,40 @@ public class RechargeController extends BaseController {
     public Result batchCancel(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
         List<String> recordId = (List<String>) MapUtils.getObject(parameter, "recordIdList");
-        List<String> status = toolDaoTemplate.selectList("recharge.selectStatus", parameter); 
-        if(status.contains("1")||status.contains("2")){
+        List<String> status = toolDaoTemplate.selectList("recharge.selectStatus", parameter);
+        if (status.contains("1") || status.contains("2")) {
             String data = "已取消和已审核的申请将不能再取消，请重新选择！";
             return new Result(false).data(data);
-        }else{
-        	 parameter.put("rechargeStatus", 2);  //取消状态
-             toolDaoTemplate.update("recharge.batchUpdateStatus", parameter);
-             String data = "取消成功，共取消申请：" + recordId.size() + "条";
-             return new Result(true).data(data);
+        } else {
+            parameter.put("rechargeStatus", 2);  //取消状态
+            toolDaoTemplate.update("recharge.batchUpdateStatus", parameter);
+            String data = "取消成功，共取消申请：" + recordId.size() + "条";
+            return new Result(true).data(data);
         }
-       
+
     }
 
-    
-    
+
     @RequiresPermissions("game.recharge.batchrecover")
     @ResponseBody
     @RequestMapping(value = "batchRecover")
     public Result batchRecover(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
         List<String> recordIds = (List<String>) MapUtils.getObject(parameter, "recordIdList");
-        List<String> status = toolDaoTemplate.selectList("recharge.selectStatus", parameter); 
-        if(status.contains("0")||status.contains("1")){
-        	String data = "待审核和已审核的申请将不能再恢复，请重新选择！";
+        List<String> status = toolDaoTemplate.selectList("recharge.selectStatus", parameter);
+        if (status.contains("0") || status.contains("1")) {
+            String data = "待审核和已审核的申请将不能再恢复，请重新选择！";
             return new Result(false).data(data);
-        	
-        }else{
-        	 parameter.put("rechargeStatus", 0);  //待审核状态
-        	 toolDaoTemplate.update("recharge.batchUpdateStatus", parameter);
-        	 String data = "恢复成功，共恢复申请：" + recordIds.size() + "条";
-             return new Result(true).data(data);
-          }
-        
+
+        } else {
+            parameter.put("rechargeStatus", 0);  //待审核状态
+            toolDaoTemplate.update("recharge.batchUpdateStatus", parameter);
+            String data = "恢复成功，共恢复申请：" + recordIds.size() + "条";
+            return new Result(true).data(data);
+        }
+
     }
-    
+
     /**
      * 按角色id申请充值跳转
      */
@@ -188,6 +187,6 @@ public class RechargeController extends BaseController {
     public String RoleIdRechargeForm(Recharge recharge, Model model) {
         return "modules/tools/roleIdRechargeForm";
     }
-    
-    
+
+
 }

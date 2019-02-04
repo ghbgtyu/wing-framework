@@ -34,9 +34,9 @@ public class AnnounceTemplate extends AbstractGameOperations implements Announce
     @Override
     public Result addAnnounce(GameNotice notice) {
         List<Server> gameServerList = getWaitingToSendGameServerList(notice);
-        for(Server server : gameServerList){
-            URI uri = buildUri(server.createUrl()+API_URL_ADD_ANNOUNCE_SUFFIX);
-            execute(notice,uri);
+        for (Server server : gameServerList) {
+            URI uri = buildUri(server.createUrl() + API_URL_ADD_ANNOUNCE_SUFFIX);
+            execute(notice, uri);
         }
 
         return new Result(true);
@@ -45,23 +45,24 @@ public class AnnounceTemplate extends AbstractGameOperations implements Announce
     @Override
     public Result deleteAnnounce(GameNotice notice) {
         List<Server> gameServerList = getWaitingToSendGameServerList(notice);
-        for(Server server : gameServerList){
-            URI uri = buildUri(server.createUrl()+API_URL_DELETE_ANNOUNCE_SUFFIX);
-            execute(notice,uri);
+        for (Server server : gameServerList) {
+            URI uri = buildUri(server.createUrl() + API_URL_DELETE_ANNOUNCE_SUFFIX);
+            execute(notice, uri);
         }
         return new Result(true);
     }
 
     /**
      * 根据公告标志isGlobal是否是所有服的列表
+     *
      * @param notice
      * @return
      */
-    private List<Server> getWaitingToSendGameServerList(GameNotice notice){
+    private List<Server> getWaitingToSendGameServerList(GameNotice notice) {
         List<Server> gameServerList = null;
-        if(notice.isGlobal()){
+        if (notice.isGlobal()) {
             gameServerList = GameAreaUtils.getGameServerListWithoutRepetition();
-        }else {
+        } else {
             List<String> serverIdList = Arrays.asList(StringUtils.split(notice.getServerIds(), ","));
             gameServerList = GameAreaUtils.getGameServerListWithoutRepetition(serverIdList);
         }

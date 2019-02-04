@@ -9,18 +9,19 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 
 /**
  * Spring 单元测试基类
+ *
  * @author 稻草鸟人
  * @version 2014-05-15
  */
-@ContextConfiguration(locations = {"classpath:spring-context.xml","classpath:spring-context-shiro.xml","classpath:spring-context-mybatis.xml","classpath:spring-mvc.xml"})
+@ContextConfiguration(locations = {"classpath:spring-context.xml", "classpath:spring-context-shiro.xml", "classpath:spring-context-mybatis.xml", "classpath:spring-mvc.xml"})
 public class SpringTransactionalContextTests extends AbstractTransactionalJUnit4SpringContextTests {
 
-	protected DataSource dataSource;
+    protected DataSource dataSource;
 
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		super.setDataSource(dataSource);
-		this.dataSource = dataSource;
-	}
-	
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        super.setDataSource(dataSource);
+        this.dataSource = dataSource;
+    }
+
 }

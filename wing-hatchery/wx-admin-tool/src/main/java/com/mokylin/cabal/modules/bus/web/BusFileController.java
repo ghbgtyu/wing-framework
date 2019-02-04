@@ -37,43 +37,40 @@ import java.util.*;
 
 @Controller
 @RequestMapping(value = "${adminPath}/bus/file")
-public class BusFileController extends BaseController{
+public class BusFileController extends BaseController {
 
     @Autowired
     private BusFileService busFileService;
 
 
     @RequiresPermissions("bus:file:manager")
-    @RequestMapping(value ={"list", ""})
+    @RequestMapping(value = {"list", ""})
     public String list(Model model) {
 
         Page<BusFile> fileList = busFileService.loadBusFileAll();
-        model.addAttribute("page",fileList);
+        model.addAttribute("page", fileList);
 
         return "modules/bus/fileList";
     }
-
-
-
 
 
     @RequiresPermissions("bus:file:manager")
     @RequestMapping(value = "create")
     public String create(Model model) {
 
-        model.addAttribute("busFile",new BusFile());
+        model.addAttribute("busFile", new BusFile());
 
         return "modules/bus/fileCreate";
     }
 
     @RequiresPermissions("bus:file:manager")
     @RequestMapping(value = "editView")
-    public String editView(String id,Model model) {
+    public String editView(String id, Model model) {
 
 
         BusFile busFile = busFileService.findBusFileById(id);
 
-        model.addAttribute("busFile",busFile);
+        model.addAttribute("busFile", busFile);
 
         return "modules/bus/fileEdit";
     }
@@ -84,9 +81,8 @@ public class BusFileController extends BaseController{
 
         busFileService.editBusFile(busFile);
 
-        return "redirect:"+ Global.getAdminPath()+"/bus/file/?repage";
+        return "redirect:" + Global.getAdminPath() + "/bus/file/?repage";
     }
-
 
 
     @RequiresPermissions("bus:file:manager")
@@ -96,60 +92,53 @@ public class BusFileController extends BaseController{
         busFileService.createBusFile(busFile);
 
 
-
-
-        return "redirect:"+ Global.getAdminPath()+"/bus/file/?repage";
+        return "redirect:" + Global.getAdminPath() + "/bus/file/?repage";
     }
 
 
     @RequiresPermissions("bus:file:manager")
     @RequestMapping(value = "saveFile")
-    public String saveFile(String id,String fileId, RedirectAttributes redirectAttributes) {
+    public String saveFile(String id, String fileId, RedirectAttributes redirectAttributes) {
 
 
         busFileService.saveFileById(id);
-        addMessage(redirectAttributes, "合同归档成功,合同号："+fileId);
+        addMessage(redirectAttributes, "合同归档成功,合同号：" + fileId);
 
-        return "redirect:"+ Global.getAdminPath()+"/bus/file/?repage";
+        return "redirect:" + Global.getAdminPath() + "/bus/file/?repage";
     }
 
     @RequiresPermissions("bus:file:manager")
     @RequestMapping(value = "delete")
-    public String delete(String id,String fileId, RedirectAttributes redirectAttributes) {
+    public String delete(String id, String fileId, RedirectAttributes redirectAttributes) {
 
 
         busFileService.deleteFileById(id);
-        addMessage(redirectAttributes, "删除合同成功,合同号："+fileId);
+        addMessage(redirectAttributes, "删除合同成功,合同号：" + fileId);
 
-        return "redirect:"+ Global.getAdminPath()+"/bus/file/?repage";
+        return "redirect:" + Global.getAdminPath() + "/bus/file/?repage";
     }
+
     @RequiresPermissions("bus:file:upload")
     @RequestMapping(value = "remove")
-    public String remove(String id,String fileId, RedirectAttributes redirectAttributes) {
+    public String remove(String id, String fileId, RedirectAttributes redirectAttributes) {
 
 
         busFileService.removeFileById(id);
-        addMessage(redirectAttributes, "移除归档合同成功,合同号："+fileId);
+        addMessage(redirectAttributes, "移除归档合同成功,合同号：" + fileId);
 
-        return "redirect:"+ Global.getAdminPath()+"/bus/file/list2?repage";
+        return "redirect:" + Global.getAdminPath() + "/bus/file/list2?repage";
     }
 
     @RequiresPermissions("bus:file:view")
-    @RequestMapping(value ={"list2"})
-    public String list2(Model model,@RequestParam Map<String, Object> paramMap) {
+    @RequestMapping(value = {"list2"})
+    public String list2(Model model, @RequestParam Map<String, Object> paramMap) {
 
         Page<BusFile> fileList = busFileService.loadBusFileAll2(paramMap);
-        model.addAttribute("page",fileList);
+        model.addAttribute("page", fileList);
         model.addAllAttributes(paramMap);
 
         return "modules/bus/fileList2";
     }
-
-
-
-
-
-
 
 
     //上传
@@ -157,77 +146,77 @@ public class BusFileController extends BaseController{
 
     @RequiresPermissions("bus:file:manager")
     @RequestMapping(value = "uploadView")
-    public String uploadView(String id,Model model) {
+    public String uploadView(String id, Model model) {
 
 
         BusFile busFile = busFileService.findBusFileById(id);
 
-        model.addAttribute("busFile",busFile);
+        model.addAttribute("busFile", busFile);
 
         return "modules/bus/fileUpload";
     }
 
 
-
-
     @RequestMapping(value = "uploadDownView")
-    public String uploadDownView(String id,Model model) {
+    public String uploadDownView(String id, Model model) {
 
 
         BusFile busFile = busFileService.findBusFileById(id);
 
-        List<SysFile> fileList=new ArrayList<>();
-        String json =  busFile.getPictureFileJsonPath();
+        List<SysFile> fileList = new ArrayList<>();
+        String json = busFile.getPictureFileJsonPath();
 
-        List<SysFile> pictureList = JSONArray.parseArray(json,SysFile.class);
+        List<SysFile> pictureList = JSONArray.parseArray(json, SysFile.class);
 
-        String otherJson =  busFile.getOtherFileJsonPath();
-        List<SysFile> otherFiles = JSONArray.parseArray(otherJson,SysFile.class);
+        String otherJson = busFile.getOtherFileJsonPath();
+        List<SysFile> otherFiles = JSONArray.parseArray(otherJson, SysFile.class);
 
         fileList.addAll(pictureList);
         fileList.addAll(otherFiles);
-        model.addAttribute("busFile",busFile);
-        model.addAttribute("fileList",fileList);
+        model.addAttribute("busFile", busFile);
+        model.addAttribute("fileList", fileList);
 
         return "modules/bus/fileDown";
     }
+
     @RequestMapping(value = "uploadDownView2")
-    public String uploadDownView2(String id,Model model) {
+    public String uploadDownView2(String id, Model model) {
 
 
         BusFile busFile = busFileService.findBusFileById(id);
 
-        List<SysFile> fileList=new ArrayList<>();
-        String json =  busFile.getPictureFileJsonPath();
+        List<SysFile> fileList = new ArrayList<>();
+        String json = busFile.getPictureFileJsonPath();
 
-        List<SysFile> pictureList = JSONArray.parseArray(json,SysFile.class);
+        List<SysFile> pictureList = JSONArray.parseArray(json, SysFile.class);
 
-        String otherJson =  busFile.getOtherFileJsonPath();
-        List<SysFile> otherFiles = JSONArray.parseArray(otherJson,SysFile.class);
+        String otherJson = busFile.getOtherFileJsonPath();
+        List<SysFile> otherFiles = JSONArray.parseArray(otherJson, SysFile.class);
 
         fileList.addAll(pictureList);
         fileList.addAll(otherFiles);
-        model.addAttribute("busFile",busFile);
-        model.addAttribute("fileList",fileList);
+        model.addAttribute("busFile", busFile);
+        model.addAttribute("fileList", fileList);
 
         return "modules/bus/fileDown2";
     }
 
-    public static  Map fileIconMap=new HashMap();
+    public static Map fileIconMap = new HashMap();
     private static List<String> PICTURE_LIST = new ArrayList<>();
     private static List<String> FILE_LIST = new ArrayList<>();
+
     static {
-        fileIconMap.put("doc" ,"<i class='fa fa-file-word-o text-primary'></i>");
-        fileIconMap.put("docx","<i class='fa fa-file-word-o text-primary'></i>");
-        fileIconMap.put("xls" ,"<i class='fa fa-file-excel-o text-success'></i>");
-        fileIconMap.put("xlsx","<i class='fa fa-file-excel-o text-success'></i>");
-        fileIconMap.put("ppt" ,"<i class='fa fa-file-powerpoint-o text-danger'></i>");
-        fileIconMap.put("pptx","<i class='fa fa-file-powerpoint-o text-danger'></i>");
-        fileIconMap.put("jpg" ,"<i class='fa fa-file-photo-o text-warning'></i>");
-        fileIconMap.put("pdf" ,"<i class='fa fa-file-pdf-o text-danger'></i>");
-        fileIconMap.put("zip" ,"<i class='fa fa-file-archive-o text-muted'></i>");
-        fileIconMap.put("rar" ,"<i class='fa fa-file-archive-o text-muted'></i>");
-        fileIconMap.put("default" ,"<i class='fa fa-file-o'></i>");
+        fileIconMap.put("doc", "<i class='fa fa-file-word-o text-primary'></i>");
+        fileIconMap.put("docx", "<i class='fa fa-file-word-o text-primary'></i>");
+        fileIconMap.put("xls", "<i class='fa fa-file-excel-o text-success'></i>");
+        fileIconMap.put("xlsx", "<i class='fa fa-file-excel-o text-success'></i>");
+        fileIconMap.put("ppt", "<i class='fa fa-file-powerpoint-o text-danger'></i>");
+        fileIconMap.put("pptx", "<i class='fa fa-file-powerpoint-o text-danger'></i>");
+        fileIconMap.put("jpg", "<i class='fa fa-file-photo-o text-warning'></i>");
+        fileIconMap.put("pdf", "<i class='fa fa-file-pdf-o text-danger'></i>");
+        fileIconMap.put("zip", "<i class='fa fa-file-archive-o text-muted'></i>");
+        fileIconMap.put("rar", "<i class='fa fa-file-archive-o text-muted'></i>");
+        fileIconMap.put("default", "<i class='fa fa-file-o'></i>");
 
 
         PICTURE_LIST.add("jpg");
@@ -245,8 +234,6 @@ public class BusFileController extends BaseController{
     }
 
 
-
-
     @RequestMapping("avatarUpload")
     @ResponseBody
     /**目前没有用到这个保存头像*/
@@ -259,7 +246,7 @@ public class BusFileController extends BaseController{
 
 
             String dirPath = request.getSession().getServletContext().getRealPath("/") + "/";
-            String relPath =  MapUtils.getString(Global.getCommonMap(), "upload-file");
+            String relPath = MapUtils.getString(Global.getCommonMap(), "upload-file");
             AvatarResult result = new AvatarResult();
             result.setAvatarUrls(new ArrayList());
             result.setSuccess(false);
@@ -270,7 +257,6 @@ public class BusFileController extends BaseController{
             User user = UserUtils.getUser();
             // 文件名
             String fileName = user.getName() + "_" + (new Date()).getTime() + ".jpg";
-
 
 
             String initParams = "";
@@ -343,7 +329,7 @@ public class BusFileController extends BaseController{
 
 
             String dirPath = request.getSession().getServletContext().getRealPath("/") + "/";
-            String relPath =  MapUtils.getString(Global.getCommonMap(), "upload-file");
+            String relPath = MapUtils.getString(Global.getCommonMap(), "upload-file");
 
             //不存在目录 则创建
             File filePath = new File(dirPath + relPath);
@@ -369,11 +355,12 @@ public class BusFileController extends BaseController{
 
     /**
      * 跳转到通用文件上传窗口
+     *
      * @return
      */
-    @RequestMapping(value="uploader",method = RequestMethod.GET)
-    public String uploader(String config,HttpServletRequest request){
-        request.setAttribute("config",config);
+    @RequestMapping(value = "uploader", method = RequestMethod.GET)
+    public String uploader(String config, HttpServletRequest request) {
+        request.setAttribute("config", config);
         return "base/file/file_uploader";
     }
 
@@ -385,13 +372,14 @@ public class BusFileController extends BaseController{
     @ResponseBody
     public FileResult uploadFile(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam(value = "fileId") String fileId,
                                  HttpServletRequest request, HttpServletResponse response) throws IOException {
-        MultipartFile[] files=new MultipartFile[]{file};
+        MultipartFile[] files = new MultipartFile[]{file};
 
-        return uploadMultipleFile(files,fileId,request,response);
+        return uploadMultipleFile(files, fileId, request, response);
     }
 
     /**
      * 多文件上传，用于uploadAsync=false(同步多文件上传使用)
+     *
      * @param files
      * @param request
      * @param response
@@ -407,50 +395,50 @@ public class BusFileController extends BaseController{
         User user = UserUtils.getUser();
         FileResult msg = new FileResult();
         String dirPath = request.getSession().getServletContext().getRealPath(File.separator) + File.separator;
-        String uploaderPath =  MapUtils.getString(Global.getCommonMap(), "upload-file")+File.separator+busFile.getFileId();
+        String uploaderPath = MapUtils.getString(Global.getCommonMap(), "upload-file") + File.separator + busFile.getFileId();
         ArrayList<Integer> arr = new ArrayList<>();
         //缓存当前的文件
-        List<SysFile> fileList=new ArrayList<>();
-        String json =  busFile.getPictureFileJsonPath();
+        List<SysFile> fileList = new ArrayList<>();
+        String json = busFile.getPictureFileJsonPath();
 
-        List<SysFile> pictureList = JSONArray.parseArray(json,SysFile.class);
+        List<SysFile> pictureList = JSONArray.parseArray(json, SysFile.class);
 
-        String otherJson =  busFile.getOtherFileJsonPath();
-        List<SysFile> otherFiles = JSONArray.parseArray(otherJson,SysFile.class);
+        String otherJson = busFile.getOtherFileJsonPath();
+        List<SysFile> otherFiles = JSONArray.parseArray(otherJson, SysFile.class);
 
 
-            for (int i = 0; i < files.length; i++) {
+        for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
 
             if (!file.isEmpty()) {
                 InputStream in = null;
                 OutputStream out = null;
                 try {
-                    File dir = new File(dirPath+uploaderPath);
+                    File dir = new File(dirPath + uploaderPath);
                     if (!dir.exists())
                         dir.mkdirs();
                     //这样也可以上传同名文件了
-                    String filePrefixFormat="yyyyMMddHHmmssS";
-                    String savedName=DateUtils.formatDate(new Date(),filePrefixFormat)+"_"+file.getOriginalFilename();
-                    String filePath=dir.getAbsolutePath() + File.separator + savedName;
+                    String filePrefixFormat = "yyyyMMddHHmmssS";
+                    String savedName = DateUtils.formatDate(new Date(), filePrefixFormat) + "_" + file.getOriginalFilename();
+                    String filePath = dir.getAbsolutePath() + File.separator + savedName;
                     File serverFile = new File(filePath);
                     //将文件写入到服务器
-                    FileUtils.copyInputStreamToFile(file.getInputStream(),serverFile);
+                    FileUtils.copyInputStreamToFile(file.getInputStream(), serverFile);
                     file.transferTo(serverFile);
-                    SysFile sysFile=new SysFile();
+                    SysFile sysFile = new SysFile();
                     sysFile.setFileName(file.getOriginalFilename());
                     sysFile.setSavedName(savedName);
                     sysFile.setFileSize(file.getSize());
-                    sysFile.setFilePath(dirPath+uploaderPath+File.separator+savedName);
+                    sysFile.setFilePath(dirPath + uploaderPath + File.separator + savedName);
                     sysFile.setId(IdGen.uuid());
                     sysFile.setUploadUserName(user.getLoginName());
-                    sysFile.setTimeStr(DateUtils.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
+                    sysFile.setTimeStr(DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
 
-                    if(isImage(file.getOriginalFilename())){
+                    if (isImage(file.getOriginalFilename())) {
 
                         pictureList.add(sysFile);
 
-                    }else{
+                    } else {
 
                         otherFiles.add(sysFile);
                     }
@@ -463,7 +451,7 @@ public class BusFileController extends BaseController{
 
                     logger.info("Server File Location=" + serverFile.getAbsolutePath());
                 } catch (Exception e) {
-                    logger.error(   file.getOriginalFilename()+"上传发生异常，异常原因："+e.getMessage());
+                    logger.error(file.getOriginalFilename() + "上传发生异常，异常原因：" + e.getMessage());
                     arr.add(i);
                 } finally {
                     if (out != null) {
@@ -482,44 +470,43 @@ public class BusFileController extends BaseController{
         busFile.setOtherFileJsonPath(JSONArray.toJSONString(otherFiles));
 
 
-
         this.busFileService.saveBusFile(busFile);
-        if(arr.size() > 0) {
+        if (arr.size() > 0) {
             msg.setError("文件上传失败！");
             msg.setErrorkeys(arr);
         }
-        FileResult preview=getPreivewSettings(fileList,request);
+        FileResult preview = getPreivewSettings(fileList, request);
         msg.setInitialPreview(preview.getInitialPreview());
         msg.setInitialPreviewConfig(preview.getInitialPreviewConfig());
         msg.setFileIds(preview.getFileIds());
         return msg;
     }
 
-    public boolean isImage(String name){
+    public boolean isImage(String name) {
         return false;
     }
 
     //删除某一项文件
-    @RequestMapping(value="deleteFile")
+    @RequestMapping(value = "deleteFile")
     @RequiresPermissions("bus:file:manager")
-    public String delete(String id,String fileId, Model model,HttpServletRequest request){
+    public String delete(String id, String fileId, Model model, HttpServletRequest request) {
 
         BusFile busFile = this.busFileService.findBusFileById(fileId);
         String path = null;
-        if(busFile!=null){
+        if (busFile != null) {
 
-            String json =  busFile.getPictureFileJsonPath();
+            String json = busFile.getPictureFileJsonPath();
 
-            List<SysFile> sysFiles = JSONArray.parseArray(json,SysFile.class);
-            List<SysFile>delList = new ArrayList<>();
-            for(SysFile f:sysFiles){
-                if(f.getId().equals(id)){
+            List<SysFile> sysFiles = JSONArray.parseArray(json, SysFile.class);
+            List<SysFile> delList = new ArrayList<>();
+            for (SysFile f : sysFiles) {
+                if (f.getId().equals(id)) {
                     path = f.getFilePath();
                     delList.add(f);
                     break;
                 }
             }
-            if(!delList.isEmpty()){
+            if (!delList.isEmpty()) {
                 sysFiles.removeAll(delList);
                 busFile.setPictureFileJsonPath(JSONArray.toJSONString(sysFiles));
                 delList.clear();
@@ -527,16 +514,16 @@ public class BusFileController extends BaseController{
 
             }
 
-            json =  busFile.getOtherFileJsonPath();
-            sysFiles = JSONArray.parseArray(json,SysFile.class);
-            for(SysFile f:sysFiles){
-                if(f.getId().equals(id)){
+            json = busFile.getOtherFileJsonPath();
+            sysFiles = JSONArray.parseArray(json, SysFile.class);
+            for (SysFile f : sysFiles) {
+                if (f.getId().equals(id)) {
                     path = f.getFilePath();
                     delList.add(f);
                     break;
                 }
             }
-            if(!delList.isEmpty()){
+            if (!delList.isEmpty()) {
                 sysFiles.removeAll(delList);
                 busFile.setOtherFileJsonPath(JSONArray.toJSONString(sysFiles));
                 delList.clear();
@@ -546,18 +533,16 @@ public class BusFileController extends BaseController{
 
         }
 
-        if(path!=null){
+        if (path != null) {
             FileUtils.delFile(path);
         }
 
 
-
-        return this.uploadDownView(fileId,model);
+        return this.uploadDownView(fileId, model);
     }
 
-    @RequestMapping(value="downloadFile",method = RequestMethod.GET)
-    public void downloadFile(@RequestParam String id,@RequestParam String fileId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    @RequestMapping(value = "downloadFile", method = RequestMethod.GET)
+    public void downloadFile(@RequestParam String id, @RequestParam String fileId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 
         InputStream is = null;
@@ -567,14 +552,9 @@ public class BusFileController extends BaseController{
             // PrintWriter out = response.getWriter();
 
 
-
-
-
-
-
             BusFile busFile = this.busFileService.findBusFileById(fileId);
 
-            if(busFile!=null){
+            if (busFile != null) {
                 String path = null;
 
                 String json = busFile.getPictureFileJsonPath();
@@ -598,7 +578,7 @@ public class BusFileController extends BaseController{
                     }
                 }
 
-                if (path != null){
+                if (path != null) {
                     file = new File(path);
                 }
 
@@ -627,12 +607,6 @@ public class BusFileController extends BaseController{
             }
 
 
-
-
-
-
-
-
         } catch (IOException e) {
             // e.printStackTrace();
         } finally {
@@ -648,43 +622,45 @@ public class BusFileController extends BaseController{
     /**
      * 获取字体图标map,base-file控件使用
      */
-    @RequestMapping(value="icons",method = RequestMethod.POST)
+    @RequestMapping(value = "icons", method = RequestMethod.POST)
     @ResponseBody
-    public Map getIcons(){
+    public Map getIcons() {
         return fileIconMap;
     }
 
     /**
      * 根据文件名获取icon
+     *
      * @param fileName 文件
      * @return
      */
-    public String getFileIcon(String fileName){
-        String ext= StrUtil.getExtName(fileName);
-        return fileIconMap.get(ext)==null?fileIconMap.get("default").toString():fileIconMap.get(ext).toString();
+    public String getFileIcon(String fileName) {
+        String ext = StrUtil.getExtName(fileName);
+        return fileIconMap.get(ext) == null ? fileIconMap.get("default").toString() : fileIconMap.get(ext).toString();
     }
 
     /**
      * 根据附件IDS 获取文件
+     *
      * @param fileIds
      * @param request
      * @return
      */
-    @RequestMapping(value="getFiles",method = RequestMethod.POST)
+    @RequestMapping(value = "getFiles", method = RequestMethod.POST)
     @ResponseBody
-    public FileResult getFiles(String fileIds,String fileId,HttpServletRequest request){
-        List<SysFile> fileList=new ArrayList<>();
-        if(!StrUtil.isEmpty(fileIds)) {
+    public FileResult getFiles(String fileIds, String fileId, HttpServletRequest request) {
+        List<SysFile> fileList = new ArrayList<>();
+        if (!StrUtil.isEmpty(fileIds)) {
             String[] fileIdArr = fileIds.split(",");
             BusFile busFile = this.busFileService.findBusFileById(fileId);
-            if(busFile==null){
+            if (busFile == null) {
                 return new FileResult();
             }
 
             String json = busFile.getPictureFileJsonPath();
             List<SysFile> sysFiles = JSONArray.parseArray(json, SysFile.class);
 
-            for(String id:fileIdArr){
+            for (String id : fileIdArr) {
                 for (SysFile f : sysFiles) {
                     if (f.getId().equals(id)) {
                         fileList.add(f);
@@ -704,40 +680,39 @@ public class BusFileController extends BaseController{
             }
 
 
-
-
         }
-        return getPreivewSettings(fileList,request);
+        return getPreivewSettings(fileList, request);
     }
 
 
     /**
      * 回填已有文件的缩略图
+     *
      * @param fileList 文件列表
      * @param request
      * @return initialPreiview initialPreviewConfig fileIds
      */
-    public FileResult getPreivewSettings(List<SysFile> fileList,HttpServletRequest request){
-        FileResult fileResult=new FileResult();
-        List<String> previews=new ArrayList<>();
-        List<FileResult.PreviewConfig> previewConfigs=new ArrayList<>();
+    public FileResult getPreivewSettings(List<SysFile> fileList, HttpServletRequest request) {
+        FileResult fileResult = new FileResult();
+        List<String> previews = new ArrayList<>();
+        List<FileResult.PreviewConfig> previewConfigs = new ArrayList<>();
         //缓存当前的文件
         String dirPath = request.getRealPath("/");
-        String[] fileArr=new String[fileList.size()];
+        String[] fileArr = new String[fileList.size()];
 
-        int index=0;
+        int index = 0;
         for (SysFile sysFile : fileList) {
             //上传后预览 TODO 该预览样式暂时不支持theme:explorer的样式，后续可以再次扩展
             //如果其他文件可预览txt、xml、html、pdf等 可在此配置
-            if(FileUtils.isImage(sysFile.getFilePath())) {
+            if (FileUtils.isImage(sysFile.getFilePath())) {
                 previews.add("<img src='." + sysFile.getFilePath().replace(File.separator, "/") + "' class='file-preview-image kv-preview-data' " +
                         "style='width:auto;height:160px' alt='" + sysFile.getFileName() + " title='" + sysFile.getFileName() + "''>");
-            }else{
+            } else {
                 previews.add("<div class='kv-preview-data file-preview-other-frame'><div class='file-preview-other'>" +
-                        "<span class='file-other-icon'>"+getFileIcon(sysFile.getFileName())+"</span></div></div>");
+                        "<span class='file-other-icon'>" + getFileIcon(sysFile.getFileName()) + "</span></div></div>");
             }
             //上传后预览配置
-            FileResult.PreviewConfig previewConfig=new FileResult.PreviewConfig();
+            FileResult.PreviewConfig previewConfig = new FileResult.PreviewConfig();
             previewConfig.setWidth("120px");
             previewConfig.setCaption(sysFile.getFileName());
             previewConfig.setKey(sysFile.getId());
@@ -745,14 +720,13 @@ public class BusFileController extends BaseController{
             previewConfig.setExtra(new FileResult.PreviewConfig.Extra(sysFile.getId()));
             previewConfig.setSize(sysFile.getFileSize());
             previewConfigs.add(previewConfig);
-            fileArr[index++]=sysFile.getId();
+            fileArr[index++] = sysFile.getId();
         }
         fileResult.setInitialPreview(previews);
         fileResult.setInitialPreviewConfig(previewConfigs);
         fileResult.setFileIds(StrUtil.join(fileArr));
         return fileResult;
     }
-
 
 
 }

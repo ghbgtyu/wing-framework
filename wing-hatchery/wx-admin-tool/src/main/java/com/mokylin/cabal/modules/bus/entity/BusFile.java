@@ -15,11 +15,11 @@ import java.util.Date;
  * Created by nijia on 2018/12/1.
  */
 
-@Table(name="bus_file")
+@Table(name = "bus_file")
 @Entity
 @DynamicInsert
 @DynamicUpdate
-public class BusFile  extends IdEntity<BusFile> {
+public class BusFile extends IdEntity<BusFile> {
 
 
     private static final long serialVersionUID = 1L;
@@ -34,7 +34,7 @@ public class BusFile  extends IdEntity<BusFile> {
 
     private Date uploadDate;    // 上传时间
 
-  //  private String uploadType;  // 上传类型
+    //  private String uploadType;  // 上传类型
 
     private int state;          //上传状态
 
@@ -47,7 +47,7 @@ public class BusFile  extends IdEntity<BusFile> {
     private String otherFileJsonPath; //其他文件路径
 
 
-    @Length(min=0, max=65535)
+    @Length(min = 0, max = 65535)
     public String getUploadDesc() {
         return uploadDesc;
     }
@@ -55,9 +55,6 @@ public class BusFile  extends IdEntity<BusFile> {
     public void setUploadDesc(String uploadDesc) {
         this.uploadDesc = uploadDesc;
     }
-
-
-
 
 
 //    public String getUploadType() {
@@ -78,7 +75,7 @@ public class BusFile  extends IdEntity<BusFile> {
         this.uploadDate = uploadDate;
     }
 
-    @Length(min=0, max=255)
+    @Length(min = 0, max = 255)
     public String getContent() {
         return content;
     }
@@ -87,7 +84,7 @@ public class BusFile  extends IdEntity<BusFile> {
         this.content = content;
     }
 
-    @Length(min=0, max=65535)
+    @Length(min = 0, max = 65535)
     public String getDocFileJsonPath() {
         return docFileJsonPath;
     }
@@ -95,7 +92,8 @@ public class BusFile  extends IdEntity<BusFile> {
     public void setDocFileJsonPath(String docFileJsonPath) {
         this.docFileJsonPath = docFileJsonPath;
     }
-    @Length(min=0, max=65535)
+
+    @Length(min = 0, max = 65535)
     public String getPictureFileJsonPath() {
         return pictureFileJsonPath;
     }
@@ -103,7 +101,8 @@ public class BusFile  extends IdEntity<BusFile> {
     public void setPictureFileJsonPath(String pictureFileJsonPath) {
         this.pictureFileJsonPath = pictureFileJsonPath;
     }
-    @Length(min=0, max=65535)
+
+    @Length(min = 0, max = 65535)
     public String getOtherFileJsonPath() {
         return otherFileJsonPath;
     }
@@ -115,7 +114,8 @@ public class BusFile  extends IdEntity<BusFile> {
     public int getState() {
         return state;
     }
-    @Length(min=0, max=64)
+
+    @Length(min = 0, max = 64)
     public String getFileId() {
         return fileId;
     }
@@ -123,7 +123,6 @@ public class BusFile  extends IdEntity<BusFile> {
     public void setFileId(String fileId) {
         this.fileId = fileId;
     }
-
 
 
     public void setState(int state) {

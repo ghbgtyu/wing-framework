@@ -4,35 +4,37 @@
 
     <select id="paging" resultType="java.util.HashMap" parameterType="java.util.HashMap">
         select id,platform_id platformId,server_id serverId,role_name roleName,
-            role_type roleType,create_name createName,create_date createDate,
-            update_date updateDate, update_name updateName
+        role_type roleType,create_name createName,create_date createDate,
+        update_date updateDate, update_name updateName
         from gm_account where 1 = 1
         <if test="@Ognl@isNotBlank(roleName)">and role_name =#{roleName}</if>
         <if test="@Ognl@isNotBlank(serverId)">and server_id =#{serverId}</if>
         <if test="@Ognl@isNotBlank(roleType)">and role_type =#{roleType}</if>
-        <if test="@Ognl@isNotBlank(createDateEnd)">and create_date <![CDATA[ < ]]> DATE_ADD(#{createDateEnd},INTERVAL 1 day)</if>
-        <if test="@Ognl@isNotBlank(createDateStart)">and create_date <![CDATA[ >= ]]> #{createDateStart} </if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and create_date <![CDATA[ < ]]> DATE_ADD(#{createDateEnd},INTERVAL 1
+            day)
+        </if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and create_date <![CDATA[ >= ]]> #{createDateStart}</if>
     </select>
 
     <insert id="insert" parameterType="java.util.HashMap">
         insert into gm_account(id,platform_id,server_id,role_id,role_name,role_type,create_name,create_by,create_date)
         values(
-          #{id},
-          #{platformName},
-          #{serverIds},
-          #{roleId},
-          #{roleName},
-          #{roleType},
-          #{currentUser.loginName},
-          #{currentUser.id},
-          now()
+        #{id},
+        #{platformName},
+        #{serverIds},
+        #{roleId},
+        #{roleName},
+        #{roleType},
+        #{currentUser.loginName},
+        #{currentUser.id},
+        now()
         )
     </insert>
 
-    <select id="findGmAccountById"  resultType="java.util.HashMap">
+    <select id="findGmAccountById" resultType="java.util.HashMap">
         select id,platform_id platformId,server_id serverId,role_name roleName,role_id roleId,
-            role_type roleType,create_name createName,create_date createDate,
-            update_date updateDate, update_name updateName
+        role_type roleType,create_name createName,create_date createDate,
+        update_date updateDate, update_name updateName
         from gm_account where 1 = 1
         and id = #{id}
     </select>

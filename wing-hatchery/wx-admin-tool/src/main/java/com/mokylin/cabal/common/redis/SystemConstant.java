@@ -17,17 +17,27 @@ public class SystemConstant {
 //	public static final String TICKET = "NITABAHAIZHENGEINIPOLE";
 //	public static final String DEFAULT_KEY = "xianlingkey";
 //	public static final String LOCALHOST = "127.0.0.1";
-	// 服务器类型
-	/** 服务器间战斗模式 */
-	public final static int BATTLE_CROSS = 0;
-	/** 国建之间的战斗模式 */
-	public final static int COUNTRY_CROSS = 1;
-	/** 游戏服务器 */
-	public final static int SERVER_TYPE_GAME = 1;
-	/** 跨服服务器 */
-	public final static int SERVER_TYPE_CROSS = 2;
-	/** 全局服务器 */
-	public final static int SERVER_TYPE_GLOBAL = 3;
+    // 服务器类型
+    /**
+     * 服务器间战斗模式
+     */
+    public final static int BATTLE_CROSS = 0;
+    /**
+     * 国建之间的战斗模式
+     */
+    public final static int COUNTRY_CROSS = 1;
+    /**
+     * 游戏服务器
+     */
+    public final static int SERVER_TYPE_GAME = 1;
+    /**
+     * 跨服服务器
+     */
+    public final static int SERVER_TYPE_CROSS = 2;
+    /**
+     * 全局服务器
+     */
+    public final static int SERVER_TYPE_GLOBAL = 3;
 //	/** 翻译服务器 */
 //	public final static int SERVER_TYPE_TRANSLATE = 4;
 //	/** 日志服务器 */
@@ -68,12 +78,18 @@ public class SystemConstant {
 //	public final static int[] SERVER_BATTLEAREAS = { SERVER_DIRECT_ARENA, SERVER_DIRECT_COUNTRY, SERVER_ARENA_SUBTYPE_HERO,
 //			SERVER_ARENA_SUBTYPE_HONOR, SERVER_ARENA_SUBTYPE_COURAGE, SERVER_ARENA_SUBTYPE_TRIAL, SERVER_DIRECT_INSTANCE_MATCHER };
 //
-	/** 服务器处于正常运行状态 */
-	public final static int SERVER_STATUS_OPENING = 0;
-	/** 服务器处于运维维护状态,只能允许GM进来 */
-	public final static int SERVER_STATUS_MAINTAIN = 1;
-	/** 服务器处于停服状态 */
-	public final static int SERVER_STATUS_STOPED = 2;
+    /**
+     * 服务器处于正常运行状态
+     */
+    public final static int SERVER_STATUS_OPENING = 0;
+    /**
+     * 服务器处于运维维护状态,只能允许GM进来
+     */
+    public final static int SERVER_STATUS_MAINTAIN = 1;
+    /**
+     * 服务器处于停服状态
+     */
+    public final static int SERVER_STATUS_STOPED = 2;
 //	/** 对不起,你可能使用了非法外挂,请自觉关闭,小心账号被盗 */
 //	public final static String REASON_PLUGIN = "对不起,你可能使用了非法外挂,请自觉关闭,小心账号被盗";
 //	/** 对不起,同一账号重复登陆，踢掉前一个连接 */

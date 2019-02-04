@@ -4,18 +4,18 @@
 
     <select id="paging" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
-            cloak.role_id,
-            cloak.rank,
-            cloak.star,
-            cloak.lucky_value,
-            cloak.history_lucky,
-            cloak.upgrade_value,
-            cloak.history_upgrade,
-            cloak.draw_list_mask,
-            cloak.create_time,
-            cloak.update_time,
-            cloak.dangqian_cloak,
-            cloak.max_rank maxRank
+        cloak.role_id,
+        cloak.rank,
+        cloak.star,
+        cloak.lucky_value,
+        cloak.history_lucky,
+        cloak.upgrade_value,
+        cloak.history_upgrade,
+        cloak.draw_list_mask,
+        cloak.create_time,
+        cloak.update_time,
+        cloak.dangqian_cloak,
+        cloak.max_rank maxRank
         FROM `cloak`
         WHERE 1 = 1
         <if test="@Ognl@isNotBlank(id)">and role_id = #{id}</if>
@@ -23,19 +23,19 @@
     </select>
 
     <select id="findCloakByRoleId" resultType="java.util.HashMap">
-      SELECT
-            cloak.role_id,
-            cloak.rank,
-            cloak.star,
-            cloak.lucky_value,
-            cloak.history_lucky,
-            cloak.upgrade_value,
-            cloak.history_upgrade,
-            cloak.draw_list_mask,
-            cloak.create_time,
-            cloak.update_time,
-            cloak.dangqian_cloak,
-            cloak.max_rank maxRank
+        SELECT
+        cloak.role_id,
+        cloak.rank,
+        cloak.star,
+        cloak.lucky_value,
+        cloak.history_lucky,
+        cloak.upgrade_value,
+        cloak.history_upgrade,
+        cloak.draw_list_mask,
+        cloak.create_time,
+        cloak.update_time,
+        cloak.dangqian_cloak,
+        cloak.max_rank maxRank
         FROM `cloak`
         WHERE role_id = #{id}
     </select>

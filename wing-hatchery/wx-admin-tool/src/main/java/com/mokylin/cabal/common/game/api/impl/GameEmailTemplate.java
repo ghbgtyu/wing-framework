@@ -29,9 +29,9 @@ public class GameEmailTemplate extends AbstractGameOperations implements GameEma
     @Override
     public Result sendEmail(GameEmail gameEmail) {
         List<Server> gameServerList = getWaitingToSendGameServerList(gameEmail);
-        for(Server server : gameServerList){
-            URI uri = buildUri(server.createUrl()+API_URL_ADD_EMAIL_SUFFIX);
-            execute(gameEmail,uri);
+        for (Server server : gameServerList) {
+            URI uri = buildUri(server.createUrl() + API_URL_ADD_EMAIL_SUFFIX);
+            execute(gameEmail, uri);
         }
 
         return new Result(true);
@@ -40,23 +40,24 @@ public class GameEmailTemplate extends AbstractGameOperations implements GameEma
     @Override
     public Result sendEmail(GameEmail gameEmail, String serverId) {
         String url = GameAreaUtils.getGameRemoteUrlByServerId(serverId);
-        URI uri = buildUri(url+API_URL_ADD_EMAIL_SUFFIX);
-        return execute(gameEmail,uri);
+        URI uri = buildUri(url + API_URL_ADD_EMAIL_SUFFIX);
+        return execute(gameEmail, uri);
     }
 
     /**
      * 根据公告标志isGlobal是否是所有服的列表
+     *
      * @param email
      * @return
      */
-    private List<Server> getWaitingToSendGameServerList(GameEmail email){
+    private List<Server> getWaitingToSendGameServerList(GameEmail email) {
         List<Server> gameServerList = null;
 //        if(email.isGlobal()){
 //            List<String> serverIdList = Arrays.asList(StringUtils.split(email.getServerIds(),","));
 //            gameServerList = GameServerUtils.getGameServerListWithoutRepetition(serverIdList);
 //        }else {
-            List<String> serverIdList = Arrays.asList(StringUtils.split(email.getServerIds(), ","));
-            gameServerList = GameAreaUtils.getGameServerListWithoutRepetition(serverIdList);
+        List<String> serverIdList = Arrays.asList(StringUtils.split(email.getServerIds(), ","));
+        gameServerList = GameAreaUtils.getGameServerListWithoutRepetition(serverIdList);
 //        }
         return gameServerList;
     }

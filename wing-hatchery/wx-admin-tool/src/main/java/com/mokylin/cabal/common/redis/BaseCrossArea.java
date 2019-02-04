@@ -5,88 +5,90 @@ import java.util.List;
 import com.alibaba.fastjson.JSONObject;
 
 public abstract class BaseCrossArea {
-	/**
-	 * 战区名称
-	 */
-	private String crossAreaName;
-	private Server crossServer;
-	private int crossType;// 跨服类型
-	private String crossAreaId;
-	public BaseCrossArea() {
-	}
+    /**
+     * 战区名称
+     */
+    private String crossAreaName;
+    private Server crossServer;
+    private int crossType;// 跨服类型
+    private String crossAreaId;
 
-	public BaseCrossArea(String crossAreaName, Server crossServer) {
-		this.crossAreaName = crossAreaName;
-		this.crossServer = crossServer;
-	}
+    public BaseCrossArea() {
+    }
 
-	public String getCrossAreaName() {
-		return crossAreaName;
-	}
+    public BaseCrossArea(String crossAreaName, Server crossServer) {
+        this.crossAreaName = crossAreaName;
+        this.crossServer = crossServer;
+    }
 
-	public void setCrossAreaName(String crossAreaName) {
-		this.crossAreaName = crossAreaName;
-	}
+    public String getCrossAreaName() {
+        return crossAreaName;
+    }
 
-	public Server getCrossServer() {
-		return crossServer;
-	}
+    public void setCrossAreaName(String crossAreaName) {
+        this.crossAreaName = crossAreaName;
+    }
 
-	public void setCrossServer(Server crossServer) {
-		this.crossServer = crossServer;
-	}
+    public Server getCrossServer() {
+        return crossServer;
+    }
 
-	/**
-	 * 获取战场下的所有服务器
-	 * 
-	 * @return
-	 */
-	public abstract List<Server> getAllServers();
-	
-	public abstract void setAllServers(List<Server> servers);
+    public void setCrossServer(Server crossServer) {
+        this.crossServer = crossServer;
+    }
 
-	/**
-	 * 删除所有的server
-	 * 
-	 * @return
-	 */
-	public abstract void removeAllServers();
+    /**
+     * 获取战场下的所有服务器
+     *
+     * @return
+     */
+    public abstract List<Server> getAllServers();
 
-	// /**
-	// * 战场类型
-	// */
-	// public abstract int crossType();
+    public abstract void setAllServers(List<Server> servers);
 
-	/**
-	 * 判断该服务器是否已经存在此战区中
-	 * 
-	 * @param server
-	 * @return true 存在
-	 */
-	public abstract boolean isExistServer(Server server);
+    /**
+     * 删除所有的server
+     *
+     * @return
+     */
+    public abstract void removeAllServers();
 
-	public String getServerName() {
-		return "国家1,国家2,国家3,国家4";
-	}
+    // /**
+    // * 战场类型
+    // */
+    // public abstract int crossType();
 
-	public abstract int getCrossType();
+    /**
+     * 判断该服务器是否已经存在此战区中
+     *
+     * @param server
+     * @return true 存在
+     */
+    public abstract boolean isExistServer(Server server);
 
-	/**
-	 * 获取该战区在缓存中/redis中的ID
-	 * @return
-	 */
-	public abstract String getCrossAreaId();
-	
-	public void setCrossType(int crossType) {
-		this.crossType = crossType;
-	}
-	
-	public String toJson(){
-		String json = JSONObject.toJSONString(this);
-		return json;
-	}
+    public String getServerName() {
+        return "国家1,国家2,国家3,国家4";
+    }
 
-	public void setCrossAreaId(String crossAreaId) {
-		this.crossAreaId = crossAreaId;
-	}
+    public abstract int getCrossType();
+
+    /**
+     * 获取该战区在缓存中/redis中的ID
+     *
+     * @return
+     */
+    public abstract String getCrossAreaId();
+
+    public void setCrossType(int crossType) {
+        this.crossType = crossType;
+    }
+
+    public String toJson() {
+        String json = JSONObject.toJSONString(this);
+        return json;
+    }
+
+    public void setCrossAreaId(String crossAreaId) {
+        this.crossAreaId = crossAreaId;
+    }
 }

@@ -17,12 +17,12 @@ import java.util.List;
  * 项目: cabal-tools
  */
 @Repository
-public class GameAreaDao{
-	@Resource
-	private ToolDaoTemplate toolDaoTemplate;
+public class GameAreaDao {
+    @Resource
+    private ToolDaoTemplate toolDaoTemplate;
 
-	public List<Server> findAllList() {
-		List<Server> allList=toolDaoTemplate.selectList("gameArea.findAllGameArea");
+    public List<Server> findAllList() {
+        List<Server> allList = toolDaoTemplate.selectList("gameArea.findAllGameArea");
 //		List<Server> resList=new ArrayList<>(allList.size());
 //		if(null!=allList&&allList.size()>0){
 //			for (Map<String, Object> map : allList) {
@@ -30,25 +30,26 @@ public class GameAreaDao{
 //				resList.add(server);
 //			}
 //		}
-		return allList;
-	}
-	
-	public List<Server> findListByPid(String pid) {
-		MybatisParameter parameter = new MybatisParameter<>();
-		parameter.put("pid", pid);
-		List<Server> allList=toolDaoTemplate.selectList("gameArea.findGameAreaByPid", parameter);
-		return allList;
-	}
+        return allList;
+    }
 
-	/**
-	 * 回去对应serverId的服务器列表
-	 * @param serverIdList
-	 * @return
-	 */
-	public List<Server> findGameAreaByServerId(List<String> serverIdList) {
-		MybatisParameter parameter = new MybatisParameter();
-		parameter.put("serverIdList", serverIdList);
-		List<Server> allList=toolDaoTemplate.selectList("gameArea.findGameAreaByServerId",parameter);
+    public List<Server> findListByPid(String pid) {
+        MybatisParameter parameter = new MybatisParameter<>();
+        parameter.put("pid", pid);
+        List<Server> allList = toolDaoTemplate.selectList("gameArea.findGameAreaByPid", parameter);
+        return allList;
+    }
+
+    /**
+     * 回去对应serverId的服务器列表
+     *
+     * @param serverIdList
+     * @return
+     */
+    public List<Server> findGameAreaByServerId(List<String> serverIdList) {
+        MybatisParameter parameter = new MybatisParameter();
+        parameter.put("serverIdList", serverIdList);
+        List<Server> allList = toolDaoTemplate.selectList("gameArea.findGameAreaByServerId", parameter);
 //		List<Server> resList=new ArrayList<>(allList.size());
 //		if(null!=allList&&allList.size()>0){
 //			for (Map<String, Object> map : allList) {
@@ -56,8 +57,8 @@ public class GameAreaDao{
 //				resList.add(server);
 //			}
 //		}
-		return allList;
-	}
+        return allList;
+    }
 
 //	private Server createServer(Map<String, Object> map) {
 //		Server server =new Server();

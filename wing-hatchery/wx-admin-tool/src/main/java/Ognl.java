@@ -19,14 +19,11 @@ public class Ognl extends Object {
         }
         if (o instanceof String) {
             return org.apache.commons.lang3.StringUtils.isBlank((String) o);
-        }
-        else if (o instanceof Collection) {
+        } else if (o instanceof Collection) {
             return CollectionUtils.isEmpty((Collection) o);
-        }
-        else if (o instanceof Map) {
+        } else if (o instanceof Map) {
             return MapUtils.isEmpty((Map) o);
-        }
-        else if (o instanceof Object[]) {
+        } else if (o instanceof Object[]) {
             return ArrayUtils.isEmpty((Object[]) o);
         }
         return false;
@@ -37,23 +34,22 @@ public class Ognl extends Object {
     }
 
     public static boolean isNumber(Object o) {
-        if (o == null){
+        if (o == null) {
             return false;
         }
         if (o instanceof Number) {
             return true;
-        }
-        else if (o instanceof String) {
+        } else if (o instanceof String) {
             return org.apache.commons.lang3.StringUtils.isNumeric((String) o);
         }
         return false;
     }
 
-    public static boolean isTrue(Object o){
+    public static boolean isTrue(Object o) {
         return o.equals(true);
     }
 
-    public static boolean isNotTrue(Object o){
+    public static boolean isNotTrue(Object o) {
         return !isTrue(true);
     }
 

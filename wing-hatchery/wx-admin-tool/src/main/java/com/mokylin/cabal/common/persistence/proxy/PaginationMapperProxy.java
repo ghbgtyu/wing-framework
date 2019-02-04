@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="https://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.common.persistence.proxy;
@@ -32,6 +32,7 @@ public class PaginationMapperProxy implements InvocationHandler {
 
     private static final Set<String> OBJECT_METHODS = new HashSet<String>() {
         private static final long serialVersionUID = -1782950882770203583L;
+
         {
             add("toString");
             add("getClass");

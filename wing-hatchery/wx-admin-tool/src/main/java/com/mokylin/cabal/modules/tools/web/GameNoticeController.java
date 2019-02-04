@@ -27,12 +27,12 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping(value = "${adminPath}/tools/gameNotice")
-public class GameNoticeController  extends BaseController {
+public class GameNoticeController extends BaseController {
 
     @ModelAttribute
     public GameNotice get(@RequestParam(required = false) String id) {
         if (StringUtils.isNotBlank(id)) {
-            return toolDaoTemplate.selectOne("gameNotice.selectOneById",id);
+            return toolDaoTemplate.selectOne("gameNotice.selectOneById", id);
         } else {
             return new GameNotice();
         }
@@ -41,9 +41,9 @@ public class GameNoticeController  extends BaseController {
     @RequestMapping(value = {"list", ""})
     public String getGameServerList(GameNotice gameNotice, HttpServletRequest request, HttpServletResponse response, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        parameter.setPage(new Page(request,response));
+        parameter.setPage(new Page(request, response));
 
-        Page<GameNotice> page = toolDaoTemplate.paging("gameNotice.paging",parameter);
+        Page<GameNotice> page = toolDaoTemplate.paging("gameNotice.paging", parameter);
 
         model.addAttribute("page", page);
         return "modules/tools/gameNoticeList";
@@ -79,43 +79,44 @@ public class GameNoticeController  extends BaseController {
     @RequestMapping(value = "save")
     public String save(GameNotice gameNotice, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        parameter.put("id",IdGen.uuid());
-        parameter.put("noticeStatus",0);    //尚未发布
+        parameter.put("id", IdGen.uuid());
+        parameter.put("noticeStatus", 0);    //尚未发布
 
-        toolDaoTemplate.insert("gameNotice.insert",parameter);
+        toolDaoTemplate.insert("gameNotice.insert", parameter);
         addMessage(redirectAttributes, "新增公告成功");
 
-        return "redirect:"+Global.getAdminPath()+"/tools/gameNotice/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameNotice/";
     }
 
 
     /**
      * GM 后台标记为已删除状态，请求游戏删除公告，达到取消的目的
+     *
      * @param redirectAttributes
      * @return
-    */
+     */
     @RequiresPermissions("game.notice.delete")
     @RequestMapping(value = "delete")
-    public String delete(GameNotice gameNotice,RedirectAttributes redirectAttributes){
+    public String delete(GameNotice gameNotice, RedirectAttributes redirectAttributes) {
         //请求Game接口要求删除服务器公告
         Result result = gameTemplate.announceOperation().deleteAnnounce(gameNotice);
-        if(result.isSuccess()) {
+        if (result.isSuccess()) {
             toolDaoTemplate.delete("gameNotice.delete", gameNotice.getId());
         }
         addMessage(redirectAttributes, "删除公告成功");
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameNotice/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameNotice/";
     }
 
     @RequiresPermissions("game.notice.publish")
     @RequestMapping(value = "publish")
-    public String publish(@ModelAttribute GameNotice gameNotice,Model model,RedirectAttributes redirectAttributes,HttpSession session){
+    public String publish(@ModelAttribute GameNotice gameNotice, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 
         Result result = gameTemplate.announceOperation().addAnnounce(gameNotice);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             gameNotice.setNoticeStatus("1");                      //1 表示已发布，这里应该可以再改进，不直接写1
-            toolDaoTemplate.update("gameNotice.updateStatus",gameNotice);
+            toolDaoTemplate.update("gameNotice.updateStatus", gameNotice);
         }
         addMessage(redirectAttributes, "发布公告成功");
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameNotice/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameNotice/";
     }
 }

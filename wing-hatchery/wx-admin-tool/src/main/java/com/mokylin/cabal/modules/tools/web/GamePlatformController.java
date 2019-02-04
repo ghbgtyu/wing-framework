@@ -30,10 +30,10 @@ public class GamePlatformController extends BaseController {
     private SystemService systemService;
 
     @ModelAttribute("gamePlatform")
-    public GamePlatform get(@RequestParam(required=false) String id) {
-        if (StringUtils.isNotBlank(id)){
+    public GamePlatform get(@RequestParam(required = false) String id) {
+        if (StringUtils.isNotBlank(id)) {
             return systemService.getGamePlatform(id);
-        }else{
+        } else {
             return new GamePlatform();
         }
     }
@@ -55,24 +55,24 @@ public class GamePlatformController extends BaseController {
     @RequestMapping(value = "save")
     public String save(GamePlatform gamePlatform, Model model, String oldName, RedirectAttributes redirectAttributes) {
 
-        if (!beanValidator(model, gamePlatform)){
+        if (!beanValidator(model, gamePlatform)) {
             return form(gamePlatform, model);
         }
-        if (!"true".equals(checkName(oldName, gamePlatform.getName()))){
+        if (!"true".equals(checkName(oldName, gamePlatform.getName()))) {
             addMessage(model, "保存平台'" + gamePlatform.getName() + "'失败, 平台名已存在");
             return form(gamePlatform, model);
         }
 
         systemService.saveGamePlatform(gamePlatform);
         addMessage(redirectAttributes, "保存平台'" + gamePlatform.getName() + "'成功");
-        return "redirect:"+Global.getAdminPath()+"/tools/gamePlatform/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gamePlatform/";
     }
 
 
     public String checkName(String oldName, String name) {
-        if (name!=null && name.equals(oldName)) {
+        if (name != null && name.equals(oldName)) {
             return "true";
-        } else if (name!=null && systemService.findGamePlatformByName(name) == null) {
+        } else if (name != null && systemService.findGamePlatformByName(name) == null) {
             return "true";
         }
         return "false";
@@ -80,9 +80,9 @@ public class GamePlatformController extends BaseController {
 
 
     @RequestMapping(value = "delete")
-    public String delete(String id, RedirectAttributes redirectAttributes){
+    public String delete(String id, RedirectAttributes redirectAttributes) {
         systemService.deleteGamePlatform(id);
         addMessage(redirectAttributes, "删除平台成功");
-        return "redirect:"+Global.getAdminPath()+"/tools/gamePlatform/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gamePlatform/";
     }
 }

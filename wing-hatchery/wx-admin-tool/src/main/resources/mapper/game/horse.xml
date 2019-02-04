@@ -4,18 +4,18 @@
 
     <select id="paging" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
-            horse.role_id,
-            horse.rank,
-            horse.star,
-            horse.lucky_value,
-            horse.history_lucky,
-            horse.upgrade_value,
-            horse.history_upgrade,
-            horse.draw_list_mask,
-            horse.create_time,
-            horse.update_time,
-            horse.horse_huan_huaid,
-            horse.max_rank maxRank
+        horse.role_id,
+        horse.rank,
+        horse.star,
+        horse.lucky_value,
+        horse.history_lucky,
+        horse.upgrade_value,
+        horse.history_upgrade,
+        horse.draw_list_mask,
+        horse.create_time,
+        horse.update_time,
+        horse.horse_huan_huaid,
+        horse.max_rank maxRank
         FROM `horse`
         WHERE 1 = 1
         <if test="@Ognl@isNotBlank(id)">and role_id = #{id}</if>
@@ -23,19 +23,19 @@
     </select>
 
     <select id="findHorseByRoleId" resultType="java.util.HashMap">
-      SELECT
-            horse.role_id,
-            horse.rank,
-            horse.star,
-            horse.lucky_value,
-            horse.history_lucky,
-            horse.upgrade_value,
-            horse.history_upgrade,
-            horse.draw_list_mask,
-            horse.create_time,
-            horse.update_time,
-            horse.horse_huan_huaid,
-            horse.max_rank maxRank
+        SELECT
+        horse.role_id,
+        horse.rank,
+        horse.star,
+        horse.lucky_value,
+        horse.history_lucky,
+        horse.upgrade_value,
+        horse.history_upgrade,
+        horse.draw_list_mask,
+        horse.create_time,
+        horse.update_time,
+        horse.horse_huan_huaid,
+        horse.max_rank maxRank
         FROM `horse`
         WHERE role_id = #{id}
     </select>

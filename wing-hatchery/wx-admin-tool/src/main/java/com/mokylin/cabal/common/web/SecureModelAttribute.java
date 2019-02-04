@@ -11,12 +11,12 @@ import java.lang.annotation.Target;
 @Documented
 public @interface SecureModelAttribute {
 
-	String value() default "";
-	
-	String[] allowedField() default "*";
-	
-	String[] deniedField() default "";
-	
-	String[] clearFiled() default "";
+    String value() default "";
+
+    String[] allowedField() default "*";
+
+    String[] deniedField() default "";
+
+    String[] clearFiled() default "";
 
 }

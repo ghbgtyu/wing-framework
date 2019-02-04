@@ -41,14 +41,14 @@ public class TongyongLogin {
 
 
         StringBuffer stringbuff = new StringBuffer();
-        
+
         String loginUrl = Global.getConfig("game.loginUrl");
-        
+
 //            gateUrl = gateUrl + "zhanshenLogin?";
         if (gateUrl.endsWith("/")) {
-        	gateUrl = gateUrl + loginUrl + "?";
+            gateUrl = gateUrl + loginUrl + "?";
         } else {
-        	gateUrl = gateUrl + "/" + loginUrl + "?";
+            gateUrl = gateUrl + "/" + loginUrl + "?";
         }
         stringbuff
                 .append(gateUrl)
@@ -64,7 +64,7 @@ public class TongyongLogin {
                 .append(coopRequest.getSign());
 
         checkUrl = stringbuff.toString().replaceAll(" ", "%20");
-        logger.info("登陆游戏,url：【{}】",checkUrl);
+        logger.info("登陆游戏,url：【{}】", checkUrl);
         //Desktop.getDesktop().browse(new URI(checkUrl));
         return checkUrl;
 
@@ -90,7 +90,7 @@ public class TongyongLogin {
     protected static String generateSign(CoopRequest coopRequest, String key) {
         StringBuffer buffer = new StringBuffer();
         buffer.append(coopRequest.getUserId()).append(coopRequest.getServerId()).append(coopRequest.getCmFlag())
-            .append(coopRequest.getTimestamp()).append(key);
+                .append(coopRequest.getTimestamp()).append(key);
 
         String md5value = Md5Utils.md5To32(buffer.toString());
         return md5value;

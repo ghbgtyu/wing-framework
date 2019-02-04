@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="https://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.common.persistence.proxy;
@@ -78,7 +78,7 @@ public class PaginationMapperMethod {
         RowBounds rowBounds;
         if (paginationIndex != null) {
             page = (Page<Object>) args[paginationIndex];
-            rowBounds =  new RowBounds(page.getFirstResult(), page.getMaxResults());
+            rowBounds = new RowBounds(page.getFirstResult(), page.getMaxResults());
         } else if (rowBoundsIndex != null) {
             rowBounds = (RowBounds) args[rowBoundsIndex];
             page = new Page<Object>();

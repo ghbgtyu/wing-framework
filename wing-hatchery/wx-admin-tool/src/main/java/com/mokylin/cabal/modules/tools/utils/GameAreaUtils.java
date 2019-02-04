@@ -35,14 +35,14 @@ public class GameAreaUtils {
     public static String getGameRemoteUrlByServerId(String serverId) {
 
         Server server = serverManager.getGameServer(Integer.parseInt(serverId));
-        if(server == null){
+        if (server == null) {
             return "";
         }
         return server.createUrl();
     }
 
 
-    public static Server getGameServerByServerId(String serverId){
+    public static Server getGameServerByServerId(String serverId) {
         return serverManager.getGameServer(Integer.parseInt(serverId));
     }
 
@@ -106,7 +106,7 @@ public class GameAreaUtils {
      * @return
      */
     public static List<Server> getGameServerListWithoutRepetition(List<String> serverIdList) {
-    	List<Server> returnGameServerList = Lists.newArrayList();
+        List<Server> returnGameServerList = Lists.newArrayList();
         for (String serverId : serverIdList) {
             Server s = serverManager.getGameServer(Integer.parseInt(serverId));
             if (s != null && s.getFollowerId() == 0) {
@@ -119,35 +119,37 @@ public class GameAreaUtils {
 
     /**
      * 根据平台编号获取服务器列表
+     *
      * @param pid
      * @return
      */
-    public static Collection<Server> getGameServerList(String pid){
+    public static Collection<Server> getGameServerList(String pid) {
         return serverManager.getGameServerList(pid);
     }
 
     /**
      * 根据平台ID获取平台名称，没有获取到则返回默认值
+     *
      * @param id
      * @param defaultVal
      * @return
      */
-	public static String getGamePlatformNameById(String id, String defaultVal) {
-		for (GamePlatform gamePlatform : UserUtils.getGamePlatformList()) {
-			if (gamePlatform.getPid().equals(id)) {
-				return gamePlatform.getName();
-			}
-		}
-		return defaultVal;
-	}
-	
-	public static GamePlatform getGamePlatformByPId(String pid) {
-		for (GamePlatform gamePlatform : UserUtils.getGamePlatformList()) {
-			if (gamePlatform.getPid().equals(pid)) {
-				return gamePlatform;
-			}
-		}
-		return null;
-	}
+    public static String getGamePlatformNameById(String id, String defaultVal) {
+        for (GamePlatform gamePlatform : UserUtils.getGamePlatformList()) {
+            if (gamePlatform.getPid().equals(id)) {
+                return gamePlatform.getName();
+            }
+        }
+        return defaultVal;
+    }
+
+    public static GamePlatform getGamePlatformByPId(String pid) {
+        for (GamePlatform gamePlatform : UserUtils.getGamePlatformList()) {
+            if (gamePlatform.getPid().equals(pid)) {
+                return gamePlatform;
+            }
+        }
+        return null;
+    }
 
 }

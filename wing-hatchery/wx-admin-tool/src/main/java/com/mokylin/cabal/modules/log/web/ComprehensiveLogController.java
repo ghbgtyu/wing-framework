@@ -25,83 +25,84 @@ import com.mokylin.cabal.modules.tools.service.OperationTypeService;
 
 /**
  * 综合日志查询
- * @author Administrator
  *
+ * @author Administrator
  */
 @Controller
 @RequestMapping(value = "${adminPath}/log/comprehensiveLogController")
-public class ComprehensiveLogController extends BaseController{
-	
-	@RequestMapping(value = "comprehensiveList")
-	public String ComprehensiveList(HttpServletRequest request, HttpServletResponse response, Model model){
-		MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");	
-		setDefaultTimeRange(parameter);
-		model.addAttribute("eventList",OperationTypeService.getOperaTypeMap());
-		List<String> operaTypeList = new ArrayList<String>();
+public class ComprehensiveLogController extends BaseController {
+
+    @RequestMapping(value = "comprehensiveList")
+    public String ComprehensiveList(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        setDefaultTimeRange(parameter);
+        model.addAttribute("eventList", OperationTypeService.getOperaTypeMap());
+        List<String> operaTypeList = new ArrayList<String>();
 //		if(!parameter.containsKey("createDateStart")&& !parameter.containsKey("createDateEnd")){
-			setDefaultTimeRange(parameter);
+        setDefaultTimeRange(parameter);
 //		}
-		
-		    if(!parameter.containsKey("operaTypeList")&&parameter.containsKey("operaType")){
-		    	operaTypeList.add(parameter.get("operaType").toString());
-					parameter.put("operaTypeList", operaTypeList);
-				}else if(parameter.containsKey("operaTypeList")){
-					operaTypeList = (List) parameter.get("operaTypeList");
-					 if(operaTypeList.size()==OperationTypeService.getOperaTypeMap().size()){
+
+        if (!parameter.containsKey("operaTypeList") && parameter.containsKey("operaType")) {
+            operaTypeList.add(parameter.get("operaType").toString());
+            parameter.put("operaTypeList", operaTypeList);
+        } else if (parameter.containsKey("operaTypeList")) {
+            operaTypeList = (List) parameter.get("operaTypeList");
+            if (operaTypeList.size() == OperationTypeService.getOperaTypeMap().size()) {
 //						 operaTypeList= new ArrayList();
 //						 parameter.put("operaTypeList", operaTypeList);
-						 parameter.put("operaTypeList", null);
-					 }
-				}
-			
-		parameter.setPage(new Page(request, response));
-        Page<Map<String,Object>> page = logDaoTemplate.paging("comprehensiveLog.paging", parameter);
+                parameter.put("operaTypeList", null);
+            }
+        }
+
+        parameter.setPage(new Page(request, response));
+        Page<Map<String, Object>> page = logDaoTemplate.paging("comprehensiveLog.paging", parameter);
         model.addAttribute("page", page);
         model.addAttribute("selectedOperas", parameter.get("operaType"));
-		
-		return "modules/logs/comprehensiveList";
-	}
-	
-	
-	/**
-	 *综合日志导出excel
-	 * @param request
-	 * @param response
-	 * @param redirectAttributes
-	 * @return
-	 */
-	@RequiresPermissions("log.comprehensive.export")
-    @RequestMapping(value = "export", method= RequestMethod.POST)
+
+        return "modules/logs/comprehensiveList";
+    }
+
+
+    /**
+     * 综合日志导出excel
+     *
+     * @param request
+     * @param response
+     * @param redirectAttributes
+     * @return
+     */
+    @RequiresPermissions("log.comprehensive.export")
+    @RequestMapping(value = "export", method = RequestMethod.POST)
     public String exportFile(HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-    	List<String> operaTypeList = new ArrayList<String>();
-    	if(!parameter.containsKey("createDateStart")&& !parameter.containsKey("createDateEnd")){
-			setDefaultTimeRange(parameter);
-		}
+        List<String> operaTypeList = new ArrayList<String>();
+        if (!parameter.containsKey("createDateStart") && !parameter.containsKey("createDateEnd")) {
+            setDefaultTimeRange(parameter);
+        }
 
-    	  if(!parameter.containsKey("operaTypeList")&&parameter.containsKey("operaType")){
-		    	operaTypeList.add(parameter.get("operaType").toString());
-					parameter.put("operaTypeList", operaTypeList);
-				}else if(parameter.containsKey("operaTypeList")){
-					operaTypeList = (List) parameter.get("operaTypeList");
-					 if(operaTypeList.size()==OperationTypeService.getOperaTypeMap().size()){
+        if (!parameter.containsKey("operaTypeList") && parameter.containsKey("operaType")) {
+            operaTypeList.add(parameter.get("operaType").toString());
+            parameter.put("operaTypeList", operaTypeList);
+        } else if (parameter.containsKey("operaTypeList")) {
+            operaTypeList = (List) parameter.get("operaTypeList");
+            if (operaTypeList.size() == OperationTypeService.getOperaTypeMap().size()) {
 //						 operaTypeList= new ArrayList();
 //						 parameter.put("operaTypeList", operaTypeList);
-						 parameter.put("operaTypeList", null);
-					 }
-				}
+                parameter.put("operaTypeList", null);
+            }
+        }
         try {
-            String fileName = "综合日志"+ DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+            String fileName = "综合日志" + DateUtils.getDate("yyyyMMddHHmmss") + ".xlsx";
             List<comprehensiveDetail> comprehensiveList = logDaoTemplate.selectList("comprehensiveLog.paging", parameter);
             for (int i = 0; i < comprehensiveList.size(); i++) {
-            	comprehensiveList.get(i).setOperationType(OperationTypeService.getOperationType(comprehensiveList.get(i).getOperationType()));
-			}
+                comprehensiveList.get(i).setOperationType(OperationTypeService.getOperationType(comprehensiveList.get(i).getOperationType()));
+            }
             new ExportExcel("综合日志", comprehensiveDetail.class).setDataList(comprehensiveList).write(response, fileName).dispose();
             return null;
         } catch (Exception e) {
-            addMessage(redirectAttributes, "导出综合日志！失败信息："+e.getMessage());
+            addMessage(redirectAttributes, "导出综合日志！失败信息：" + e.getMessage());
         }
-        return "redirect:"+ Global.getAdminPath()+"/log/comprehensiveLogController/comprehensiveList?repage";
+        return "redirect:" + Global.getAdminPath() + "/log/comprehensiveLogController/comprehensiveList?repage";
     }
 
 }

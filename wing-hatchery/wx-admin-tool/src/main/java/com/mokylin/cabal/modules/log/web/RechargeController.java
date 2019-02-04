@@ -32,12 +32,12 @@ public class RechargeController extends BaseController {
     }
 
     @RequestMapping(value = "chargeStatistics")
-    public String chargeStatistic(HttpServletRequest request,HttpServletResponse response, Model model){
+    public String chargeStatistic(HttpServletRequest request, HttpServletResponse response, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        parameter.setPage(new Page(request,response));
-        Page<Map<String,Object>> page = logDaoTemplate.paging("roleRecharge.chargeStatistics",parameter);
+        parameter.setPage(new Page(request, response));
+        Page<Map<String, Object>> page = logDaoTemplate.paging("roleRecharge.chargeStatistics", parameter);
 
-        model.addAttribute("page",page);
+        model.addAttribute("page", page);
         return "modules/logs/chargeStatistics";
     }
 }

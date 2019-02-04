@@ -28,7 +28,7 @@ public class BusFileService extends BaseService {
     private BusFileDao fileDao;
 
 
-    public boolean upload(){
+    public boolean upload() {
         User user = UserUtils.getUser();
 
         return false;
@@ -40,6 +40,7 @@ public class BusFileService extends BaseService {
 
 
     }
+
     public Page<BusFile> loadBusFileAll2() {
 
         return fileDao.loadBusFileAll();
@@ -57,6 +58,7 @@ public class BusFileService extends BaseService {
         fileDao.save(updateFile);
 
     }
+
     @Transactional(readOnly = false)
     public void saveBusFile(BusFile busFile) {
 
@@ -78,6 +80,7 @@ public class BusFileService extends BaseService {
         fileDao.save(busFile);
 
     }
+
     @Transactional(readOnly = false)
     public void deleteFileById(String id) {
 
@@ -102,6 +105,7 @@ public class BusFileService extends BaseService {
         return fileDao.get(id);
 
     }
+
     @Transactional(readOnly = false)
     public void saveFileById(String id) {
         BusFile updateFile = findBusFileById(id);

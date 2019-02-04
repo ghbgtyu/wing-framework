@@ -25,7 +25,7 @@ public class ToolDaoTemplate {
     @Resource
     private SqlSessionTemplate toolSqlSession;
 
-    public <E> Page<E> paging(String statement, MybatisParameter<E> parameter){
+    public <E> Page<E> paging(String statement, MybatisParameter<E> parameter) {
         Page<E> page = parameter.getPage();
         List<E> dataList = selectList(statement, parameter);
         page.setList(dataList);
@@ -72,18 +72,18 @@ public class ToolDaoTemplate {
         return toolSqlSession.delete(statement, parameter);
     }
 
-    public void batchInsert(String statement, List paramsList){
+    public void batchInsert(String statement, List paramsList) {
         StopWatch sw = new StopWatch();
         sw.start();
         SqlSession batchSqlSession = null;
-        try{
+        try {
             batchSqlSession = toolSqlSession.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
             for (Object record : paramsList) {
                 batchSqlSession.insert(statement, record);
             }
-        }
-        catch(Exception e){log.error(null, e);}
-        finally{
+        } catch (Exception e) {
+            log.error(null, e);
+        } finally {
             if (batchSqlSession != null) {
                 batchSqlSession.commit();
                 batchSqlSession.close();
@@ -92,40 +92,40 @@ public class ToolDaoTemplate {
         log.debug("批量新增 {}条记录  statement:[{}] 完成时间:[{}]", paramsList.size(), statement, sw.getTime());
     }
 
-    public int batchInsert2(String statement, List list){
+    public int batchInsert2(String statement, List list) {
         StopWatch sw = new StopWatch();
         sw.start();
-        if(list == null || list.size()==0) return 0;
-        if(list.size() > 500){
+        if (list == null || list.size() == 0) return 0;
+        if (list.size() > 500) {
             int size = list.size();
-            int divisor = size%500>0?size/500:size/500+1;
-            for(int i=0; i<divisor; i++){
-                int toindex = (i+1)*500;
-                if( i == divisor - 1 ){
+            int divisor = size % 500 > 0 ? size / 500 : size / 500 + 1;
+            for (int i = 0; i < divisor; i++) {
+                int toindex = (i + 1) * 500;
+                if (i == divisor - 1) {
                     toindex = size;
                 }
-                List tempList = list.subList(i*500,toindex);
-                insert(statement,tempList);
+                List tempList = list.subList(i * 500, toindex);
+                insert(statement, tempList);
             }
-        }else{
-            insert(statement,list);
+        } else {
+            insert(statement, list);
         }
         log.debug("批量新增 {}条记录  statement:[{}] 完成时间:[{}]", list.size(), statement, sw.getTime());
-        return  list.size();
+        return list.size();
     }
 
-    public void batchUpdate(String statement, List paramsList){
+    public void batchUpdate(String statement, List paramsList) {
         StopWatch sw = new StopWatch();
         sw.start();
         SqlSession batchSqlSession = null;
-        try{
+        try {
             batchSqlSession = toolSqlSession.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
             for (Object record : paramsList) {
                 batchSqlSession.update(statement, record);
             }
-        }
-        catch(Exception e){log.error(null, e);}
-        finally{
+        } catch (Exception e) {
+            log.error(null, e);
+        } finally {
             if (batchSqlSession != null) {
                 batchSqlSession.commit();
                 batchSqlSession.close();
@@ -134,25 +134,25 @@ public class ToolDaoTemplate {
         log.debug("批量更新 {}条记录  statement:[{}] 完成时间:[{}]", paramsList.size(), statement, sw.getTime());
     }
 
-    public int batchUpdate2(String statement, List list){
+    public int batchUpdate2(String statement, List list) {
         StopWatch sw = new StopWatch();
         sw.start();
-        if(list == null || list.size()==0) return 0;
-        if(list.size() > 500){
+        if (list == null || list.size() == 0) return 0;
+        if (list.size() > 500) {
             int size = list.size();
-            int divisor = size%500>0?size/500:size/500+1;
-            for(int i=0; i<divisor; i++){
-                int toindex = (i+1)*500;
-                if( i == divisor - 1 ){
+            int divisor = size % 500 > 0 ? size / 500 : size / 500 + 1;
+            for (int i = 0; i < divisor; i++) {
+                int toindex = (i + 1) * 500;
+                if (i == divisor - 1) {
                     toindex = size;
                 }
-                List tempList = list.subList(i*500,toindex);
-                update(statement,tempList);
+                List tempList = list.subList(i * 500, toindex);
+                update(statement, tempList);
             }
-        }else{
-            update(statement,list);
+        } else {
+            update(statement, list);
         }
         log.debug("批量更新 {}条记录  statement:[{}] 完成时间:[{}]", list.size(), statement, sw.getTime());
-        return  list.size();
+        return list.size();
     }
 }

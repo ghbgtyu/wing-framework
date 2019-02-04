@@ -36,7 +36,7 @@ public class OperationTypeService {
     private static final String FILE_TYPE = "operation.txt"; //操作类型
     private static Map<String, OperationType> operationMap = new HashMap<String, OperationType>();
 
-   // @PostConstruct
+    // @PostConstruct
     public void init() {
         try {
             String contextPath = WebPathUtil.getWebContentPath();
@@ -57,10 +57,10 @@ public class OperationTypeService {
                 String data = null;
                 while ((data = br.readLine()) != null) {
                     String[] event = data.split("\t");
-                      if (event.length == 3) {
+                    if (event.length == 3) {
                         OperationType operationType = new OperationType(event[1], event[2]);
                         operationMap.put(event[0], operationType);
-                      } else if(event.length == 2) {
+                    } else if (event.length == 2) {
                         OperationType operationType = new OperationType(event[1], event[1]);
                         operationMap.put(event[0], operationType);
                     }

@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="https://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.common.persistence.proxy;
@@ -19,7 +19,7 @@ import org.apache.ibatis.session.SqlSession;
  * @since JDK 1.5
  */
 public class PageConfiguration extends Configuration {
-	
+
     protected MapperRegistry mapperRegistry = new PaginationMapperRegistry(this);
 
     @Override

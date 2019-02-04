@@ -19,7 +19,7 @@ public class RedisTest extends BaseTest {
     private RedisManager redisManager;
 
     @Test
-    public void testGameCache(){
+    public void testGameCache() {
         System.out.println("========================game============================");
         System.out.println(JSON.toJSONString(redisManager.getServerList(RedisConstant.KEY_SERVER_GAME)));
         System.out.println("========================game============================");

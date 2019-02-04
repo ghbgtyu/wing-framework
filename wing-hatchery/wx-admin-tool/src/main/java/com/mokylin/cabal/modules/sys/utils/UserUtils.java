@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="https://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.modules.sys.utils;
@@ -135,10 +135,10 @@ public class UserUtils extends BaseService {
 
 
     //用户是否具有全平台访问权限
-    public static boolean hasAllPlatformPermission(User user){
+    public static boolean hasAllPlatformPermission(User user) {
         boolean flag = false;
-        for(Role role : user.getRoleList()){
-            if(role.hasAllPlatformPermission()){
+        for (Role role : user.getRoleList()) {
+            if (role.hasAllPlatformPermission()) {
                 flag = true;
             }
         }
@@ -150,11 +150,11 @@ public class UserUtils extends BaseService {
      * @param user
      * @return
      */
-    public static List<String> getTheSameRoleUserIds(User user){
+    public static List<String> getTheSameRoleUserIds(User user) {
         List<String> roleUserIdList = (List<String>) getCache(CACHE_ROLE_USER_ID_LIST);
-        if(roleUserIdList == null){
+        if (roleUserIdList == null) {
             roleUserIdList = userDao.findUserIdsByUserId(user.getId());
-            putCache(CACHE_ROLE_USER_ID_LIST,roleUserIdList);
+            putCache(CACHE_ROLE_USER_ID_LIST, roleUserIdList);
         }
         return roleUserIdList;
     }
@@ -164,10 +164,10 @@ public class UserUtils extends BaseService {
         List<GamePlatform> gamePlatformList = (List<GamePlatform>) getCache(CACHE_GAME_PLATFORM_LIST);
         if (gamePlatformList == null) {
             gamePlatformList = gamePlatformDao.findAllList();
-            
+
             putCache(CACHE_GAME_PLATFORM_LIST, gamePlatformList);
         }
-        
+
         return gamePlatformList;
     }
 
@@ -184,7 +184,7 @@ public class UserUtils extends BaseService {
         } else {
             gamePlatforms = Sets.newHashSet();
             for (Role role : user.getRoleList()) {
-                if(role.hasAllPlatformPermission()){
+                if (role.hasAllPlatformPermission()) {
                     gamePlatforms = new HashSet<GamePlatform>(getAllGamePlatform());
                     break;
                 }
@@ -195,18 +195,18 @@ public class UserUtils extends BaseService {
         }
         return new ArrayList<GamePlatform>(gamePlatforms);
     }
-    
+
     /**
-     * 
+     *
      * @return
      */
     public static List<GamePlatform> getGamePlatformListContainServer() {
-    	List<GamePlatform> gamePlatforms = getGamePlatformList();
-    	
-        for(GamePlatform gamePlatform : gamePlatforms) {
-        	
+        List<GamePlatform> gamePlatforms = getGamePlatformList();
+
+        for (GamePlatform gamePlatform : gamePlatforms) {
+
         }
-        
+
         return new ArrayList<GamePlatform>(gamePlatforms);
     }
 

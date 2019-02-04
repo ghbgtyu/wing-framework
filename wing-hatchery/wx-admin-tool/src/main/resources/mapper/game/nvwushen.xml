@@ -4,19 +4,19 @@
 
     <select id="paging" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
-            role_nvwushen.id,
-            role_nvwushen.role_id,
-            role_nvwushen.rank,
-            role_nvwushen.star,
-            role_nvwushen.`start`,
-            role_nvwushen.lucky_value,
-            role_nvwushen.history_lucky,
-            role_nvwushen.upgrade_value,
-            role_nvwushen.history_upgrade,
-            role_nvwushen.huanhua_id,
-            role_nvwushen.create_time,
-            role_nvwushen.update_time,
-            role_nvwushen.max_rank maxRank
+        role_nvwushen.id,
+        role_nvwushen.role_id,
+        role_nvwushen.rank,
+        role_nvwushen.star,
+        role_nvwushen.`start`,
+        role_nvwushen.lucky_value,
+        role_nvwushen.history_lucky,
+        role_nvwushen.upgrade_value,
+        role_nvwushen.history_upgrade,
+        role_nvwushen.huanhua_id,
+        role_nvwushen.create_time,
+        role_nvwushen.update_time,
+        role_nvwushen.max_rank maxRank
         FROM `role_nvwushen`
         WHERE 1 = 1
         <if test="@Ognl@isNotBlank(id)">and role_id = #{id}</if>
@@ -24,20 +24,20 @@
     </select>
 
     <select id="findByRoleId" resultType="java.util.HashMap">
-      SELECT
-            role_nvwushen.id,
-            role_nvwushen.role_id,
-            role_nvwushen.rank,
-            role_nvwushen.star,
-            role_nvwushen.`start`,
-            role_nvwushen.lucky_value,
-            role_nvwushen.history_lucky,
-            role_nvwushen.upgrade_value,
-            role_nvwushen.history_upgrade,
-            role_nvwushen.huanhua_id,
-            role_nvwushen.create_time,
-            role_nvwushen.update_time,
-            role_nvwushen.max_rank maxRank
+        SELECT
+        role_nvwushen.id,
+        role_nvwushen.role_id,
+        role_nvwushen.rank,
+        role_nvwushen.star,
+        role_nvwushen.`start`,
+        role_nvwushen.lucky_value,
+        role_nvwushen.history_lucky,
+        role_nvwushen.upgrade_value,
+        role_nvwushen.history_upgrade,
+        role_nvwushen.huanhua_id,
+        role_nvwushen.create_time,
+        role_nvwushen.update_time,
+        role_nvwushen.max_rank maxRank
         FROM `role_nvwushen`
         WHERE role_id = #{id}
     </select>

@@ -19,14 +19,13 @@ public abstract class MybatisBaseBean implements Serializable {
 
     private static final long serialVersionUID = 7237004521633907033L;
 
-    protected String id;		// 编号
-    protected String createBy;	// 创建者
+    protected String id;        // 编号
+    protected String createBy;    // 创建者
     protected Date createDate;// 创建日期
     private String createName;
-    protected String updateBy;	// 更新者
+    protected String updateBy;    // 更新者
     protected Date updateDate;// 更新日期
     protected String delFlag; // 删除标记（0：正常；1：删除；2：审核）
-
 
 
     public String getId() {

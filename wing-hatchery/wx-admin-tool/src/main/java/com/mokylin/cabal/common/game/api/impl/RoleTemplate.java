@@ -37,48 +37,48 @@ public class RoleTemplate extends AbstractGameOperations implements RoleOperatio
     @Override
     public Result jinYan(String serverId, String roleId) {
         String remoteUrl = GameAreaUtils.getGameRemoteUrlByServerId(serverId);
-        URI uri = buildUri(remoteUrl+API_URL_ROLE_BATCH_JINYAN_SUFFIX);
+        URI uri = buildUri(remoteUrl + API_URL_ROLE_BATCH_JINYAN_SUFFIX);
         List<String> roleIds = Lists.newArrayList();
         roleIds.add(roleId);
-        return execute(roleIds,uri);
+        return execute(roleIds, uri);
     }
 
     @Override
     public Result batchJinYan(List<String> roleIds) {
         String remoteUrl = GameAreaUtils.getGameRemoteUrlByServerId(LookupContext.getCurrentServerId());
-        URI uri = buildUri(remoteUrl+API_URL_ROLE_BATCH_JINYAN_SUFFIX);
-        return execute(roleIds,uri);
+        URI uri = buildUri(remoteUrl + API_URL_ROLE_BATCH_JINYAN_SUFFIX);
+        return execute(roleIds, uri);
     }
 
     @Override
     public Result batchFenHao(List<String> roleIds) {
         String remoteUrl = GameAreaUtils.getGameRemoteUrlByServerId(LookupContext.getCurrentServerId());
-        URI uri = buildUri(remoteUrl+API_URL_ROLE_BATCH_FENHAO_SUFFIX);
-        return execute(roleIds,uri);
+        URI uri = buildUri(remoteUrl + API_URL_ROLE_BATCH_FENHAO_SUFFIX);
+        return execute(roleIds, uri);
     }
 
     @Override
     public Result batchCancelJinYan(List<String> roleIds) {
         String remoteUrl = GameAreaUtils.getGameRemoteUrlByServerId(LookupContext.getCurrentServerId());
-        URI uri = buildUri(remoteUrl+API_URL_ROLE_BATCH_CANCEL_JINYAN_SUFFIX);
-        return execute(roleIds,uri);
+        URI uri = buildUri(remoteUrl + API_URL_ROLE_BATCH_CANCEL_JINYAN_SUFFIX);
+        return execute(roleIds, uri);
     }
 
     @Override
     public Result batchCancelFenHao(List<String> roleIds) {
         String remoteUrl = GameAreaUtils.getGameRemoteUrlByServerId(LookupContext.getCurrentServerId());
-        URI uri = buildUri(remoteUrl+API_URL_ROLE_BATCH_CANCEL_FENHAO_SUFFIX);
-        return execute(roleIds,uri);
+        URI uri = buildUri(remoteUrl + API_URL_ROLE_BATCH_CANCEL_FENHAO_SUFFIX);
+        return execute(roleIds, uri);
     }
 
     @Override
     public Result updateRoleType(String serverId, String roleId, String roleType) {
         String remoteUrl = GameAreaUtils.getGameRemoteUrlByServerId(serverId);
-        URI uri = buildUri(remoteUrl+API_URL_ROLE_UPDATE_ROLE_TYPE);
+        URI uri = buildUri(remoteUrl + API_URL_ROLE_UPDATE_ROLE_TYPE);
         JSONObject object = new JSONObject();
-        object.put("roleId",roleId);
-        object.put("roleType",roleType);
-        return execute(object,uri);
+        object.put("roleId", roleId);
+        object.put("roleType", roleType);
+        return execute(object, uri);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class RoleTemplate extends AbstractGameOperations implements RoleOperatio
         String url = GameAreaUtils.getGameRemoteUrlByServerId(serverId);
         URI uri = buildUri(url + API_URL_ROLE_DELETE);
         JSONObject object = new JSONObject();
-        object.put("roleId",roleId);
-        return execute(object,uri);
+        object.put("roleId", roleId);
+        return execute(object, uri);
     }
 }

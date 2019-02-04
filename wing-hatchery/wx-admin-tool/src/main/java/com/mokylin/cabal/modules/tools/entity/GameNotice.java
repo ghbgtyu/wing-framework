@@ -42,8 +42,6 @@ public class GameNotice extends MybatisBaseBean {
     private String gamePlatformId;
 
 
-
-
     public GameNotice() {
     }
 
@@ -127,7 +125,7 @@ public class GameNotice extends MybatisBaseBean {
         this.gamePlatformId = gamePlatformId;
     }
 
-    public boolean isGlobal(){
+    public boolean isGlobal() {
         return this.isGlobal == 1 ? true : false;
     }
 

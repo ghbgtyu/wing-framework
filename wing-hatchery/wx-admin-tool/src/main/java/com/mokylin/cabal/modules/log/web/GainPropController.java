@@ -33,10 +33,10 @@ public class GainPropController extends BaseController {
 
 
     @ModelAttribute
-    public GainPropDetail get(@RequestParam(required=false) String id) {
-        if (StringUtils.isNotBlank(id)){
+    public GainPropDetail get(@RequestParam(required = false) String id) {
+        if (StringUtils.isNotBlank(id)) {
             return logDaoTemplate.selectOne("gainProp.selectOneById", id);
-        }else{
+        } else {
             return new GainPropDetail();
         }
     }
@@ -44,23 +44,23 @@ public class GainPropController extends BaseController {
     @RequestMapping(value = {"list", ""})
     public String list(GainPropDetail gainPropDetail, HttpServletRequest request, HttpServletResponse response, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        parameter.setPage(new Page(request,response));
-        Page<GainPropDetail> page = logDaoTemplate.paging("gainProp.paging",parameter);
+        parameter.setPage(new Page(request, response));
+        Page<GainPropDetail> page = logDaoTemplate.paging("gainProp.paging", parameter);
         model.addAttribute("page", page);
         return "modules/logs/gainPropList";
     }
 
-    @RequestMapping(value = "export", method= RequestMethod.POST)
+    @RequestMapping(value = "export", method = RequestMethod.POST)
     public String exportFile(GainPropDetail gainPropDetail, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
         try {
-            String fileName = "道具获取"+ DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+            String fileName = "道具获取" + DateUtils.getDate("yyyyMMddHHmmss") + ".xlsx";
             List<GainPropDetail> gainPropDetailList = logDaoTemplate.selectList("gainProp.paging", parameter);
             new ExportExcel("道具获取", GainPropDetail.class).setDataList(gainPropDetailList).write(response, fileName).dispose();
             return null;
         } catch (Exception e) {
-            addMessage(redirectAttributes, "导出用户失败！失败信息："+e.getMessage());
+            addMessage(redirectAttributes, "导出用户失败！失败信息：" + e.getMessage());
         }
-        return "redirect:"+ Global.getAdminPath()+"/sys/user/?repage";
+        return "redirect:" + Global.getAdminPath() + "/sys/user/?repage";
     }
 }

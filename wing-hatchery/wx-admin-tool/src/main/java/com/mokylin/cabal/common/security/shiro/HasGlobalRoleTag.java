@@ -25,8 +25,8 @@ public class HasGlobalRoleTag extends SecureTag {
     public int onDoStartTag() throws JspException {
         List<Role> roleList = UserUtils.getUser().getRoleList();
         if (roleList != null) {
-            for(Role role : roleList){
-                if(role.hasAllPlatformPermission()){
+            for (Role role : roleList) {
+                if (role.hasAllPlatformPermission()) {
                     return TagSupport.EVAL_BODY_INCLUDE;
                 }
             }

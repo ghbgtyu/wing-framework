@@ -28,8 +28,9 @@ public class LogDaoTemplate {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-//    @Resource private SqlSessionTemplate toolSqlSession;
-    @Resource private SqlSessionTemplate logSqlSession;
+    //    @Resource private SqlSessionTemplate toolSqlSession;
+    @Resource
+    private SqlSessionTemplate logSqlSession;
 
     private static ExecutorService exec = Executors.newFixedThreadPool(50);
 
@@ -201,23 +202,23 @@ public class LogDaoTemplate {
         return logSqlSession.insert(statement, parameter);
     }
 
-    public int batchInsert(String statement, List list){
-        if(list == null) return 0;
-        if(list.size() > 500){
+    public int batchInsert(String statement, List list) {
+        if (list == null) return 0;
+        if (list.size() > 500) {
             int size = list.size();
-            int divisor = size%500>0?size/500:size/500+1;
-            for(int i=0; i<divisor; i++){
-                int toindex = (i+1)*500;
-                if( i == divisor - 1 ){
+            int divisor = size % 500 > 0 ? size / 500 : size / 500 + 1;
+            for (int i = 0; i < divisor; i++) {
+                int toindex = (i + 1) * 500;
+                if (i == divisor - 1) {
                     toindex = size;
                 }
-                List tempList = list.subList(i*500,toindex);
-                insert(statement,tempList);
+                List tempList = list.subList(i * 500, toindex);
+                insert(statement, tempList);
             }
-        }else{
-            insert(statement,list);
+        } else {
+            insert(statement, list);
         }
-        return  list.size();
+        return list.size();
     }
 
     public int update(String statement) {

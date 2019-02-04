@@ -18,7 +18,7 @@ public class MybatisParameter<T> extends HashMap<String, Object> {
     }
 
     public MybatisParameter(HttpServletRequest request, HttpServletResponse response) {
-        this.page = new Page<T>(request,response);
+        this.page = new Page<T>(request, response);
     }
 
     public Page<T> getPage() {

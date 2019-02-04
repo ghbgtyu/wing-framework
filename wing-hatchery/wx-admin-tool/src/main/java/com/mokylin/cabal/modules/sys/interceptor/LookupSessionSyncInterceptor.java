@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LookupSessionSyncInterceptor extends HandlerInterceptorAdapter {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String currentServerId = (String)request.getSession().getAttribute(ConfigConstants.SELECTED_SERVER_KEY);
+        String currentServerId = (String) request.getSession().getAttribute(ConfigConstants.SELECTED_SERVER_KEY);
 
         LookupContext.setCurrentServerId(currentServerId);
         return true;

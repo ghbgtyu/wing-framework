@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="goodsFlowLog">
-<!--道具消耗日志 -->
-<select id="paging" parameterType="java.util.HashMap" resultType="com.mokylin.cabal.modules.log.entity.PropsDetail">
-	select g.user_id as userId, 
-      	   g.operate_type as opereateType,
-		   g.item_name as itemName,
-		   g.flow_type as flowType,
-		   g.resource_line as resource,
-		   g.active_panel as active,
-		   g.value as value,
-		   g.before_value as beforeValue,
-		   g.after_value as afterValue,
-		   FROM_UNIXTIME(g.log_time/1000) as logTime
-	from goods_flow_log g
-	where  g.flow_type = 2 and g.area_id = #{currentServerId}
-	<if test="@Ognl@isNotBlank(itemName)"> and g.item_name = #{itemName} </if>
-	<if test="@Ognl@isNotBlank(operaTypeList)"> 
-	 and g.operate_type in 
-	<foreach item="item" index="index" collection="operaTypeList" open="(" separator="," close=")">
-            #{item}
-    </foreach>
-    </if>
-	<if test="@Ognl@isNotBlank(createDateEnd)"> and  FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ < ]]> DATE_ADD(#{createDateEnd},INTERVAL 1 day)</if>
-	<if test="@Ognl@isNotBlank(createDateStart)"> and  FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ >= ]]> #{createDateStart}</if>
-	
-</select>
+    <!--道具消耗日志 -->
+    <select id="paging" parameterType="java.util.HashMap" resultType="com.mokylin.cabal.modules.log.entity.PropsDetail">
+        select g.user_id as userId,
+        g.operate_type as opereateType,
+        g.item_name as itemName,
+        g.flow_type as flowType,
+        g.resource_line as resource,
+        g.active_panel as active,
+        g.value as value,
+        g.before_value as beforeValue,
+        g.after_value as afterValue,
+        FROM_UNIXTIME(g.log_time/1000) as logTime
+        from goods_flow_log g
+        where g.flow_type = 2 and g.area_id = #{currentServerId}
+        <if test="@Ognl@isNotBlank(itemName)">and g.item_name = #{itemName}</if>
+        <if test="@Ognl@isNotBlank(operaTypeList)">
+            and g.operate_type in
+            <foreach item="item" index="index" collection="operaTypeList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ < ]]>
+            DATE_ADD(#{createDateEnd},INTERVAL 1 day)
+        </if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ >= ]]>
+            #{createDateStart}
+        </if>
 
-<!-- 道具获取日志 -->
-<select id="propGainPaging" parameterType="java.util.HashMap" resultType="com.mokylin.cabal.modules.log.entity.PropsDetail">
-	    select g.user_id as userId, 
-	      	   g.operate_type as opereateType,
-			   g.item_name as itemName,
-			   g.flow_type as flowType,
-			   g.resource_line as resource,
-		       g.active_panel as active,
-			   g.value as value,
-			   g.before_value as beforeValue,
-			   g.after_value as afterValue,
-	      	   FROM_UNIXTIME(g.log_time/1000) as logTime
-		from goods_flow_log g
-		where  g.flow_type = 1 and g.area_id = #{currentServerId}
-		<if test="@Ognl@isNotBlank(itemName)"> and g.item_name = #{itemName} </if>
-		<if test="@Ognl@isNotBlank(operaTypeList)"> 
-		 and g.operate_type in 
-		<foreach item="item" index="index" collection="operaTypeList" open="(" separator="," close=")">
-	            #{item}
-	    </foreach>
-	    </if>
-		<if test="@Ognl@isNotBlank(createDateEnd)"> and  FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ < ]]> DATE_ADD(#{createDateEnd},INTERVAL 1 day)</if>
-	    <if test="@Ognl@isNotBlank(createDateStart)"> and  FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ >= ]]> #{createDateStart}</if>
-		
-</select>
+    </select>
+
+    <!-- 道具获取日志 -->
+    <select id="propGainPaging" parameterType="java.util.HashMap"
+            resultType="com.mokylin.cabal.modules.log.entity.PropsDetail">
+        select g.user_id as userId,
+        g.operate_type as opereateType,
+        g.item_name as itemName,
+        g.flow_type as flowType,
+        g.resource_line as resource,
+        g.active_panel as active,
+        g.value as value,
+        g.before_value as beforeValue,
+        g.after_value as afterValue,
+        FROM_UNIXTIME(g.log_time/1000) as logTime
+        from goods_flow_log g
+        where g.flow_type = 1 and g.area_id = #{currentServerId}
+        <if test="@Ognl@isNotBlank(itemName)">and g.item_name = #{itemName}</if>
+        <if test="@Ognl@isNotBlank(operaTypeList)">
+            and g.operate_type in
+            <foreach item="item" index="index" collection="operaTypeList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ < ]]>
+            DATE_ADD(#{createDateEnd},INTERVAL 1 day)
+        </if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and FROM_UNIXTIME(g.log_time/1000,'%Y-%m-%d') <![CDATA[ >= ]]>
+            #{createDateStart}
+        </if>
+
+    </select>
 
 
 </mapper>

@@ -11,6 +11,6 @@ import javax.annotation.Resource;
  */
 public class BaseTest extends SpringTransactionalContextTests {
 
-    @Resource(name= "toolDaoTemplate")
+    @Resource(name = "toolDaoTemplate")
     ToolDaoTemplate toolDaoTemplate;
 }

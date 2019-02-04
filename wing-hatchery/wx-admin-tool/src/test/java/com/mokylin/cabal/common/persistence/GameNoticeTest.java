@@ -13,8 +13,8 @@ public class GameNoticeTest extends BaseTest {
 
 
     @Test
-    public void testSelectById(){
-        GameNotice gameNotice = toolDaoTemplate.selectOne("gameNotice.selectOneById",1);
+    public void testSelectById() {
+        GameNotice gameNotice = toolDaoTemplate.selectOne("gameNotice.selectOneById", 1);
         System.out.println(JSON.toJSONString(gameNotice));
     }
 }

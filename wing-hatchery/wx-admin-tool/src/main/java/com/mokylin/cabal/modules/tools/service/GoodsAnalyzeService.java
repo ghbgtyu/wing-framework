@@ -26,7 +26,7 @@ import java.util.Map;
  * 项目: cabal-tools
  */
 @Component
-public class GoodsAnalyzeService{
+public class GoodsAnalyzeService {
 
     private static final Logger LOG = LoggerFactory.getLogger(GoodsAnalyzeService.class.getName());
 
@@ -41,16 +41,16 @@ public class GoodsAnalyzeService{
 
 
     //@PostConstruct
-    public void init(){
+    public void init() {
 
-        try{
+        try {
             String contextPath = WebPathUtil.getWebContentPath();
-            Map<String,Object> parameter = new HashMap<String, Object>();
-            parameter.put("fileType",FILE_TYPE);
+            Map<String, Object> parameter = new HashMap<String, Object>();
+            parameter.put("fileType", FILE_TYPE);
             ConfigFile configFile = toolDaoTemplate.selectOne("configFile.selectOneByName", parameter);
             //ConfigFile configFile = null;
-            if(configFile == null){
-                LOG.error("找不到配置文件{}",FILE_TYPE);
+            if (configFile == null) {
+                LOG.error("找不到配置文件{}", FILE_TYPE);
                 return;
             }
             String filePath = configFile.getFilePath();
@@ -59,11 +59,11 @@ public class GoodsAnalyzeService{
             List goodsFileDataList = AsFileParseUtils.parse(fullFileName);
             if (CollectionUtils.isEmpty(goodsFileDataList)) {
                 LOG.error("物品表{}文件没找到或者文件格式错误", fullFileName);
-                return ;
+                return;
             }
             //Object[] array = (Object[])goodsFileDataList.get(0);
             for (Object object : goodsFileDataList) {
-                Map map = (Map)object;
+                Map map = (Map) object;
                 String id = MapUtils.getString(map, "id");
                 String name = MapUtils.getString(map, "name");
                 String maxstack = MapUtils.getString(map, "maxstack");
@@ -73,34 +73,38 @@ public class GoodsAnalyzeService{
                 }
                 Goods goods = new Goods(id, name, maxstack);
                 goods.setXuniGoods(xuni);
-                goods.setGoodsDesc( MapUtils.getString(map, "describe") );
+                goods.setGoodsDesc(MapUtils.getString(map, "describe"));
 
                 //是虚拟物品，则加入虚拟物品列表
-                if( goods.isXuniGoods() ){
+                if (goods.isXuniGoods()) {
                     xuniGoodsList.add(goods);
                 }
 
-                goodsMap.put(goods.getId() , goods);
+                goodsMap.put(goods.getId(), goods);
             }
-        }catch (Exception e) {
-            LOG.error("解析物品配置文件出错",  e);
+        } catch (Exception e) {
+            LOG.error("解析物品配置文件出错", e);
         }
     }
 
-    public void refresh(){
+    public void refresh() {
         goodsMap.clear();
         xuniGoodsList.clear();
         init();
     }
-   
 
-    /** 获取所有物品列表 **/
-    public Map<String, Goods> getGoods(){
+
+    /**
+     * 获取所有物品列表
+     **/
+    public Map<String, Goods> getGoods() {
         return goodsMap;
     }
 
-    /** 获取虚拟物品列表 */
-    public List<Goods> getXuniGoodsList(){
+    /**
+     * 获取虚拟物品列表
+     */
+    public List<Goods> getXuniGoodsList() {
         return xuniGoodsList;
     }
 
@@ -108,10 +112,10 @@ public class GoodsAnalyzeService{
     /**
      * 按物品名查找
      */
-    public List<Goods> query(String goodsName){
+    public List<Goods> query(String goodsName) {
         List<Goods> result = new ArrayList();
         for (Goods goods : this.getGoods().values()) {
-            if (StringUtils.contains(goods.getName(), goodsName)){
+            if (StringUtils.contains(goods.getName(), goodsName)) {
                 result.add(goods);
             }
         }

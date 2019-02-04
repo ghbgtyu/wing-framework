@@ -7,6 +7,6 @@ import com.mokylin.cabal.common.web.BaseController;
 
 @Controller
 @RequestMapping(value = "${adminPath}/analysis/receive")
-public class ReceiveController extends BaseController{
-	
+public class ReceiveController extends BaseController {
+
 }

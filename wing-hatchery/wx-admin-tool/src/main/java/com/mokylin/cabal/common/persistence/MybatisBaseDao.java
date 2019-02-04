@@ -21,7 +21,7 @@ public class MybatisBaseDao {
 
     protected LogDaoTemplate logDaoTemplate;
 
-  
+
     protected GameDaoTemplate gameDaoTemplate;
 
 

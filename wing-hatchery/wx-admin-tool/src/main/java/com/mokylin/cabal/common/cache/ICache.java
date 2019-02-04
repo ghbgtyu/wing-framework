@@ -19,7 +19,7 @@ public interface ICache<K, V> {
     /**
      * 将 Key 与 Value 放入 Cache 中
      *
-     * @param key Key
+     * @param key   Key
      * @param value Value
      * @return 放入前的 Value
      * @throws CacheException

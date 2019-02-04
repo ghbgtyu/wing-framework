@@ -12,23 +12,23 @@ public class MarkDownResult {
 
     private String url;
 
-    public MarkDownResult(){
+    public MarkDownResult() {
 
     }
 
-    public MarkDownResult(Integer success){
-        this.success=success;
+    public MarkDownResult(Integer success) {
+        this.success = success;
     }
 
-    public MarkDownResult(Integer success, String message, String url){
-        this.success=success;
-        this.message=message;
-        this.url=url;
+    public MarkDownResult(Integer success, String message, String url) {
+        this.success = success;
+        this.message = message;
+        this.url = url;
     }
 
-    public MarkDownResult(Integer success, String url){
-        this.success=success;
-        this.url=url;
+    public MarkDownResult(Integer success, String url) {
+        this.success = success;
+        this.url = url;
     }
 
     public Integer getSuccess() {

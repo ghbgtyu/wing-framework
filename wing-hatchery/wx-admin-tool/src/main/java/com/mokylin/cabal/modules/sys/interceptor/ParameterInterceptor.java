@@ -34,7 +34,7 @@ public class ParameterInterceptor extends HandlerInterceptorAdapter {
         MybatisParameter paramMap = new MybatisParameter();
         Map requestParameterMap = request.getParameterMap();
         for (Object key : requestParameterMap.keySet()) {
-            String[] array = (String[])requestParameterMap.get(key);
+            String[] array = (String[]) requestParameterMap.get(key);
             String value = StringUtils.join(array, ",");
             if (StringUtils.isBlank(value)) {
                 continue;
@@ -43,17 +43,15 @@ public class ParameterInterceptor extends HandlerInterceptorAdapter {
             //如果参数名是serverIds,则split向paramMap放一个List集合以便mybatis foreach标签处理
             if ("serverIds".equals(key) && StringUtils.isNotBlank(value)) {
                 paramMap.put("serverIdList", Arrays.asList(StringUtils.split(value, ",")));
-            }
-            else if (StringUtils.endsWith((String)key, "_list")) {//如果name以"_list"结尾
-                String keyStr = (String)key;
+            } else if (StringUtils.endsWith((String) key, "_list")) {//如果name以"_list"结尾
+                String keyStr = (String) key;
                 paramMap.put(keyStr.replaceFirst("_list", "List"), Arrays.asList(array));
-            }
-            else if (array.length > 1) {//多个
+            } else if (array.length > 1) {//多个
                 paramMap.put(key + "List", Arrays.asList(array));
             }
             // 批量提交
-            if("recordIds".equals(key) && StringUtils.isNotBlank(value)){
-                paramMap.put("recordIdList", Arrays.asList(StringUtils.split(value,",")));
+            if ("recordIds".equals(key) && StringUtils.isNotBlank(value)) {
+                paramMap.put("recordIdList", Arrays.asList(StringUtils.split(value, ",")));
             }
         }
 
@@ -61,14 +59,14 @@ public class ParameterInterceptor extends HandlerInterceptorAdapter {
 
         paramMap.put("currentUser", user);
         //paramMap.put("isGlobalPlatformPermission",UserUtils.hasAllPlatformPermission(user));
-        paramMap.put("isGlobalPlatformPermission",true);
+        paramMap.put("isGlobalPlatformPermission", true);
         //paramMap.put("theSameRoleUserIdList",UserUtils.getTheSameRoleUserIds(user));
-        paramMap.put("roleUserIdList",UserUtils.getTheSameRoleUserIds(user));
+        paramMap.put("roleUserIdList", UserUtils.getTheSameRoleUserIds(user));
 
         //取出当前登陆服务器ID
         String serverId = LookupContext.getCurrentServerId();
         if (StringUtils.isBlank(serverId)) {
-            serverId = (String)request.getSession().getAttribute(ConfigConstants.SELECTED_SERVER_KEY);
+            serverId = (String) request.getSession().getAttribute(ConfigConstants.SELECTED_SERVER_KEY);
         }
 
         paramMap.put("currentServerId", serverId);
@@ -77,8 +75,8 @@ public class ParameterInterceptor extends HandlerInterceptorAdapter {
         paramMap.put("nowTime", new Date());    //当前时间
 
         //默认实体主见都是id，如果创建一条记录，则前端不会传递ID，这里我们默认自动生成一个，否则ID就为原来的值
-        String id = MapUtils.getString(paramMap,"id");
-        if(StringUtils.isEmpty(id) || StringUtils.isBlank(id)){
+        String id = MapUtils.getString(paramMap, "id");
+        if (StringUtils.isEmpty(id) || StringUtils.isBlank(id)) {
             paramMap.put("id", IdGen.uuid());       //新增记录时，通常需要一个id
         }
 

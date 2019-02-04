@@ -34,40 +34,42 @@ public class MoneyGetLogController extends BaseController {
 //	@Resource
 //	protected MonitorConfigService monitorConfigService;
 
-	@RequestMapping(value = "moneyGetLogReport")
-	public String moneyGetLogReport(HttpServletRequest request, HttpServletResponse response, Model model) {
-		MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-		String roleName = MapUtils.getString(parameter, "roleName");
-		createQueryCondition(parameter);
-		Page<Map<String, Object>> moneyGetLog = logPaging(request,response,"moneyFlowLog.findMoneyGetLog");
-		model.addAttribute("moneyGetLog", moneyGetLog);
-		model.addAttribute("roleName", roleName);
-		return "modules/logs/moneyGetLogReport";
-	}
-	
-	@RequiresPermissions("log.moneyGain.export")
-	@RequestMapping(value = "exportXls")
-	public ResponseEntity<byte[]> exportXls(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
-		MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-		createQueryCondition(parameter);
-		List<Map> moneyGetLog = logDaoTemplate.selectList("moneyFlowLog.findMoneyGetLog",parameter);
-		for (Map map : moneyGetLog) {
-			 map.put("money_type", DictUtils.getDictLabel(map.get("money_type").toString(),"money_type","类别错误"));
-			 map.put("operate_type", OperationTypeService.getOperationType(map.get("operate_type").toString()));
-		}
-		return super.exportXls(moneyGetLog, "货币获取"+System.currentTimeMillis(),"角色名","项目","事件","货币变化数量","货币变化前数量","货币变化后数量","时间");
-	}
-	/**
-	 * 创建查询条件，上面的两个操作要求的查询条件是一样的
-	 * @param parameter
-	 */
-	private void createQueryCondition(MybatisParameter parameter) {
-		setDefaultTimeRange(parameter);
-		String roleName = MapUtils.getString(parameter, "roleName");
-		if(null==roleName){
-			parameter.put("roleName", "%");
-		}else{
-			parameter.put("roleName","%"+roleName+"%");
-		}
-	}
+    @RequestMapping(value = "moneyGetLogReport")
+    public String moneyGetLogReport(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        String roleName = MapUtils.getString(parameter, "roleName");
+        createQueryCondition(parameter);
+        Page<Map<String, Object>> moneyGetLog = logPaging(request, response, "moneyFlowLog.findMoneyGetLog");
+        model.addAttribute("moneyGetLog", moneyGetLog);
+        model.addAttribute("roleName", roleName);
+        return "modules/logs/moneyGetLogReport";
+    }
+
+    @RequiresPermissions("log.moneyGain.export")
+    @RequestMapping(value = "exportXls")
+    public ResponseEntity<byte[]> exportXls(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        createQueryCondition(parameter);
+        List<Map> moneyGetLog = logDaoTemplate.selectList("moneyFlowLog.findMoneyGetLog", parameter);
+        for (Map map : moneyGetLog) {
+            map.put("money_type", DictUtils.getDictLabel(map.get("money_type").toString(), "money_type", "类别错误"));
+            map.put("operate_type", OperationTypeService.getOperationType(map.get("operate_type").toString()));
+        }
+        return super.exportXls(moneyGetLog, "货币获取" + System.currentTimeMillis(), "角色名", "项目", "事件", "货币变化数量", "货币变化前数量", "货币变化后数量", "时间");
+    }
+
+    /**
+     * 创建查询条件，上面的两个操作要求的查询条件是一样的
+     *
+     * @param parameter
+     */
+    private void createQueryCondition(MybatisParameter parameter) {
+        setDefaultTimeRange(parameter);
+        String roleName = MapUtils.getString(parameter, "roleName");
+        if (null == roleName) {
+            parameter.put("roleName", "%");
+        } else {
+            parameter.put("roleName", "%" + roleName + "%");
+        }
+    }
 }

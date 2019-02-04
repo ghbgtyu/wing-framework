@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="httparamMap://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.modules.sys.service;
@@ -32,55 +32,55 @@ import com.mokylin.cabal.modules.sys.entity.Log;
 @Transactional(readOnly = true)
 public class LogService extends BaseService {
 
-	@Autowired
-	private LogDao logDao;
-	
-	public Log get(String id) {
-		return logDao.get(id);
-	}
-	
-	public Page<Log> find(Page<Log> page, Map<String, Object> paramMap) {
-		DetachedCriteria dc = logDao.createDetachedCriteria();
+    @Autowired
+    private LogDao logDao;
 
-		Long createById = StringUtils.toLong(paramMap.get("createById"));
-		if (createById > 0){
-			dc.add(Restrictions.eq("createBy.id", createById));
-		}
-		
-		String requestUri = ObjectUtils.toString(paramMap.get("requestUri"));
-		if (StringUtils.isNotBlank(requestUri)){
-			dc.add(Restrictions.like("requestUri", "%"+requestUri+"%"));
-		}
+    public Log get(String id) {
+        return logDao.get(id);
+    }
 
-		String exception = ObjectUtils.toString(paramMap.get("exception"));
-		if (StringUtils.isNotBlank(exception)){
-			dc.add(Restrictions.eq("type", Log.TYPE_EXCEPTION));
-		}
-		
-		Date beginDate = DateUtils.parseDate(paramMap.get("beginDate"));
-		if (beginDate == null){
-			beginDate = DateUtils.setDays(new Date(), 1);
-			paramMap.put("beginDate", DateUtils.formatDate(beginDate, "yyyy-MM-dd"));
-		}
-		Date endDate = DateUtils.parseDate(paramMap.get("endDate"));
-		if (endDate == null){
-			endDate = DateUtils.addDays(DateUtils.addMonths(beginDate, 1), -1);
-			paramMap.put("endDate", DateUtils.formatDate(endDate, "yyyy-MM-dd"));
-		}
-		dc.add(Restrictions.between("createDate", beginDate, endDate));
-		
-		dc.addOrder(Order.desc("createDate"));
-		return logDao.find(page, dc);
-	}
+    public Page<Log> find(Page<Log> page, Map<String, Object> paramMap) {
+        DetachedCriteria dc = logDao.createDetachedCriteria();
+
+        Long createById = StringUtils.toLong(paramMap.get("createById"));
+        if (createById > 0) {
+            dc.add(Restrictions.eq("createBy.id", createById));
+        }
+
+        String requestUri = ObjectUtils.toString(paramMap.get("requestUri"));
+        if (StringUtils.isNotBlank(requestUri)) {
+            dc.add(Restrictions.like("requestUri", "%" + requestUri + "%"));
+        }
+
+        String exception = ObjectUtils.toString(paramMap.get("exception"));
+        if (StringUtils.isNotBlank(exception)) {
+            dc.add(Restrictions.eq("type", Log.TYPE_EXCEPTION));
+        }
+
+        Date beginDate = DateUtils.parseDate(paramMap.get("beginDate"));
+        if (beginDate == null) {
+            beginDate = DateUtils.setDays(new Date(), 1);
+            paramMap.put("beginDate", DateUtils.formatDate(beginDate, "yyyy-MM-dd"));
+        }
+        Date endDate = DateUtils.parseDate(paramMap.get("endDate"));
+        if (endDate == null) {
+            endDate = DateUtils.addDays(DateUtils.addMonths(beginDate, 1), -1);
+            paramMap.put("endDate", DateUtils.formatDate(endDate, "yyyy-MM-dd"));
+        }
+        dc.add(Restrictions.between("createDate", beginDate, endDate));
+
+        dc.addOrder(Order.desc("createDate"));
+        return logDao.find(page, dc);
+    }
 
     /**
      * 默认readOnly为false
      * @param log
      */
     @Transactional(readOnly = false)
-    public void save(Log log){
+    public void save(Log log) {
         logDao.clear();
         logDao.save(log);
     }
-	
+
 }

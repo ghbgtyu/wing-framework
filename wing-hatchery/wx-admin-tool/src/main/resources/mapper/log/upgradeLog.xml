@@ -2,24 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="upgradeLog">
     <select id="findUpgradeLogReport" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
-	    SELECT
-			upgrade_log.role_name role_name,
-			upgrade_log.operation_type operation_type,
-			upgrade_log.equip_name equip_name,
-			upgrade_log.item_name item_name,
-			upgrade_log.num AS num,
-			upgrade_log.before_level before_level,
-			upgrade_log.after_level after_level,
-			upgrade_log.log_day log_day
-		FROM
-			upgrade_log
-		WHERE
-			1 = 1
-			<if test="@Ognl@isNotBlank(roleName)">and role_name like #{roleName}</if>
-			<if test="@Ognl@isNotBlank(operateType)">and operation_type <![CDATA[ = ]]>#{operateType}</if>
-			<if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(replace(#{createDateStart},'-',''),' ','')</if>
-			<if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(replace(#{createDateEnd},'-',''),' ','')</if>
-		ORDER BY
-			upgrade_log.log_day DESC
+        SELECT
+        upgrade_log.role_name role_name,
+        upgrade_log.operation_type operation_type,
+        upgrade_log.equip_name equip_name,
+        upgrade_log.item_name item_name,
+        upgrade_log.num AS num,
+        upgrade_log.before_level before_level,
+        upgrade_log.after_level after_level,
+        upgrade_log.log_day log_day
+        FROM
+        upgrade_log
+        WHERE
+        1 = 1
+        <if test="@Ognl@isNotBlank(roleName)">and role_name like #{roleName}</if>
+        <if test="@Ognl@isNotBlank(operateType)">and operation_type <![CDATA[ = ]]>#{operateType}</if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>
+            replace(replace(#{createDateStart},'-',''),' ','')
+        </if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>
+            replace(replace(#{createDateEnd},'-',''),' ','')
+        </if>
+        ORDER BY
+        upgrade_log.log_day DESC
     </select>
 </mapper>

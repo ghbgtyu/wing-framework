@@ -22,16 +22,16 @@ import com.mokylin.cabal.common.web.BaseController;
 
 @Controller
 @RequestMapping(value = "${adminPath}/global/coinProduceConsume")
-public class CoinProduceConsumeController extends BaseController{
-    @RequestMapping( value =  "coinProduceConsumeReport")
-    public String monthRemainerReport(HttpServletRequest request,HttpServletResponse response, Model model){
-    	MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-    	setServerIdList(parameter);
-    	setDefaultTimeRange(parameter);
-    	Page<Map<String,Object>> coinProduceConsume =globalPaging(request, response, "rizonghe.findCoinProduceConsumeReport");
-    	model.addAttribute("coinProduceConsume", coinProduceConsume);
-    	// 把serverIdList转成string
-    	parameter.put("serverIdList", parameter.get("serverIds"));
-    	return "modules/global/coinProduceConsumeReport";
+public class CoinProduceConsumeController extends BaseController {
+    @RequestMapping(value = "coinProduceConsumeReport")
+    public String monthRemainerReport(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        setServerIdList(parameter);
+        setDefaultTimeRange(parameter);
+        Page<Map<String, Object>> coinProduceConsume = globalPaging(request, response, "rizonghe.findCoinProduceConsumeReport");
+        model.addAttribute("coinProduceConsume", coinProduceConsume);
+        // 把serverIdList转成string
+        parameter.put("serverIdList", parameter.get("serverIds"));
+        return "modules/global/coinProduceConsumeReport";
     }
 }

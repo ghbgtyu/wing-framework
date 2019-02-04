@@ -51,6 +51,7 @@ public class GameTemplate implements Game {
 
     /**
      * http url 后面增加参数 access_token
+     *
      * @param accessToken
      */
     public GameTemplate(String accessToken) {
@@ -58,7 +59,7 @@ public class GameTemplate implements Game {
         initialize();
     }
 
-    protected  RestTemplate configureRestTemplate(String accessToken, TokenStrategy tokenStrategy){
+    protected RestTemplate configureRestTemplate(String accessToken, TokenStrategy tokenStrategy) {
         RestTemplate client;
         List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
         client = new RestTemplate();
@@ -74,7 +75,7 @@ public class GameTemplate implements Game {
     }
 
 
-    protected RestTemplate configureRestTemplate(){
+    protected RestTemplate configureRestTemplate() {
         RestTemplate client;
         List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
         client = new RestTemplate();

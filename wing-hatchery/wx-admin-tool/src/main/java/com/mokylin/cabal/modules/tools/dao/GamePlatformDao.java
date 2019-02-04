@@ -15,15 +15,15 @@ import java.util.List;
 @Repository
 public class GamePlatformDao extends BaseDao<GamePlatform> {
 
-    public List<GamePlatform> findAllList(){
+    public List<GamePlatform> findAllList() {
         return find("from GamePlatform where delFlag=:p1 order by name", new Parameter(GamePlatform.DEL_FLAG_NORMAL));
     }
 
-    public GamePlatform findByName(String name){
+    public GamePlatform findByName(String name) {
         return getByHql("from GamePlatform where delFlag = :p1 and name = :p2", new Parameter(GamePlatform.DEL_FLAG_NORMAL, name));
     }
 
-    public GamePlatform findByPid(String pid){
+    public GamePlatform findByPid(String pid) {
         return getByHql("from GamePlatform where delFlag = :p1 and pid = :p2", new Parameter(GamePlatform.DEL_FLAG_NORMAL, pid));
     }
 }

@@ -13,5 +13,5 @@ public interface GuildOperation {
      * @param guildId 公会Id
      * @return
      */
-    Result delete(String serverId,Long guildId);
+    Result delete(String serverId, Long guildId);
 }

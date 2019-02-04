@@ -28,19 +28,19 @@ public class PlatformHistoryMonthDataController extends BaseController {
 //	@Resource
 //	protected MonitorConfigService monitorConfigService;
 
-	@RequestMapping(value = "platformHistoryMonthData")
-	public String platformHistoryMonthData(HttpServletRequest request, HttpServletResponse response, Model model) {
-		MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-		setDefaultMonthlyRange(parameter);
-		setMultiplePlatform(parameter);
-		//设置默认月份
-		List<Map<String, Object>> monthData = globalDaoTemplate.selectList("monthlyIntegrated.findMonthData",parameter);
-		List<Map<String, Object>> newServerMonthData = globalDaoTemplate.selectList("monthlyIntegrated.findNewServerMonthData",parameter);
-		List<Map<String, Object>> oldServerMonthData = globalDaoTemplate.selectList("monthlyIntegrated.findOldServerMonthData",parameter);
-		model.addAttribute("monthData", monthData);
-		model.addAttribute("newServerMonthData", newServerMonthData);
-		model.addAttribute("oldServerMonthData", oldServerMonthData);
-		model.addAttribute("selectedPids", parameter.get("pids"));
-		return "modules/global/platformHistoryMonthData";
-	}
+    @RequestMapping(value = "platformHistoryMonthData")
+    public String platformHistoryMonthData(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        setDefaultMonthlyRange(parameter);
+        setMultiplePlatform(parameter);
+        //设置默认月份
+        List<Map<String, Object>> monthData = globalDaoTemplate.selectList("monthlyIntegrated.findMonthData", parameter);
+        List<Map<String, Object>> newServerMonthData = globalDaoTemplate.selectList("monthlyIntegrated.findNewServerMonthData", parameter);
+        List<Map<String, Object>> oldServerMonthData = globalDaoTemplate.selectList("monthlyIntegrated.findOldServerMonthData", parameter);
+        model.addAttribute("monthData", monthData);
+        model.addAttribute("newServerMonthData", newServerMonthData);
+        model.addAttribute("oldServerMonthData", oldServerMonthData);
+        model.addAttribute("selectedPids", parameter.get("pids"));
+        return "modules/global/platformHistoryMonthData";
+    }
 }

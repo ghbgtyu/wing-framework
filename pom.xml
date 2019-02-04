@@ -7,22 +7,22 @@
     <groupId>com.wing</groupId>
     <artifactId>wing-framework</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.3</version>
     <modules>
 
         <module>wing-common</module>
         <module>wing-bus</module>
         <module>wing-center-server</module>
         <module>wing-center-client</module>
-        <module>wing-hatchery</module>
+         <module>wing-hatchery</module>
         <module>wing-server-common</module>
         <module>wing-proxy</module>
-    </modules>
+</modules>
 
-    <!-- maven 仓库 -->
+<!-- maven 仓库 -->
     <repositories>
 
-        <repository>
+        <!--  <repository>
             <id>central-repos</id>
             <name>Central Repository</name>
             <url>http://repo.maven.apache.org/maven2</url>
@@ -61,24 +61,59 @@
             </snapshots>
         </repository>
 
-    </repositories>
-
-    <pluginRepositories>
-
-        <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.-->
-        <pluginRepository>
-            <id>alimaven</id>
-            <name>aliyun maven</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+         <repository>
+            <id>java</id>
+            <name>Central Repository 2</name>
+            <url>http://192.168.60.60:8081/repository/java/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+-->
+
+
+
+    </repositories>
+    <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.-->
+    <!--<url>http://maven.aliyun.com/nexus/content/groups/public</url> -->
+    <!--<pluginRepositories>
+
+
+        <pluginRepository>
+            <id>java</id>
+            <name>local maven</name>
+
+            <url>http://192.168.60.60:8081/repository/java/</url>
+
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
 
     </pluginRepositories>
+-->
+
+    <!--
+
+-->
+    <distributionManagement>
+        <repository>
+            <id>java_project</id>
+            <name>local maven</name>
+            <url>http://192.168.60.60:8081/repository/java_project/</url>
+        </repository>
+
+
+
+    </distributionManagement>
+
 
     <!-- 项目属性 -->
     <properties>

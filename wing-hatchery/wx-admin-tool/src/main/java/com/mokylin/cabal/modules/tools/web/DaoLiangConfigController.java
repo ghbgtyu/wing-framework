@@ -19,32 +19,32 @@ import com.mokylin.cabal.modules.tools.service.DaoLiangConfigService;
 
 @Controller
 @RequestMapping(value = "${adminPath}/tools/daoLiangConfig")
-public class DaoLiangConfigController extends BaseController{
-	 @Resource
-	 protected DaoLiangConfigService daoLiangConfigService;
-	
-    @RequestMapping( value =  "daoLiangConfig")
-    public String daoLiangConfig(HttpServletRequest request,HttpServletResponse response, Model model){
-    	MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-    	String pid= (String) parameter.get("pid");
-    	if(StringUtils.isNotEmpty(pid)){
-	    	Map<String,Object> daoLiangConfig =daoLiangConfigService.selectOneAfterInsertOrUpdate("daoLiang.findDaoLiangByPid",parameter);
-	    	model.addAttribute("daoLiangConfig", daoLiangConfig);
-    	}
-    	List<Map<String,Object>> allDaoLiang = toolDaoTemplate.selectList("daoLiang.findDaoLiang");
-    	model.addAttribute("allDaoLiang", allDaoLiang);
-    	return "modules/tools/daoLiangConfig";
+public class DaoLiangConfigController extends BaseController {
+    @Resource
+    protected DaoLiangConfigService daoLiangConfigService;
+
+    @RequestMapping(value = "daoLiangConfig")
+    public String daoLiangConfig(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        String pid = (String) parameter.get("pid");
+        if (StringUtils.isNotEmpty(pid)) {
+            Map<String, Object> daoLiangConfig = daoLiangConfigService.selectOneAfterInsertOrUpdate("daoLiang.findDaoLiangByPid", parameter);
+            model.addAttribute("daoLiangConfig", daoLiangConfig);
+        }
+        List<Map<String, Object>> allDaoLiang = toolDaoTemplate.selectList("daoLiang.findDaoLiang");
+        model.addAttribute("allDaoLiang", allDaoLiang);
+        return "modules/tools/daoLiangConfig";
     }
-    
-    @RequestMapping( value =  "addDaoLiangConfig")
-    public String addDaoLiangConfig(HttpServletRequest request,HttpServletResponse response, Model model){
-    	MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-    	daoLiangConfigService.selectOneAfterInsertOrUpdate("daoLiang.findDaoLiangByPid",parameter);
+
+    @RequestMapping(value = "addDaoLiangConfig")
+    public String addDaoLiangConfig(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        daoLiangConfigService.selectOneAfterInsertOrUpdate("daoLiang.findDaoLiangByPid", parameter);
 //    	model.addAttribute("daoLiangConfig", daoLiangConfig);
 //    	model.addAttribute("pid", MapUtils.getObject(parameter, "pid"));
-    	List<Map<String,Object>> allDaoLiang = toolDaoTemplate.selectList("daoLiang.findDaoLiang");
-    	model.addAttribute("allDaoLiang", allDaoLiang);
-    	model.addAttribute("message", "修改成功！");
-    	return "modules/tools/daoLiangConfig";
+        List<Map<String, Object>> allDaoLiang = toolDaoTemplate.selectList("daoLiang.findDaoLiang");
+        model.addAttribute("allDaoLiang", allDaoLiang);
+        model.addAttribute("message", "修改成功！");
+        return "modules/tools/daoLiangConfig";
     }
 }

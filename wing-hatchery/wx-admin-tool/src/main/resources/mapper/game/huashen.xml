@@ -4,14 +4,14 @@
 
     <select id="paging" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
-            role_huashen.id,
-            role_huashen.role_id,
-            role_huashen.shenjiang_id,
-            role_huashen.rank,
-            role_huashen.shenjiang_date,
-            role_huashen.update_time,
-            role_huashen.create_time,
-            role_huashen.max_rank maxRank
+        role_huashen.id,
+        role_huashen.role_id,
+        role_huashen.shenjiang_id,
+        role_huashen.rank,
+        role_huashen.shenjiang_date,
+        role_huashen.update_time,
+        role_huashen.create_time,
+        role_huashen.max_rank maxRank
         FROM `role_huashen`
         WHERE 1 = 1
         <if test="@Ognl@isNotBlank(id)">and role_id = #{id}</if>
@@ -20,14 +20,14 @@
 
     <select id="findByRoleId" resultType="java.util.HashMap">
         SELECT
-            role_huashen.id,
-            role_huashen.role_id,
-            role_huashen.shenjiang_id,
-            role_huashen.rank,
-            role_huashen.shenjiang_date,
-            role_huashen.update_time,
-            role_huashen.create_time,
-            role_huashen.max_rank maxRank
+        role_huashen.id,
+        role_huashen.role_id,
+        role_huashen.shenjiang_id,
+        role_huashen.rank,
+        role_huashen.shenjiang_date,
+        role_huashen.update_time,
+        role_huashen.create_time,
+        role_huashen.max_rank maxRank
         FROM `role_huashen`
         WHERE role_id = #{id}
     </select>

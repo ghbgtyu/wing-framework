@@ -19,7 +19,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <context:annotation-config />
+    <context:annotation-config/>
 
     <!-- 定义Hibernate Session工厂 -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -97,73 +97,73 @@
         <property name="filters" value="stat"/>
     </bean>
 
-   <!-- 
-    <bean id="globalDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-    
-        <property name="driverClassName" value="${jdbc.driver}"/>
+    <!--
+     <bean id="globalDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 
-  
-        <property name="url" value="${global.jdbc.url}"/>
-        <property name="username" value="${global.jdbc.username}"/>
-        <property name="password" value="${global.jdbc.password}"/>
+         <property name="driverClassName" value="${jdbc.driver}"/>
 
 
-        <property name="initialSize" value="${jdbc.pool.minIdle}"/>
-        <property name="minIdle" value="${jdbc.pool.minIdle}"/>
-        <property name="maxActive" value="${jdbc.pool.maxActive}"/>
-
-     
-        <property name="maxWait" value="60000"/>
-
-   
-        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+         <property name="url" value="${global.jdbc.url}"/>
+         <property name="username" value="${global.jdbc.username}"/>
+         <property name="password" value="${global.jdbc.password}"/>
 
 
-        <property name="minEvictableIdleTimeMillis" value="300000"/>
+         <property name="initialSize" value="${jdbc.pool.minIdle}"/>
+         <property name="minIdle" value="${jdbc.pool.minIdle}"/>
+         <property name="maxActive" value="${jdbc.pool.maxActive}"/>
 
-        <property name="validationQuery" value="SELECT 'x'"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="testOnBorrow" value="false"/>
-        <property name="testOnReturn" value="false"/>
 
-      
+         <property name="maxWait" value="60000"/>
 
- 
-        <property name="filters" value="stat"/>
-    </bean>-->
- 
-     <!-- <bean id="logDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-   
-        <property name="driverClassName" value="${jdbc.driver}"/>
 
-    
-        <property name="url" value="${log.jdbc.url}"/>
-        <property name="username" value="${log.jdbc.username}"/>
-        <property name="password" value="${log.jdbc.password}"/>
+         <property name="timeBetweenEvictionRunsMillis" value="60000"/>
 
-   
-        <property name="initialSize" value="${jdbc.pool.minIdle}"/>
-        <property name="minIdle" value="${jdbc.pool.minIdle}"/>
-        <property name="maxActive" value="${jdbc.pool.maxActive}"/>
 
-   
-        <property name="maxWait" value="60000"/>
+         <property name="minEvictableIdleTimeMillis" value="300000"/>
 
-        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+         <property name="validationQuery" value="SELECT 'x'"/>
+         <property name="testWhileIdle" value="true"/>
+         <property name="testOnBorrow" value="false"/>
+         <property name="testOnReturn" value="false"/>
 
-  
-        <property name="minEvictableIdleTimeMillis" value="300000"/>
 
-        <property name="validationQuery" value="SELECT 'x'"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="testOnBorrow" value="false"/>
-        <property name="testOnReturn" value="false"/>
 
-  
 
-    
-        <property name="filters" value="stat"/>
-    </bean>-->
+         <property name="filters" value="stat"/>
+     </bean>-->
+
+    <!-- <bean id="logDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+
+       <property name="driverClassName" value="${jdbc.driver}"/>
+
+
+       <property name="url" value="${log.jdbc.url}"/>
+       <property name="username" value="${log.jdbc.username}"/>
+       <property name="password" value="${log.jdbc.password}"/>
+
+
+       <property name="initialSize" value="${jdbc.pool.minIdle}"/>
+       <property name="minIdle" value="${jdbc.pool.minIdle}"/>
+       <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+
+
+       <property name="maxWait" value="60000"/>
+
+       <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+
+
+       <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+       <property name="validationQuery" value="SELECT 'x'"/>
+       <property name="testWhileIdle" value="true"/>
+       <property name="testOnBorrow" value="false"/>
+       <property name="testOnReturn" value="false"/>
+
+
+
+
+       <property name="filters" value="stat"/>
+   </bean>-->
 
     <!-- 数据源配置, 使用应用服务器的数据库连接池
     <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/cabal" />-->

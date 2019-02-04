@@ -11,15 +11,16 @@ public class JsonUtils {
 
     /**
      * 根据JSONObject字符串，以及key得到对应的value
+     *
      * @param obj
      * @param key
      * @return
      */
-    public static String parseObject(String obj, String key){
-        if(StringUtils.isEmpty(obj)){
+    public static String parseObject(String obj, String key) {
+        if (StringUtils.isEmpty(obj)) {
             return "";
         }
-        if(!obj.contains(key)){
+        if (!obj.contains(key)) {
             return "";
         }
         JSONObject object = JSONObject.parseObject(obj);

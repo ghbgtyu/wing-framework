@@ -18,28 +18,28 @@ import com.mokylin.cabal.modules.tools.service.MonitorConfigService;
 
 @Controller
 @RequestMapping(value = "${adminPath}/tools/monitorConfig")
-public class MonitorConfigController extends BaseController{
-	 @Resource
-	 protected MonitorConfigService monitorConfigService;
-	
-    @RequestMapping( value =  "monitorConfig")
-    public String monitorConfig(HttpServletRequest request,HttpServletResponse response, Model model){
-    	MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-    	Map<String,Object> monitorConfig =monitorConfigService.selectOne("monitorConfig.findMonitorConfig",parameter);
-    	model.addAttribute("monitorConfig", monitorConfig);
-    	return "modules/tools/monitorConfig";
+public class MonitorConfigController extends BaseController {
+    @Resource
+    protected MonitorConfigService monitorConfigService;
+
+    @RequestMapping(value = "monitorConfig")
+    public String monitorConfig(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        Map<String, Object> monitorConfig = monitorConfigService.selectOne("monitorConfig.findMonitorConfig", parameter);
+        model.addAttribute("monitorConfig", monitorConfig);
+        return "modules/tools/monitorConfig";
     }
-    
-    @RequestMapping( value =  "addMonitorConfig")
-    public String addMonitorConfig(HttpServletRequest request,HttpServletResponse response, Model model){
-    	MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-    	String currentId = MapUtils.getString(parameter, "currentId");
-    	if(StringUtils.isNotEmpty(currentId)){
-    		toolDaoTemplate.update("monitorConfig.update", parameter);
-    	}
-    	Map<String,Object> monitorConfig =monitorConfigService.selectOne("monitorConfig.findMonitorConfig",parameter);
-    	model.addAttribute("monitorConfig", monitorConfig);
-    	model.addAttribute("message", "修改成功！");
-    	return "modules/tools/monitorConfig";
+
+    @RequestMapping(value = "addMonitorConfig")
+    public String addMonitorConfig(HttpServletRequest request, HttpServletResponse response, Model model) {
+        MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
+        String currentId = MapUtils.getString(parameter, "currentId");
+        if (StringUtils.isNotEmpty(currentId)) {
+            toolDaoTemplate.update("monitorConfig.update", parameter);
+        }
+        Map<String, Object> monitorConfig = monitorConfigService.selectOne("monitorConfig.findMonitorConfig", parameter);
+        model.addAttribute("monitorConfig", monitorConfig);
+        model.addAttribute("message", "修改成功！");
+        return "modules/tools/monitorConfig";
     }
 }

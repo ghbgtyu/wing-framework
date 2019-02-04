@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="https://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.modules.sys.dao;
@@ -17,9 +17,9 @@ import com.mokylin.cabal.modules.sys.entity.Dict;
  */
 @MyBatisDao
 public interface MyBatisDictDao {
-	
+
     Dict get(String id);
-    
+
     List<Dict> find(Dict dict);
-    
+
 }

@@ -19,43 +19,42 @@
 
     <!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
     <!--<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">-->
-        <!--<mvc:message-converters register-defaults="true">-->
-            <!--&lt;!&ndash; 将StringHttpMessageConverter的默认编码设为UTF-8 &ndash;&gt;-->
-            <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
-                <!--<constructor-arg value="UTF-8"/>-->
-            <!--</bean>-->
-            <!--&lt;!&ndash; 将Jackson2HttpMessageConverter的默认格式化输出为true &ndash;&gt;-->
-            <!--&lt;!&ndash;<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">&ndash;&gt;-->
-                <!--&lt;!&ndash;<property name="prettyPrint" value="true"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<property name="objectMapper">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<bean class="com.mokylin.cabal.common.mapper.JsonMapper"></bean>&ndash;&gt;-->
-                <!--&lt;!&ndash;</property>&ndash;&gt;-->
-            <!--&lt;!&ndash;</bean>&ndash;&gt;-->
-            <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"></bean>-->
-            <!--&lt;!&ndash; 使用XML格式输出数据 &ndash;&gt;-->
-            <!--<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">-->
-                <!--<constructor-arg>-->
-                    <!--<bean class="org.springframework.oxm.xstream.XStreamMarshaller">-->
-                        <!--<property name="streamDriver">-->
-                            <!--<bean class="com.thoughtworks.xstream.io.xml.StaxDriver"/>-->
-                        <!--</property>-->
-                        <!--<property name="annotatedClasses">-->
-                            <!--<list>-->
-                                <!--<value>com.mokylin.cabal.common.persistence.BaseEntity</value>-->
-                            <!--</list>-->
-                        <!--</property>-->
-                    <!--</bean>-->
-                <!--</constructor-arg>-->
-                <!--<property name="supportedMediaTypes" value="application/xml"></property>-->
-            <!--</bean>-->
-        <!--</mvc:message-converters>-->
-        <!--<mvc:argument-resolvers>-->
-            <!--<bean class="com.mokylin.cabal.common.web.SecureModelAttributeMethodArgumentResolver">-->
-                <!--<constructor-arg value="false"/>-->
-            <!--</bean>-->
-        <!--</mvc:argument-resolvers>-->
+    <!--<mvc:message-converters register-defaults="true">-->
+    <!--&lt;!&ndash; 将StringHttpMessageConverter的默认编码设为UTF-8 &ndash;&gt;-->
+    <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+    <!--<constructor-arg value="UTF-8"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 将Jackson2HttpMessageConverter的默认格式化输出为true &ndash;&gt;-->
+    <!--&lt;!&ndash;<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="prettyPrint" value="true"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<property name="objectMapper">&ndash;&gt;-->
+    <!--&lt;!&ndash;<bean class="com.mokylin.cabal.common.mapper.JsonMapper"></bean>&ndash;&gt;-->
+    <!--&lt;!&ndash;</property>&ndash;&gt;-->
+    <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+    <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"></bean>-->
+    <!--&lt;!&ndash; 使用XML格式输出数据 &ndash;&gt;-->
+    <!--<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">-->
+    <!--<constructor-arg>-->
+    <!--<bean class="org.springframework.oxm.xstream.XStreamMarshaller">-->
+    <!--<property name="streamDriver">-->
+    <!--<bean class="com.thoughtworks.xstream.io.xml.StaxDriver"/>-->
+    <!--</property>-->
+    <!--<property name="annotatedClasses">-->
+    <!--<list>-->
+    <!--<value>com.mokylin.cabal.common.persistence.BaseEntity</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--</constructor-arg>-->
+    <!--<property name="supportedMediaTypes" value="application/xml"></property>-->
+    <!--</bean>-->
+    <!--</mvc:message-converters>-->
+    <!--<mvc:argument-resolvers>-->
+    <!--<bean class="com.mokylin.cabal.common.web.SecureModelAttributeMethodArgumentResolver">-->
+    <!--<constructor-arg value="false"/>-->
+    <!--</bean>-->
+    <!--</mvc:argument-resolvers>-->
     <!--</mvc:annotation-driven>-->
-
 
 
     <mvc:annotation-driven>
@@ -103,7 +102,7 @@
 
 
     <!-- 国际化 -->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="i18n/messages"/>
@@ -113,31 +112,31 @@
     <mvc:interceptors>
         <!--系统拦截器-->
         <mvc:interceptor>
-            <mvc:mapping path="${adminPath}/game/**" />
-            <mvc:mapping path="${adminPath}/tools/**" />
-            <mvc:mapping path="${adminPath}/global/**" />
-            <mvc:mapping path="${adminPath}/log/**" />
-            <mvc:mapping path="${adminPath}/bus/**" />
+            <mvc:mapping path="${adminPath}/game/**"/>
+            <mvc:mapping path="${adminPath}/tools/**"/>
+            <mvc:mapping path="${adminPath}/global/**"/>
+            <mvc:mapping path="${adminPath}/log/**"/>
+            <mvc:mapping path="${adminPath}/bus/**"/>
             <bean class="com.mokylin.cabal.modules.sys.interceptor.LogInterceptor"/>
         </mvc:interceptor>
 
 
         <mvc:interceptor>
-            <mvc:mapping path="/**" />
-            <bean class="com.mokylin.cabal.modules.sys.interceptor.LookupSessionSyncInterceptor" />
+            <mvc:mapping path="/**"/>
+            <bean class="com.mokylin.cabal.modules.sys.interceptor.LookupSessionSyncInterceptor"/>
         </mvc:interceptor>
 
         <mvc:interceptor>
-            <mvc:mapping path="${adminPath}/game/**" />
-            <mvc:mapping path="${adminPath}/tools/**" />
-            <mvc:mapping path="${adminPath}/global/**" />
-            <mvc:mapping path="${adminPath}/log/**" />
-            <mvc:mapping path="${adminPath}/bus/**" />
+            <mvc:mapping path="${adminPath}/game/**"/>
+            <mvc:mapping path="${adminPath}/tools/**"/>
+            <mvc:mapping path="${adminPath}/global/**"/>
+            <mvc:mapping path="${adminPath}/log/**"/>
+            <mvc:mapping path="${adminPath}/bus/**"/>
             <!--<mvc:exclude-mapping path="${adminPath}/login"/>-->
-            <bean class="com.mokylin.cabal.modules.sys.interceptor.ParameterInterceptor" />
+            <bean class="com.mokylin.cabal.modules.sys.interceptor.ParameterInterceptor"/>
         </mvc:interceptor>
 
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
     </mvc:interceptors>
 
     <!-- 支持Shiro对Controller的方法级AOP安全控制 begin-->
@@ -160,24 +159,23 @@
     </bean>
 
     <!--<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">-->
-        <!--<constructor-arg>-->
-            <!--<bean class="org.springframework.http.client.SimpleClientHttpRequestFactory">-->
-                <!--<property name="connectTimeout" value="5000"/>-->
-                <!--<property name="readTimeout" value="5000"/>-->
-            <!--</bean>-->
-        <!--</constructor-arg>-->
-        <!--<property name="messageConverters">-->
-            <!--<list>-->
-                <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>-->
-                <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>-->
-            <!--</list>-->
-        <!--</property>-->
+    <!--<constructor-arg>-->
+    <!--<bean class="org.springframework.http.client.SimpleClientHttpRequestFactory">-->
+    <!--<property name="connectTimeout" value="5000"/>-->
+    <!--<property name="readTimeout" value="5000"/>-->
+    <!--</bean>-->
+    <!--</constructor-arg>-->
+    <!--<property name="messageConverters">-->
+    <!--<list>-->
+    <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>-->
+    <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>-->
+    <!--</list>-->
+    <!--</property>-->
     <!--</bean>-->
 
     <bean id="gameTemplate" class="com.mokylin.cabal.common.game.api.GameTemplate">
         <!--<property name="restTemplate" ref="restTemplate"/>-->
     </bean>
-
 
 
     <!--<bean id="serverManager" class="com.mokylin.cabal.common.redis.ServerManager" init-method="init"/>-->

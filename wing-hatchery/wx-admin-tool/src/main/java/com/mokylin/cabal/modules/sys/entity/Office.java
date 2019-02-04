@@ -1,6 +1,6 @@
 /**
  * Copyright &copy; 2014-2015 <a href="https://github.com/mokylin/cabal">cabal</a> All rights reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
 package com.mokylin.cabal.modules.sys.entity;
@@ -38,214 +38,217 @@ import com.mokylin.cabal.common.persistence.IdEntity;
  */
 @Entity
 @Table(name = "sys_office")
-@DynamicInsert @DynamicUpdate
+@DynamicInsert
+@DynamicUpdate
 //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Office extends IdEntity<Office> {
 
-	private static final long serialVersionUID = 1L;
-	private Office parent;	// 父级编号
-	private String parentIds; // 所有父级编号
-	private Area area;		// 归属区域
-	private String code; 	// 机构编码
-	private String name; 	// 机构名称
-	private String type; 	// 机构类型（1：公司；2：部门；3：小组）
-	private String grade; 	// 机构等级（1：一级；2：二级；3：三级；4：四级）
-	private String address; // 联系地址
-	private String zipCode; // 邮政编码
-	private String master; 	// 负责人
-	private String phone; 	// 电话
-	private String fax; 	// 传真
-	private String email; 	// 邮箱
-	
-	private List<User> userList = Lists.newArrayList();   // 拥有用户列表
-	private List<Office> childList = Lists.newArrayList();// 拥有子机构列表
+    private static final long serialVersionUID = 1L;
+    private Office parent;    // 父级编号
+    private String parentIds; // 所有父级编号
+    private Area area;        // 归属区域
+    private String code;    // 机构编码
+    private String name;    // 机构名称
+    private String type;    // 机构类型（1：公司；2：部门；3：小组）
+    private String grade;    // 机构等级（1：一级；2：二级；3：三级；4：四级）
+    private String address; // 联系地址
+    private String zipCode; // 邮政编码
+    private String master;    // 负责人
+    private String phone;    // 电话
+    private String fax;    // 传真
+    private String email;    // 邮箱
 
-	public Office(){
-		super();
-	}
-	
-	public Office(String id){
-		this();
-		this.id = id;
-	}
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="parent_id")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@NotNull
-	public Office getParent() {
-		return parent;
-	}
+    private List<User> userList = Lists.newArrayList();   // 拥有用户列表
+    private List<Office> childList = Lists.newArrayList();// 拥有子机构列表
 
-	public void setParent(Office parent) {
-		this.parent = parent;
-	}
+    public Office() {
+        super();
+    }
 
-	@Length(min=1, max=255)
-	public String getParentIds() {
-		return parentIds;
-	}
+    public Office(String id) {
+        this();
+        this.id = id;
+    }
 
-	public void setParentIds(String parentIds) {
-		this.parentIds = parentIds;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    @NotFound(action = NotFoundAction.IGNORE)
+    @NotNull
+    public Office getParent() {
+        return parent;
+    }
 
-	@ManyToOne
-	@JoinColumn(name="area_id")
-	@NotFound(action = NotFoundAction.IGNORE)
-	@NotNull
-	public Area getArea() {
-		return area;
-	}
+    public void setParent(Office parent) {
+        this.parent = parent;
+    }
 
-	public void setArea(Area area) {
-		this.area = area;
-	}
+    @Length(min = 1, max = 255)
+    public String getParentIds() {
+        return parentIds;
+    }
 
-	@Length(min=1, max=100)
-	public String getName() {
-		return name;
-	}
+    public void setParentIds(String parentIds) {
+        this.parentIds = parentIds;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Length(min=1, max=1)
-	public String getType() {
-		return type;
-	}
+    @ManyToOne
+    @JoinColumn(name = "area_id")
+    @NotFound(action = NotFoundAction.IGNORE)
+    @NotNull
+    public Area getArea() {
+        return area;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setArea(Area area) {
+        this.area = area;
+    }
 
-	@Length(min=1, max=1)
-	public String getGrade() {
-		return grade;
-	}
+    @Length(min = 1, max = 100)
+    public String getName() {
+        return name;
+    }
 
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Length(min=0, max=255)
-	public String getAddress() {
-		return address;
-	}
+    @Length(min = 1, max = 1)
+    public String getType() {
+        return type;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	@Length(min=0, max=100)
-	public String getZipCode() {
-		return zipCode;
-	}
+    @Length(min = 1, max = 1)
+    public String getGrade() {
+        return grade;
+    }
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 
-	@Length(min=0, max=100)
-	public String getMaster() {
-		return master;
-	}
+    @Length(min = 0, max = 255)
+    public String getAddress() {
+        return address;
+    }
 
-	public void setMaster(String master) {
-		this.master = master;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	@Length(min=0, max=200)
-	public String getPhone() {
-		return phone;
-	}
+    @Length(min = 0, max = 100)
+    public String getZipCode() {
+        return zipCode;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
 
-	@Length(min=0, max=200)
-	public String getFax() {
-		return fax;
-	}
+    @Length(min = 0, max = 100)
+    public String getMaster() {
+        return master;
+    }
 
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
+    public void setMaster(String master) {
+        this.master = master;
+    }
 
-	@Length(min=0, max=200)
-	public String getEmail() {
-		return email;
-	}
+    @Length(min = 0, max = 200)
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	@Length(min=0, max=100)
-	public String getCode() {
-		return code;
-	}
+    @Length(min = 0, max = 200)
+    public String getFax() {
+        return fax;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
-	@OneToMany(mappedBy = "office", fetch=FetchType.LAZY)
-	@Where(clause="del_flag='"+DEL_FLAG_NORMAL+"'")
-	@OrderBy(value="id") @Fetch(FetchMode.SUBSELECT)
-	@NotFound(action = NotFoundAction.IGNORE)
-	//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<User> getUserList() {
-		return userList;
-	}
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
 
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
-	}
+    @Length(min = 0, max = 200)
+    public String getEmail() {
+        return email;
+    }
 
-	@OneToMany(mappedBy = "parent", fetch=FetchType.LAZY)
-	@Where(clause="del_flag='"+DEL_FLAG_NORMAL+"'")
-	@OrderBy(value="code") @Fetch(FetchMode.SUBSELECT)
-	@NotFound(action = NotFoundAction.IGNORE)
-	//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	public List<Office> getChildList() {
-		return childList;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setChildList(List<Office> childList) {
-		this.childList = childList;
-	}
+    @Length(min = 0, max = 100)
+    public String getCode() {
+        return code;
+    }
 
-	@Transient
-	public static void sortList(List<Office> list, List<Office> sourcelist, String parentId){
-		for (int i=0; i<sourcelist.size(); i++){
-			Office e = sourcelist.get(i);
-			if (e.getParent()!=null && e.getParent().getId()!=null
-					&& e.getParent().getId().equals(parentId)){
-				list.add(e);
-				// 判断是否还有子节点, 有则继续获取子节点
-				for (int j=0; j<sourcelist.size(); j++){
-					Office child = sourcelist.get(j);
-					if (child.getParent()!=null && child.getParent().getId()!=null
-							&& child.getParent().getId().equals(e.getId())){
-						sortList(list, sourcelist, e.getId());
-						break;
-					}
-				}
-			}
-		}
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	@Transient
-	public boolean isRoot(){
-		return isRoot(this.id);
-	}
-	
-	@Transient
-	public static boolean isRoot(String id){
-		return id != null && id.equals("1");
-	}
-	
+    @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
+    @Where(clause = "del_flag='" + DEL_FLAG_NORMAL + "'")
+    @OrderBy(value = "id")
+    @Fetch(FetchMode.SUBSELECT)
+    @NotFound(action = NotFoundAction.IGNORE)
+    //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
+    @Where(clause = "del_flag='" + DEL_FLAG_NORMAL + "'")
+    @OrderBy(value = "code")
+    @Fetch(FetchMode.SUBSELECT)
+    @NotFound(action = NotFoundAction.IGNORE)
+    //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    public List<Office> getChildList() {
+        return childList;
+    }
+
+    public void setChildList(List<Office> childList) {
+        this.childList = childList;
+    }
+
+    @Transient
+    public static void sortList(List<Office> list, List<Office> sourcelist, String parentId) {
+        for (int i = 0; i < sourcelist.size(); i++) {
+            Office e = sourcelist.get(i);
+            if (e.getParent() != null && e.getParent().getId() != null
+                    && e.getParent().getId().equals(parentId)) {
+                list.add(e);
+                // 判断是否还有子节点, 有则继续获取子节点
+                for (int j = 0; j < sourcelist.size(); j++) {
+                    Office child = sourcelist.get(j);
+                    if (child.getParent() != null && child.getParent().getId() != null
+                            && child.getParent().getId().equals(e.getId())) {
+                        sortList(list, sourcelist, e.getId());
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    @Transient
+    public boolean isRoot() {
+        return isRoot(this.id);
+    }
+
+    @Transient
+    public static boolean isRoot(String id) {
+        return id != null && id.equals("1");
+    }
+
 }

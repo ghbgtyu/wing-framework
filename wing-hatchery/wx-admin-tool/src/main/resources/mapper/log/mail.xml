@@ -3,27 +3,31 @@
 <mapper namespace="mail">
 
     <select id="findMailList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	    SELECT
-	     	id,
-	     	role_id,
-	     	role_name,
-			admin_email_id,
-			title,
-			content,
-			sender_name,
-			send_time,
-			attachment,
-			is_del,
-			is_received,
-			is_open
-		FROM
-			mail_log
-		WHERE area_id = #{serverId}
-			<if test="@Ognl@isNotBlank(roleId)">and role_id = #{roleId} </if>
-            <if test="@Ognl@isNotBlank(roleName)">and role_name = #{roleName} </if>
-            <if test="@Ognl@isNotBlank(contentKey)">and content like concat('%',#{contentKey},'%') </if>
-			<if test="@Ognl@isNotBlank(createDateEnd)">and date_format(send_time,'%Y-%m-%d') <![CDATA[ <= ]]> #{createDateEnd}</if>
-          	<if test="@Ognl@isNotBlank(createDateStart)">and date_format(send_time,'%Y-%m-%d') <![CDATA[ >= ]]> #{createDateStart}</if>
+        SELECT
+        id,
+        role_id,
+        role_name,
+        admin_email_id,
+        title,
+        content,
+        sender_name,
+        send_time,
+        attachment,
+        is_del,
+        is_received,
+        is_open
+        FROM
+        mail_log
+        WHERE area_id = #{serverId}
+        <if test="@Ognl@isNotBlank(roleId)">and role_id = #{roleId}</if>
+        <if test="@Ognl@isNotBlank(roleName)">and role_name = #{roleName}</if>
+        <if test="@Ognl@isNotBlank(contentKey)">and content like concat('%',#{contentKey},'%')</if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and date_format(send_time,'%Y-%m-%d') <![CDATA[ <= ]]>
+            #{createDateEnd}
+        </if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and date_format(send_time,'%Y-%m-%d') <![CDATA[ >= ]]>
+            #{createDateStart}
+        </if>
     </select>
-    
+
 </mapper>

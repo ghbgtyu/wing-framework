@@ -3,20 +3,20 @@
 <mapper namespace="platformStatistics">
 
     <select id="findByPlatform" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        select pid, sum(income) income,sum(dau) dau,sum(dru) dru, sum(consume_coin) consume, sum(is_open_day) kaifu, 
-        	   sum(dpa)/sum(dau) pay_rate, sum(income)/sum(dpa) arpu
-        from stat_integrated where 1 =1 
+        select pid, sum(income) income,sum(dau) dau,sum(dru) dru, sum(consume_coin) consume, sum(is_open_day) kaifu,
+        sum(dpa)/sum(dau) pay_rate, sum(income)/sum(dpa) arpu
+        from stat_integrated where 1 =1
         <if test="@Ognl@isNotBlank(pidsList)">
-			AND pid IN
-		     <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
-		       #{item}
-		     </foreach>
-	    </if>
+            AND pid IN
+            <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
         <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
         <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
         GROUP BY pid
     </select>
-    
+
     <select id="findByPid" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         select sum(income) income,sum(dau) dau,sum(dru) dru, sum(consume_coin) consume, sum(is_open_day) kaifu,
         sum(dpa)/sum(dau) pay_rate, sum(income)/sum(dpa) arpu
@@ -25,22 +25,23 @@
         <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
     </select>
 
-	<select id="findSumValue" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        select sum(income) sum_income,sum(dru) sum_dru,sum(dau) sum_dau, sum(consume_coin) sum_consume, sum(is_open_day) sum_kaifu
-        from stat_integrated where 1 =1 
+    <select id="findSumValue" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select sum(income) sum_income,sum(dru) sum_dru,sum(dau) sum_dau, sum(consume_coin) sum_consume, sum(is_open_day)
+        sum_kaifu
+        from stat_integrated where 1 =1
         <if test="@Ognl@isNotBlank(pidsList)">
-			AND pid IN
-		     <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
-		       #{item}
-		     </foreach>
-	    </if>
+            AND pid IN
+            <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
         <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
         <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
     </select>
-    
+
     <select id="findOnlineDistribution" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        select 
-        pid, 
+        select
+        pid,
         sum(section_1) section_1,
         sum(section_2) section_2,
         sum(section_3) section_3,
@@ -68,20 +69,20 @@
         log_day
         from stat_online_time_distribution where 1 =1
         <if test="@Ognl@isNotBlank(pidsList)">
-			AND pid IN
-		     <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
-		       #{item}
-		     </foreach>
-	    </if>
+            AND pid IN
+            <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
         <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
         <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
-          GROUP BY log_day, pid
-          ORDER BY log_day DESC
+        GROUP BY log_day, pid
+        ORDER BY log_day DESC
     </select>
-    
+
     <select id="findRegDistribution" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        select 
-        pid, 
+        select
+        pid,
         sum(section_1) section_1,
         sum(section_2) section_2,
         sum(section_3) section_3,
@@ -109,14 +110,14 @@
         log_day
         from stat_reg_distribution where 1 =1
         <if test="@Ognl@isNotBlank(pidsList)">
-			AND pid IN
-		     <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
-		       #{item}
-		     </foreach>
-	    </if>
+            AND pid IN
+            <foreach item="item" index="index" collection="pidsList" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
         <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
         <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
-          GROUP BY log_day, pid
-          ORDER BY log_day DESC
+        GROUP BY log_day, pid
+        ORDER BY log_day DESC
     </select>
 </mapper>

@@ -4,21 +4,21 @@
 
     <select id="paging" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
-            item.id,
-            item.template_id,
-            item.position,
-            item.role_id,
-            item.slot_num,
-            item.count,
-            item.bind,
-            item.rare_level,
-            item.star_level,
-            item.`level`,
-            item.attributes,
-            item.module,
-            item.end_time,
-            item.add_time,
-            item.modify_time
+        item.id,
+        item.template_id,
+        item.position,
+        item.role_id,
+        item.slot_num,
+        item.count,
+        item.bind,
+        item.rare_level,
+        item.star_level,
+        item.`level`,
+        item.attributes,
+        item.module,
+        item.end_time,
+        item.add_time,
+        item.modify_time
         FROM `item`
         WHERE 1 = 1
         <if test="@Ognl@isNotBlank(roleId)">and role_id = #{roleId}</if>
@@ -26,22 +26,22 @@
     </select>
 
     <select id="findItemByRoleId" resultType="java.util.HashMap">
-      SELECT
-            item.id,
-            item.template_id,
-            item.position,
-            item.role_id,
-            item.slot_num,
-            item.count,
-            item.bind,
-            item.rare_level,
-            item.star_level,
-            item.`level`,
-            item.attributes,
-            item.module,
-            item.end_time,
-            item.add_time,
-            item.modify_time
+        SELECT
+        item.id,
+        item.template_id,
+        item.position,
+        item.role_id,
+        item.slot_num,
+        item.count,
+        item.bind,
+        item.rare_level,
+        item.star_level,
+        item.`level`,
+        item.attributes,
+        item.module,
+        item.end_time,
+        item.add_time,
+        item.modify_time
         FROM `item`
         WHERE role_id = #{id}
     </select>

@@ -39,7 +39,7 @@ public class DashboardControllerTest extends BaseTest {
         request.setMethod(HttpMethod.POST.name());
         MybatisParameter paramMap = new MybatisParameter();
         request.setAttribute("paramMap", paramMap);
-        ModelAndView modelAndView = handlerAdapter.handle(request, response, new HandlerMethod(dashboardController,"baseReport",HttpServletRequest.class,Model.class));
+        ModelAndView modelAndView = handlerAdapter.handle(request, response, new HandlerMethod(dashboardController, "baseReport", HttpServletRequest.class, Model.class));
         assertEquals("modules/global/baseReport", modelAndView.getViewName());
     }
 }

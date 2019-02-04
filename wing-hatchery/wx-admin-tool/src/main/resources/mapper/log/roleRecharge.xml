@@ -4,63 +4,74 @@
 
     <select id="paging" parameterType="java.util.HashMap" resultType="java.util.HashMap">
         SELECT
-            role_recharge.id,
-            role_recharge.user_id userId,
-            role_recharge.role_id roleId,
-            role_recharge.role_name roleName,
-            role_recharge.treasure_amount,
-            role_recharge.rmb_amount,
-            role_recharge.recharge_type rechargeType,
-            role_recharge.money_type moneyType,
-            role_recharge.order_id orderId,
-            role_recharge.is_finish,
-            role_recharge.pid,
-            role_recharge.server_id,
-            role_recharge.total_treasure_amount,
-            role_recharge.recharge_time,
-            role_recharge.is_first_recharge,
-            role_recharge.registration_days,
-            role_recharge.recharge_count count,
-            role_recharge.log_month,
-            role_recharge.log_day,
-            role_recharge.log_hour
+        role_recharge.id,
+        role_recharge.user_id userId,
+        role_recharge.role_id roleId,
+        role_recharge.role_name roleName,
+        role_recharge.treasure_amount,
+        role_recharge.rmb_amount,
+        role_recharge.recharge_type rechargeType,
+        role_recharge.money_type moneyType,
+        role_recharge.order_id orderId,
+        role_recharge.is_finish,
+        role_recharge.pid,
+        role_recharge.server_id,
+        role_recharge.total_treasure_amount,
+        role_recharge.recharge_time,
+        role_recharge.is_first_recharge,
+        role_recharge.registration_days,
+        role_recharge.recharge_count count,
+        role_recharge.log_month,
+        role_recharge.log_day,
+        role_recharge.log_hour
         FROM `role_recharge`
         WHERE 1 = 1
-        <if test="@Ognl@isNotBlank(roleName)">and role_name = #{roleName} </if>
-        <if test="@Ognl@isNotBlank(roleId)">and role_id = #{roleId} </if>
-        <if test="@Ognl@isNotBlank(orderId)">and order_id = #{orderId} </if>
-        <if test="@Ognl@isNotBlank(createDateEnd)">and recharge_time <![CDATA[ <= ]]>unix_timestamp(DATE_ADD(#{createDateEnd},INTERVAL 1 day))*1000</if>
-        <if test="@Ognl@isNotBlank(createDateStart)">and recharge_time <![CDATA[ >= ]]>unix_timestamp(#{createDateStart})*1000</if>
+        <if test="@Ognl@isNotBlank(roleName)">and role_name = #{roleName}</if>
+        <if test="@Ognl@isNotBlank(roleId)">and role_id = #{roleId}</if>
+        <if test="@Ognl@isNotBlank(orderId)">and order_id = #{orderId}</if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and recharge_time <![CDATA[ <= ]]>
+            unix_timestamp(DATE_ADD(#{createDateEnd},INTERVAL 1 day))*1000
+        </if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and recharge_time <![CDATA[ >= ]]>
+            unix_timestamp(#{createDateStart})*1000
+        </if>
         order by recharge_time desc
     </select>
 
     <select id="chargeStatistics" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        select user_id,role_id,role_name,level,total_rmb_amount,recharge_count,max_rmb_amount,surplus_treasure,max(recharge_time) lastChargeTime,last_login_time
+        select
+        user_id,role_id,role_name,level,total_rmb_amount,recharge_count,max_rmb_amount,surplus_treasure,max(recharge_time)
+        lastChargeTime,last_login_time
         from role_recharge
         WHERE 1 = 1
-        <if test="@Ognl@isNotBlank(roleName)">and role_name = #{roleName} </if>
+        <if test="@Ognl@isNotBlank(roleName)">and role_name = #{roleName}</if>
         <if test="@Ognl@isNotBlank(roleId)">and role_id = #{roleId}</if>
-        <if test="@Ognl@isNotBlank(createDateEnd)">and recharge_time <![CDATA[ <= ]]>unix_timestamp(DATE_ADD(#{createDateEnd},INTERVAL 1 day))*1000</if>
-        <if test="@Ognl@isNotBlank(createDateStart)">and recharge_time <![CDATA[ >= ]]>unix_timestamp(#{createDateStart})*1000</if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and recharge_time <![CDATA[ <= ]]>
+            unix_timestamp(DATE_ADD(#{createDateEnd},INTERVAL 1 day))*1000
+        </if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and recharge_time <![CDATA[ >= ]]>
+            unix_timestamp(#{createDateStart})*1000
+        </if>
         GROUP BY user_id,role_id
         ORDER BY recharge_time desc
     </select>
-    
-    <select id="findRechargeOldActiveDistributionByPid" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-       SELECT count(DISTINCT role_id) oau_recharge_count
-       from role_recharge 
-       WHERE pid = #{pid} 
-       		and registration_time <![CDATA[ < ]]> replace(#{createDateStart},'-','') 
-       		and role_id in 
-       		(SELECT role_id
-       		from role_recharge 
-       		WHERE 1 = 1
-	        <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
-	        <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
-       		GROUP BY role_id 
-       		HAVING SUM(rmb_amount) <![CDATA[>]]> #{amountStart} 
-       		<if test="@Ognl@isNotBlank(amountEnd)">and SUM(rmb_amount) <![CDATA[ <= ]]>#{amountEnd}</if>
-       		);
+
+    <select id="findRechargeOldActiveDistributionByPid" parameterType="java.util.HashMap"
+            resultType="java.util.HashMap">
+        SELECT count(DISTINCT role_id) oau_recharge_count
+        from role_recharge
+        WHERE pid = #{pid}
+        and registration_time <![CDATA[ < ]]> replace(#{createDateStart},'-','')
+        and role_id in
+        (SELECT role_id
+        from role_recharge
+        WHERE 1 = 1
+        <if test="@Ognl@isNotBlank(createDateEnd)">and log_day <![CDATA[ <= ]]>replace(#{createDateEnd},'-','')</if>
+        <if test="@Ognl@isNotBlank(createDateStart)">and log_day <![CDATA[ >= ]]>replace(#{createDateStart},'-','')</if>
+        GROUP BY role_id
+        HAVING SUM(rmb_amount) <![CDATA[>]]> #{amountStart}
+        <if test="@Ognl@isNotBlank(amountEnd)">and SUM(rmb_amount) <![CDATA[ <= ]]>#{amountEnd}</if>
+        );
     </select>
-    
+
 </mapper>

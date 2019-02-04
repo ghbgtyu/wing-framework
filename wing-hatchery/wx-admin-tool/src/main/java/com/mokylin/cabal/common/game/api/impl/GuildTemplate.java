@@ -24,8 +24,9 @@ public class GuildTemplate extends AbstractGameOperations implements GuildOperat
 
     /**
      * 解散公会
+     *
      * @param serverId
-     * @param guildId 公会Id
+     * @param guildId  公会Id
      * @return
      */
     @Override
@@ -33,7 +34,7 @@ public class GuildTemplate extends AbstractGameOperations implements GuildOperat
         String url = GameAreaUtils.getGameRemoteUrlByServerId(serverId);
         URI uri = buildUri(url + API_URL_GUILD_DELETE_SUFFIX);
         JSONObject object = new JSONObject();
-        object.put("guildId",guildId);
-        return execute(object,uri);
+        object.put("guildId", guildId);
+        return execute(object, uri);
     }
 }

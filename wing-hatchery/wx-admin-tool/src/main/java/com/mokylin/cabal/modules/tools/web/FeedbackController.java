@@ -43,40 +43,39 @@ public class FeedbackController extends BaseController {
 
     @RequiresPermissions("game.feedback.reply")
     @RequestMapping(value = "feedbackForm")
-    public String feedbackForm(HttpServletRequest request, Model model){
+    public String feedbackForm(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        model.addAttribute("map",parameter);
+        model.addAttribute("map", parameter);
         return "modules/tools/feedbackForm";
     }
 
     /**
      * 发送完邮件其实可以把邮件内容都记录下来的
+     *
      * @param request
      * @param redirectAttributes
      * @return
      */
     @RequiresPermissions("game.feedback.reply")
     @RequestMapping(value = "send")
-    public String send(HttpServletRequest request, RedirectAttributes redirectAttributes){
+    public String send(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
         GameEmail email = new GameEmail();
         email.setReceiverUserIds(parameter.get("roleId").toString());
         email.setId(parameter.get("id").toString());
         email.setTitle(parameter.get("title").toString());
         email.setContent(parameter.get("content").toString());
-        Result result = gameTemplate.gameEmailOperation().sendEmail(email, MapUtils.getString(parameter,"serverId"));
-        if(result.isSuccess()) {
+        Result result = gameTemplate.gameEmailOperation().sendEmail(email, MapUtils.getString(parameter, "serverId"));
+        if (result.isSuccess()) {
             //更新回复状态
-            parameter.put("isReplied",1);   //1表示已回复，0表示未回复
+            parameter.put("isReplied", 1);   //1表示已回复，0表示未回复
             parameter.put("feedbackContent", JSON.toJSONString(email));
-            toolDaoTemplate.update("feedback.updateRepliedStatus",parameter);
+            toolDaoTemplate.update("feedback.updateRepliedStatus", parameter);
             addMessage(redirectAttributes, "回复玩家：" + parameter.get("roleName") + "成功");
         }
 
-        return "redirect:"+ Global.getAdminPath()+"/tools/feedback/";
+        return "redirect:" + Global.getAdminPath() + "/tools/feedback/";
     }
-
-
 
 
 }

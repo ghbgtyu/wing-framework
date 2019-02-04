@@ -22,29 +22,28 @@ public class AsFileParseUtils {
 
     private static final Logger log = LoggerFactory.getLogger(AsFileParseUtils.class);
 
-    public static List parse(File file){
+    public static List parse(File file) {
         FileInputStream is = null;
         try {
             is = new FileInputStream(file);
             Amf3Input amf3In = new Amf3Input(new SerializationContext());
             amf3In.setInputStream(is);
-            Object[] array = (Object[])amf3In.readObject();
+            Object[] array = (Object[]) amf3In.readObject();
             return Arrays.asList(array);
         } catch (Exception e) {
             log.error(ExceptionUtils.getMessage(e));
-        }
-        finally{
+        } finally {
             IOUtils.closeQuietly(is);
         }
         return Collections.EMPTY_LIST;
     }
 
-    public static List parse(String fileName){
-    	File file = new File(fileName);
-        if(file.isFile()&& file.exists()){
-        return AsFileParseUtils.parse(file);
-        }else{
-        	return null;
+    public static List parse(String fileName) {
+        File file = new File(fileName);
+        if (file.isFile() && file.exists()) {
+            return AsFileParseUtils.parse(file);
+        } else {
+            return null;
         }
     }
 }

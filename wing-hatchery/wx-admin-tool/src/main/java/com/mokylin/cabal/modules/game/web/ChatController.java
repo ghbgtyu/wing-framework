@@ -62,16 +62,16 @@ public class ChatController extends BaseController {
     @RequiresPermissions("game.chatmonitor.keyWordsEdit")
     @RequestMapping(value = "addKeyword")
     @ResponseBody
-    public Result addKeyword(HttpServletRequest request, Model model){
+    public Result addKeyword(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        redisManager.addKeyword(MapUtils.getString(parameter,"key"),MapUtils.getString(parameter,"keyword"));
+        redisManager.addKeyword(MapUtils.getString(parameter, "key"), MapUtils.getString(parameter, "keyword"));
         return new Result(true);
     }
 
     @RequiresPermissions("game.chatmonitor.monitor")
     @RequestMapping(value = "fetchData")
     @ResponseBody
-    public Result fetchData(HttpServletRequest request, Model model){
+    public Result fetchData(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
         String template = "<a href=\"#\" onclick=\"jinYan(#{serverId},#{roleId})\">#{roleName}</a></br>";
         List<String> roleIdList = Lists.newArrayList();
@@ -81,44 +81,44 @@ public class ChatController extends BaseController {
         Date before = concurrentHashMap.get(user.getId());
         Date after = new Date();
         //获取聊天记录并进行解析
-        Map<String,String> keywords = redisManager.getKeywords();
+        Map<String, String> keywords = redisManager.getKeywords();
         List<String> chatRecords = redisManager.getChatContent();
         JSONArray array = JSON.parseArray(JSON.toJSONString(chatRecords));
-        for(int i = 0; i < array.size(); i ++){
-            ChatRecord chatRecord = JSON.parseObject(array.get(i).toString(),ChatRecord.class);
+        for (int i = 0; i < array.size(); i++) {
+            ChatRecord chatRecord = JSON.parseObject(array.get(i).toString(), ChatRecord.class);
 
-            if(before == null){
-                monitor1.append("【"+chatRecord.getChatTime()+"】"+chatRecord.getRoleName()+":"+chatRecord.getContent()+"</br>");
-                for(String key : keywords.keySet()){
-                	String keyword = keywords.get(key);
-                	if(chatRecord.getContent().indexOf(keyword) != -1){
-                		if(!roleIdList.contains(chatRecord.getRoleId())){
-                            monitor2.append(template.replace("#{serverId}",chatRecord.getServerId()).replace("#{roleId}",chatRecord.getRoleId()).replace("#{roleName}",chatRecord.getRoleName()));
+            if (before == null) {
+                monitor1.append("【" + chatRecord.getChatTime() + "】" + chatRecord.getRoleName() + ":" + chatRecord.getContent() + "</br>");
+                for (String key : keywords.keySet()) {
+                    String keyword = keywords.get(key);
+                    if (chatRecord.getContent().indexOf(keyword) != -1) {
+                        if (!roleIdList.contains(chatRecord.getRoleId())) {
+                            monitor2.append(template.replace("#{serverId}", chatRecord.getServerId()).replace("#{roleId}", chatRecord.getRoleId()).replace("#{roleName}", chatRecord.getRoleName()));
                             roleIdList.add(chatRecord.getRoleId());
                         }
-                	}
+                    }
                 }
                 continue;
             }
 
-            if(before != null && (Long.parseLong(String.valueOf(chatRecord.getChatTime())) > before.getTime())) {
-                monitor1.append("【"+chatRecord.getChatTime()+"】"+chatRecord.getRoleName()+":"+chatRecord.getContent()+"</br>");
-                for(String key : keywords.keySet()){
-                	String keyword = keywords.get(key);
-                	if(chatRecord.getContent().indexOf(keyword) != -1){
-                		 if(!roleIdList.contains(chatRecord.getRoleId())){
-                             monitor2.append(template.replace("#{serverId}",chatRecord.getServerId()).replace("#{roleId}",chatRecord.getRoleId()).replace("#{roleName}",chatRecord.getRoleName()));
-                             roleIdList.add(chatRecord.getRoleId());
-                         }
-                	}
+            if (before != null && (Long.parseLong(String.valueOf(chatRecord.getChatTime())) > before.getTime())) {
+                monitor1.append("【" + chatRecord.getChatTime() + "】" + chatRecord.getRoleName() + ":" + chatRecord.getContent() + "</br>");
+                for (String key : keywords.keySet()) {
+                    String keyword = keywords.get(key);
+                    if (chatRecord.getContent().indexOf(keyword) != -1) {
+                        if (!roleIdList.contains(chatRecord.getRoleId())) {
+                            monitor2.append(template.replace("#{serverId}", chatRecord.getServerId()).replace("#{roleId}", chatRecord.getRoleId()).replace("#{roleName}", chatRecord.getRoleName()));
+                            roleIdList.add(chatRecord.getRoleId());
+                        }
+                    }
                 }
             }
         }
 
-        concurrentHashMap.put(user.getId(),after);
+        concurrentHashMap.put(user.getId(), after);
         JSONObject ret = new JSONObject();
-        ret.put("monitor1",monitor1.toString());
-        ret.put("monitor2",monitor2.toString());
+        ret.put("monitor1", monitor1.toString());
+        ret.put("monitor2", monitor2.toString());
 
         return new Result(true).data(ret);
     }
@@ -126,7 +126,7 @@ public class ChatController extends BaseController {
     @RequiresPermissions("game.chatmonitor.keyWordsEdit")
     @RequestMapping(value = "deleteKey")
     @ResponseBody
-    public Result deleteKey(String keyword,HttpServletRequest request, Model model){
+    public Result deleteKey(String keyword, HttpServletRequest request, Model model) {
 
         redisManager.deleteKeyword(keyword);
         return new Result(true);
@@ -134,9 +134,9 @@ public class ChatController extends BaseController {
 
     @RequiresPermissions("game.chatmonitor.monitor")
     @RequestMapping(value = "startMonitor")
-    public Result startMonitor(HttpServletRequest request, Model model){
+    public Result startMonitor(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        List<String> serverIdList = (List<String>) MapUtils.getObject(parameter,"serverIdList");
+        List<String> serverIdList = (List<String>) MapUtils.getObject(parameter, "serverIdList");
 
         gameTemplate.monitorOperation().chatMonitor(serverIdList);
 
@@ -145,9 +145,9 @@ public class ChatController extends BaseController {
 
     @RequiresPermissions("game.chatmonitor.monitor")
     @RequestMapping(value = "cancelMonitor")
-    public Result cancelMonitor(HttpServletRequest request, Model model){
+    public Result cancelMonitor(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        List<String> serverIdList = (List<String>) MapUtils.getObject(parameter,"serverIdList");
+        List<String> serverIdList = (List<String>) MapUtils.getObject(parameter, "serverIdList");
 
         gameTemplate.monitorOperation().cancelMonitor(serverIdList);
 

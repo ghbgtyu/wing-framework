@@ -16,20 +16,19 @@ public class ConfigFile extends MybatisBaseBean {
     private String filePath;
 
     private String fileDesc;
-    
+
     private String fileType;
-    
-    
-    
+
+
     public String getFileType() {
-		return fileType;
-	}
+        return fileType;
+    }
 
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
-	}
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
 
-	public String getFileName() {
+    public String getFileName() {
         return fileName;
     }
 

@@ -18,14 +18,22 @@ public class RedisConstant {
 //
 //	// /** 统计库只有一个(放一些定时统计信息，在线等，还有异常信息) */
 //	// public final static int REDIS_TYPE_GLOBAL_STAT = 4;
-	/** 游戏服务器 */
-	public static final String KEY_SERVER_GAME = "game";
-	/** 跨服服务器 */
-	public static final String KEY_SERVER_CROSS = "cross";
-	/** 全局服务器 */
-	public static final String KEY_SERVER_GLOBAL = "global";
-	/** redis战区服务器 */
-	public static final String KEY_CROSS_AREA = "cross_area";
+    /**
+     * 游戏服务器
+     */
+    public static final String KEY_SERVER_GAME = "game";
+    /**
+     * 跨服服务器
+     */
+    public static final String KEY_SERVER_CROSS = "cross";
+    /**
+     * 全局服务器
+     */
+    public static final String KEY_SERVER_GLOBAL = "global";
+    /**
+     * redis战区服务器
+     */
+    public static final String KEY_CROSS_AREA = "cross_area";
 //	/** 翻译服务器 */
 //	public static final String KEY_SERVER_TRANSLATE = "translate";
 //	/** 充值服务器 */
@@ -47,13 +55,19 @@ public class RedisConstant {
 //	public static final String FIELD_CROSS_ID = "cross_id";
 //	public static final String FIELD_CROSS_CAMP = "cross_camp";
 
-	// 频道
-	/** 全局服务器频道 */
-	public static final String CHANNEL_SERVER_GLOBAL = "channel-global";
-	/** 跨服服务器频道 */
-	public static final String CHANNEL_SERVER_CROSS = "channel-cross";
-	/** 游戏服务器频道 */
-	public static final String CHANNEL_SERVER_GAME = "channel-game";
+    // 频道
+    /**
+     * 全局服务器频道
+     */
+    public static final String CHANNEL_SERVER_GLOBAL = "channel-global";
+    /**
+     * 跨服服务器频道
+     */
+    public static final String CHANNEL_SERVER_CROSS = "channel-cross";
+    /**
+     * 游戏服务器频道
+     */
+    public static final String CHANNEL_SERVER_GAME = "channel-game";
 //	/** 充值服务器频道 */
 //	public static final String CHANNEL_SERVER_CHARGE = "channel-charge";
 //	/** 翻译服务器频道 */

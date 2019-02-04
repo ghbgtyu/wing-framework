@@ -26,10 +26,10 @@ public class TreasureTemplate extends AbstractGameOperations implements Treasure
 
     @Override
     public Result recharge(List<Recharge> rechargeList) {
-        for(Recharge recharge : rechargeList){
+        for (Recharge recharge : rechargeList) {
             String url = GameAreaUtils.getGameRemoteUrlByServerId(recharge.getServerId());
-            URI uri = buildUri(url+API_URL_ADD_RECHARGE_SUFFIX);
-            execute(recharge,uri);
+            URI uri = buildUri(url + API_URL_ADD_RECHARGE_SUFFIX);
+            execute(recharge, uri);
         }
         return new Result(true);
     }

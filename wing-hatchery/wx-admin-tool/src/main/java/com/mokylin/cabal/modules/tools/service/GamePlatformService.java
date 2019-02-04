@@ -23,7 +23,7 @@ public class GamePlatformService extends BaseService {
     @Resource
     private GamePlatformDao gamePlatformDao;
 
-    public GamePlatform get(String id){
+    public GamePlatform get(String id) {
         return gamePlatformDao.get(id);
     }
 

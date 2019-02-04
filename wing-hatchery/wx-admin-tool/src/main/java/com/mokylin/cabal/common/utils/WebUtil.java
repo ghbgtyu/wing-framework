@@ -61,7 +61,7 @@ public class WebUtil {
         Map requestParameterMap = request.getParameterMap();
         try {
             for (Object key : requestParameterMap.keySet()) {
-                String[] array = (String[])requestParameterMap.get(key);
+                String[] array = (String[]) requestParameterMap.get(key);
                 String value = StringUtils.join(array, ",");
                 if (StringUtils.isBlank(value)) {
                     continue;
@@ -223,7 +223,7 @@ public class WebUtil {
             int fontHeight = height - 2;         // 字体高度
             int randomSeed = 10;                 // 随机数种子
             char[] codeSequence = {              // 验证码中可出现的字符
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
             };
             // 创建图像
             BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);

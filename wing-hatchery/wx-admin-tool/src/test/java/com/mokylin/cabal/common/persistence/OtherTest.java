@@ -53,7 +53,7 @@ public class OtherTest {
 
 //        System.out.println(System.currentTimeMillis());
 //        //1416813462783
-       System.out.println(DateUtils.parseLong("1416449219695"));
+        System.out.println(DateUtils.parseLong("1416449219695"));
 //        System.out.println(TimeZone.getDefault().getRawOffset());
 //        System.out.println(DateUtils.pastDays("1416813462783"));
         //System.out.println("<th>关键字</th><td>"+keywords+"</td><td><a href=\"${ctx}/game/chat/deleteKey?keyword="+keywords+"\" onclick=\"return confirmx('确认要删除该关键字吗？', this.href)\">删除</a></td>");
@@ -94,16 +94,15 @@ public class OtherTest {
 //        calendar.set(Calendar.WEEK_OF_YEAR,-1);
 //        calendar.add(Calendar.WEEK_OF_YEAR,-1);
 //        int a= calendar.get(Calendar.WEEK_OF_YEAR);
-        String month = (calendar.get(Calendar.MONTH)+1)+"";
-        if(month.length() == 1){
+        String month = (calendar.get(Calendar.MONTH) + 1) + "";
+        if (month.length() == 1) {
             month = "0" + month;
         }
-        String day = calendar.get(Calendar.DAY_OF_MONTH)+"";
-        if(day.length() == 1){
+        String day = calendar.get(Calendar.DAY_OF_MONTH) + "";
+        if (day.length() == 1) {
             day = "0" + day;
         }
-        System.out.println(month+"-----------"+day);
-
+        System.out.println(month + "-----------" + day);
 
 
     }

@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 日期: 2014/10/22 11:57
  * 项目: cabal-tools
  */
-public class Result implements Serializable{
+public class Result implements Serializable {
 
     private static final long serialVersionUID = -6796913034844000040L;
 

@@ -51,7 +51,7 @@ public class GameEmailController extends BaseController {
     @ModelAttribute
     public GameEmail get(@RequestParam(required = false) String id) {
         if (StringUtils.isNotBlank(id)) {
-            return toolDaoTemplate.selectOne("gameEmail.selectOneById",id);
+            return toolDaoTemplate.selectOne("gameEmail.selectOneById", id);
         } else {
             return new GameEmail();
         }
@@ -60,8 +60,8 @@ public class GameEmailController extends BaseController {
     @RequestMapping(value = {"list", ""})
     public String getGameServerList(GameEmail gameEmail, HttpServletRequest request, HttpServletResponse response, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        parameter.setPage(new Page(request,response));
-        Page<GameEmail> page = toolDaoTemplate.paging("gameEmail.paging",parameter);
+        parameter.setPage(new Page(request, response));
+        Page<GameEmail> page = toolDaoTemplate.paging("gameEmail.paging", parameter);
 
         model.addAttribute("page", page);
         return "modules/tools/gameEmailList";
@@ -83,28 +83,29 @@ public class GameEmailController extends BaseController {
 
     @RequiresPermissions("game.email.edit")
     @RequestMapping(value = "save")
-    public String save(GameEmail gameEmail, HttpServletRequest request, RedirectAttributes redirectAttributes){
+    public String save(GameEmail gameEmail, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        parameter.put("emailStatus",0);
+        parameter.put("emailStatus", 0);
 
         //附加物品列表，绑定为默认值，但是其并没有选择物品，这里需要移除掉
         List<AttachmentGoods> list = gameEmail.getGoodsList();
-        for(AttachmentGoods goods : list){
-            if(StringUtils.isBlank(goods.getId()) || StringUtils.isEmpty(goods.getId())){
+        for (AttachmentGoods goods : list) {
+            if (StringUtils.isBlank(goods.getId()) || StringUtils.isEmpty(goods.getId())) {
                 list.remove(goods);
             }
         }
 
         parameter.put("attachments", JSON.toJSONString(list));
 
-        toolDaoTemplate.insert("gameEmail.insert",parameter);
-        addMessage(redirectAttributes,"申请邮件成功");
+        toolDaoTemplate.insert("gameEmail.insert", parameter);
+        addMessage(redirectAttributes, "申请邮件成功");
 
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameEmail/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameEmail/";
     }
 
     /**
      * 批量补偿申请，直接发送，按人来发，一个人一封邮件，未区分是否是一个服
+     *
      * @param gameEmail
      * @param file
      * @param request
@@ -112,15 +113,15 @@ public class GameEmailController extends BaseController {
      * @return
      */
     @RequiresPermissions("game.email.batchadd")
-    @RequestMapping( value = "batchSave")
-    public String batchSave(GameEmail gameEmail,MultipartFile file, HttpServletRequest request, RedirectAttributes redirectAttributes){
+    @RequestMapping(value = "batchSave")
+    public String batchSave(GameEmail gameEmail, MultipartFile file, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        parameter.put("emailStatus",1);
+        parameter.put("emailStatus", 1);
 
         //附加物品列表，绑定为默认值，但是其并没有选择物品，这里需要移除掉
         List<AttachmentGoods> list = gameEmail.getGoodsList();
-        for(AttachmentGoods goods : list){
-            if(StringUtils.isBlank(goods.getId()) || StringUtils.isEmpty(goods.getId())){
+        for (AttachmentGoods goods : list) {
+            if (StringUtils.isBlank(goods.getId()) || StringUtils.isEmpty(goods.getId())) {
                 list.remove(goods);
             }
         }
@@ -131,31 +132,31 @@ public class GameEmailController extends BaseController {
         StringBuffer receiverUserIds = new StringBuffer();
         try {
             List<String> recordList = IOUtils.readLines(file.getInputStream());
-            for(String record : recordList){
-                String[] array = StringUtils.split(record,",");
-                int len =serverIds.length();
+            for (String record : recordList) {
+                String[] array = StringUtils.split(record, ",");
+                int len = serverIds.length();
                 serverIds = serverIds.length() > 0 ? serverIds.append("," + array[0]) : serverIds.append(array[0]);
                 receiverUserIds = receiverUserIds.length() > 0 ? receiverUserIds.append("," + array[1]) : receiverUserIds.append(array[1]);
                 gameEmail.setId(IdGen.uuid());      //每个人每封邮件都有一个ID
                 gameEmail.setReceiverUserIds(array[1]);
-                gameTemplate.gameEmailOperation().sendEmail(gameEmail,array[0]);
+                gameTemplate.gameEmailOperation().sendEmail(gameEmail, array[0]);
             }
         } catch (IOException e) {
-            logger.error("",e);
+            logger.error("", e);
         }
-        parameter.put("serverIds",serverIds.toString());
-        parameter.put("receiverUserIds",receiverUserIds.toString());
+        parameter.put("serverIds", serverIds.toString());
+        parameter.put("receiverUserIds", receiverUserIds.toString());
 
         toolDaoTemplate.insert("gameEmail.insert", parameter);
 
 
         addMessage(redirectAttributes, "批量邮件成功");
 
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameEmail/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameEmail/";
     }
 
-    @RequestMapping(value="goodsDialog")
-    public String goodsDialog(String goodsName, Model model){
+    @RequestMapping(value = "goodsDialog")
+    public String goodsDialog(String goodsName, Model model) {
 
         model.addAttribute("list", goodsAnalyzeService.query(goodsName));
 
@@ -164,84 +165,85 @@ public class GameEmailController extends BaseController {
 
     @RequiresPermissions("game.email.cancel")
     @RequestMapping(value = "cancel")
-    public String cancel(String id,HttpServletRequest request, Model model){
+    public String cancel(String id, HttpServletRequest request, Model model) {
 
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-        toolDaoTemplate.update("gameEmail.cancel",parameter);
-        addMessage(model,"取消成功咯~");
+        toolDaoTemplate.update("gameEmail.cancel", parameter);
+        addMessage(model, "取消成功咯~");
 
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameEmail/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameEmail/";
     }
 
     /**
      * 批量取消
+     *
      * @param request
      * @param model
      * @return
      */
     @RequiresPermissions("game.email.batchcancel")
     @RequestMapping(value = "batchCancel")
-    public String batchCancel(HttpServletRequest request, Model model){
+    public String batchCancel(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
 
-        toolDaoTemplate.update("gameEmail.batchCancel",parameter);
+        toolDaoTemplate.update("gameEmail.batchCancel", parameter);
 
-        addMessage(model,"批量取消成功咯~");
+        addMessage(model, "批量取消成功咯~");
 
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameEmail/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameEmail/";
     }
 
     @RequiresPermissions("game.email.batchrecover")
     @RequestMapping(value = "batchRecover")
-    public String batchRecover(HttpServletRequest request, Model model){
+    public String batchRecover(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
 
-        toolDaoTemplate.update("gameEmail.batchRecover",parameter);
+        toolDaoTemplate.update("gameEmail.batchRecover", parameter);
 
-        addMessage(model,"批量恢复成功咯~");
+        addMessage(model, "批量恢复成功咯~");
 
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameEmail/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameEmail/";
     }
 
     @RequiresPermissions("game.email.recover")
     @RequestMapping(value = "recover")
-    public String recover(HttpServletRequest request, Model model){
+    public String recover(HttpServletRequest request, Model model) {
         MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
 
-        toolDaoTemplate.update("gameEmail.recover",parameter);
+        toolDaoTemplate.update("gameEmail.recover", parameter);
 
-        addMessage(model,"恢复成功咯~");
+        addMessage(model, "恢复成功咯~");
 
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameEmail/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameEmail/";
     }
 
     @RequiresPermissions("game.email.send")
     @RequestMapping(value = "send")
-    public String publish(@ModelAttribute GameEmail email,HttpServletRequest request,Model model,RedirectAttributes redirectAttributes){
+    public String publish(@ModelAttribute GameEmail email, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 
         Result result = gameTemplate.gameEmailOperation().sendEmail(email);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             email.setEmailStatus("1");
             MybatisParameter parameter = (MybatisParameter) request.getAttribute("paramMap");
-            parameter.put("emailStatus","1");
-            toolDaoTemplate.update("gameEmail.updateStatus",parameter);
+            parameter.put("emailStatus", "1");
+            toolDaoTemplate.update("gameEmail.updateStatus", parameter);
 
         }
         addMessage(redirectAttributes, "发布公告成功");
-        return "redirect:"+ Global.getAdminPath()+"/tools/gameEmail/";
+        return "redirect:" + Global.getAdminPath() + "/tools/gameEmail/";
     }
 
 
-    private MultiValueMap parse(MultipartFile file){
+    private MultiValueMap parse(MultipartFile file) {
         MultiValueMap result = new MultiValueMap();
         try {
             List<String> list = IOUtils.readLines(file.getInputStream());
-            for(String record : list){
-                String[] array = StringUtils.split(record,",");
+            for (String record : list) {
+                String[] array = StringUtils.split(record, ",");
 
             }
         } catch (IOException e) {
-            logger.error("",e);
+            logger.error("", e);
         }
 
         return result;

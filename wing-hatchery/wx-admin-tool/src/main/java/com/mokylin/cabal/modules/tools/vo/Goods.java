@@ -12,7 +12,7 @@ public class Goods extends MybatisBaseBean {
 
     private static final long serialVersionUID = 4548079703662030884L;
 
-    public Goods(String id, String name, String maxStack){
+    public Goods(String id, String name, String maxStack) {
         this.id = id;
         this.name = name;
         this.maxStack = NumberUtils.toInt(maxStack);
@@ -27,30 +27,39 @@ public class Goods extends MybatisBaseBean {
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public int getMaxStack() {
         return maxStack;
     }
+
     public void setMaxStack(int maxStack) {
         this.maxStack = maxStack;
     }
+
     public boolean isXuniGoods() {
         return xuniGoods;
     }
+
     public void setXuniGoods(boolean xuniGoods) {
         this.xuniGoods = xuniGoods;
     }
+
     public String getGoodsDesc() {
         return goodsDesc;
     }
+
     public void setGoodsDesc(String goodsDesc) {
         this.goodsDesc = goodsDesc;
     }

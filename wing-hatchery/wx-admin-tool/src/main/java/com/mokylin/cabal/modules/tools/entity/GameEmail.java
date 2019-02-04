@@ -162,12 +162,13 @@ public class GameEmail extends MybatisBaseBean {
 
     /**
      * 返回指定用户名的List形式对象
+     *
      * @return
      */
-    public List<String> getReceiverNameList(){
+    public List<String> getReceiverNameList() {
         List<String> list = new ArrayList();
         String[] receiverNames = StringUtils.split(this.receiverNames, ",");
-        if(receiverNames == null){
+        if (receiverNames == null) {
             return list;
         }
         for (String name : StringUtils.split(this.receiverNames, ",")) {
@@ -178,9 +179,10 @@ public class GameEmail extends MybatisBaseBean {
 
     /**
      * 返回指定serverId的List形式对象
+     *
      * @return
      */
-    public List<String> getServerIdList(){
+    public List<String> getServerIdList() {
         String[] array = StringUtils.split(this.serverIds, ",");
         return Arrays.asList(array);
     }
@@ -188,7 +190,7 @@ public class GameEmail extends MybatisBaseBean {
     /**
      * 得到附件物品的json
      */
-    public String getAttachmentsJson(){
+    public String getAttachmentsJson() {
         if (StringUtils.isBlank(attachments)) {
             return null;
         }
@@ -197,28 +199,28 @@ public class GameEmail extends MybatisBaseBean {
         for (String goodsString : goodsArray) {
             Map map = new HashMap();
             String[] array = StringUtils.split(goodsString, ";");
-            if (ArrayUtils.isEmpty(array)) { continue; }
+            if (ArrayUtils.isEmpty(array)) {
+                continue;
+            }
 
             if (array.length == 2) {
                 map.put("goodsId", array[0]);
                 map.put("goodsCount", array[1]);
-            }
-            else if (array.length == 3) {
+            } else if (array.length == 3) {
                 map.put("goodsId", array[0]);
                 map.put("goodsCount", array[1]);
                 map.put("bindOrNot", array[2]);
-            }else if(array.length == 4){
+            } else if (array.length == 4) {
                 map.put("goodsId", array[0]);
                 map.put("goodsCount", array[1]);
                 map.put("bindOrNot", array[2]);
-                map.put("expireTime",array[3]);
+                map.put("expireTime", array[3]);
                 /*try {
                     map.put("expireTime", DateUtil.parseDateTime(array[3]).getTime());
                 } catch (ParseException e) {
                     log.error("",e);
                 }*/
-            }
-            else{
+            } else {
                 continue;
             }
             resultList.add(map);
@@ -226,11 +228,16 @@ public class GameEmail extends MybatisBaseBean {
         return JSON.toJSONString(resultList);
     }
 
-    public List<AttachmentGoods> getGoodsList() {return goodsList;}
-    public void setGoodsList(List<AttachmentGoods> goodsList) {this.goodsList = goodsList;}
+    public List<AttachmentGoods> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<AttachmentGoods> goodsList) {
+        this.goodsList = goodsList;
+    }
 
 
-    public boolean isGlobal(){
+    public boolean isGlobal() {
         return this.isGlobal == 1 ? true : false;
     }
 }

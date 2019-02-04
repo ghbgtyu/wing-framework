@@ -3,23 +3,27 @@
 <mapper namespace="guild">
 
     <select id="findGuildList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-	    SELECT
-			guild.id,
-			guild.name,
-			role.name leader_name,
-			guild.add_time,
-			guild.level,
-			guild.combat_power,
-			guild.current_member_num
-			<!-- guild_state.state guild_state -->
-		FROM
-			guild, role
-		WHERE
-			guild.deacon_role_id = role.id
-			<if test="@Ognl@isNotBlank(createDateStart)">and date_format(guild.add_time,'%Y-%m-%d') <![CDATA[ >= ]]> #{createDateStart}</if>
-			<if test="@Ognl@isNotBlank(createDateEnd)">and date_format(guild.add_time,'%Y-%m-%d') <![CDATA[ <= ]]> #{createDateEnd}</if>
-			<if test="@Ognl@isNotBlank(name)">and guild.name like #{name}</if>
-		ORDER BY
-			level DESC
+        SELECT
+        guild.id,
+        guild.name,
+        role.name leader_name,
+        guild.add_time,
+        guild.level,
+        guild.combat_power,
+        guild.current_member_num
+        <!-- guild_state.state guild_state -->
+        FROM
+        guild, role
+        WHERE
+        guild.deacon_role_id = role.id
+        <if test="@Ognl@isNotBlank(createDateStart)">and date_format(guild.add_time,'%Y-%m-%d') <![CDATA[ >= ]]>
+            #{createDateStart}
+        </if>
+        <if test="@Ognl@isNotBlank(createDateEnd)">and date_format(guild.add_time,'%Y-%m-%d') <![CDATA[ <= ]]>
+            #{createDateEnd}
+        </if>
+        <if test="@Ognl@isNotBlank(name)">and guild.name like #{name}</if>
+        ORDER BY
+        level DESC
     </select>
 </mapper>

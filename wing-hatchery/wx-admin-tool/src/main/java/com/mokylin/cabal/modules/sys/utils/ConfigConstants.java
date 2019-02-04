@@ -6,7 +6,7 @@ import com.mokylin.cabal.common.config.Global;
  * 作者: 稻草鸟人
  * 日期: 2014/10/23 17:03
  * 项目: cabal-tools
- *
+ * <p>
  * 全局常量
  */
 public class ConfigConstants {
@@ -27,7 +27,7 @@ public class ConfigConstants {
 
     public static final String REDIS_HOST = Global.propertiesLoader.getProperty("global.redis.host"); //
 
-    public static final Integer REDIS_PORT =   Global.propertiesLoader.getInteger("global.redis.port");
+    public static final Integer REDIS_PORT = Global.propertiesLoader.getInteger("global.redis.port");
 
     public static final Integer CHAT_REDIS_INDEX = Global.propertiesLoader.getInteger("chat.redis.index");
 

@@ -15,21 +15,19 @@ public class ThreadTest {
     @Test
     public void testJson() throws Exception {
         JSONObject object = new JSONObject();
-        object.put("announceId","123123123");
-        object.put("announceContent","Hello");
-        object.put("beginTime","2014-10-01 10:00:00");
-        object.put("endTime","2014-10-30 11:00:00");
-        object.put("interval","1");
+        object.put("announceId", "123123123");
+        object.put("announceContent", "Hello");
+        object.put("beginTime", "2014-10-01 10:00:00");
+        object.put("endTime", "2014-10-30 11:00:00");
+        object.put("interval", "1");
         System.out.println(object);
     }
-
-
 
 
     static class Task implements Callable<String> {
         private int i;
 
-        public Task(int i){
+        public Task(int i) {
             this.i = i;
         }
 
@@ -44,11 +42,11 @@ public class ThreadTest {
         testExecutorCompletionService();
     }
 
-    private static void testExecutorCompletionService() throws InterruptedException, ExecutionException{
+    private static void testExecutorCompletionService() throws InterruptedException, ExecutionException {
         int numThread = 5;
         ExecutorService executor = Executors.newFixedThreadPool(numThread);
         CompletionService<String> completionService = new ExecutorCompletionService<String>(executor);
-        for(int i = 0;i<numThread;i++ ){
+        for (int i = 0; i < numThread; i++) {
             final int finalI = i;
             completionService.submit(new Callable<String>() {
                 @Override
@@ -58,7 +56,7 @@ public class ThreadTest {
             });
         }
 
-        for(int i = 0;i<numThread;i++ ){
+        for (int i = 0; i < numThread; i++) {
             System.out.println(completionService.take().get());
         }
     }

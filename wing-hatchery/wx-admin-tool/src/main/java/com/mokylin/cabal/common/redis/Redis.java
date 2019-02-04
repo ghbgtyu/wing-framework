@@ -29,11 +29,17 @@ import com.mokylin.cabal.common.service.ServiceException;
 public class Redis {
 
     private static final Logger logger = LoggerFactory.getLogger(Redis.class);
-    /** 默认超时（毫秒） */
+    /**
+     * 默认超时（毫秒）
+     */
     public static final int DEFAULT_TIMEOUT = 2000;
-    /** 默认database */
+    /**
+     * 默认database
+     */
     public static final int DEFAULT_DATABASE = 0;
-    /** jedis client 池 */
+    /**
+     * jedis client 池
+     */
     private JedisPool pool;
 
     public Redis(String host, int port) {
@@ -51,8 +57,8 @@ public class Redis {
     /**
      * 初始化Redis辅助类.
      *
-     * @param host IP
-     * @param port 端口
+     * @param host  IP
+     * @param port  端口
      * @param index 库Index
      */
     public Redis(String host, int port, int timeout, String password, int index) {
@@ -63,7 +69,7 @@ public class Redis {
     public Redis(GenericObjectPoolConfig config, String host, int port, int timeout, String password, int database) {
         pool = new JedisPool(config, host, port, timeout, password, database);
         ping();
-        logger.info("Redis 连接信息:host={},port={},database={},timeout={}ms,password={}", new Object[] { host, port, database, timeout, password });
+        logger.info("Redis 连接信息:host={},port={},database={},timeout={}ms,password={}", new Object[]{host, port, database, timeout, password});
     }
 
     public void ping() {
@@ -131,7 +137,7 @@ public class Redis {
      * @return 被删除Keys的数量
      */
     public long del(String... keys) {
-        if(ArrayUtils.isEmpty(keys)){
+        if (ArrayUtils.isEmpty(keys)) {
             return 0L;
         }
         Jedis j = pool.getResource();
@@ -187,7 +193,7 @@ public class Redis {
      * <p>
      * 如果Key已过期，将会被自动删除，设置了过期时间的Key被称之为volatile(不稳定) KEY.<br>
      *
-     * @param key KEY
+     * @param key     KEY
      * @param seconds 过期时间（秒）
      * @return 如果设置了过期时间返回1，没有设置或不能设置过期时间返回0
      */
@@ -237,6 +243,7 @@ public class Redis {
     //
     // ------------------------------String相关命令------------------------------
     //
+
     /**
      * 设置key所对应的value值.
      * <p>
@@ -244,7 +251,7 @@ public class Redis {
      * 如果Key已存在了，它会被覆盖，而不管它是什么类型。<br>
      * 这里干掉了返回值，因为SET不会失败，总返回OK
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param value KEY对应的Value
      */
     public void set(String key, String value) {
@@ -258,7 +265,9 @@ public class Redis {
         }
     }
 
-    /** 将key重命名为newKey.如果key与newkey相同，将返回错误，如果newkey已经存在，则值将被覆盖 */
+    /**
+     * 将key重命名为newKey.如果key与newkey相同，将返回错误，如果newkey已经存在，则值将被覆盖
+     */
     public void rename(String key, String newKey) {
         Jedis j = pool.getResource();
         try {
@@ -433,6 +442,7 @@ public class Redis {
     //
     // ------------------------------Hash相关命令------------------------------
     //
+
     /**
      * 时间复杂度： O(1)。
      * 返回 key 指定的哈希集包含的字段的数量。
@@ -450,13 +460,14 @@ public class Redis {
         }
         return ret;
     }
+
     /**
      * Hash操作，设置Key指定的Hash集中指定字段的值.
      * <p>
      * 时间复杂度为o(N)，其中N是被设置的字段数量.<br>
      * 该命令将重写所有在Hash集中存在字段，如果key指定的Hash集不存在，会创建一个新的Hash集并与key关联
      *
-     * @param key Key键
+     * @param key   Key键
      * @param value Hash集
      * @return 状态码
      */
@@ -479,7 +490,7 @@ public class Redis {
      * 时间复杂度为o(N)，其中N是被设置的字段数量.<br>
      * 该命令将重写所有在Hash集中存在字段，如果key指定的Hash集不存在，会创建一个新的Hash集并与key关联
      *
-     * @param key Key键
+     * @param key   Key键
      * @param value Hash集
      * @return 状态码
      */
@@ -501,7 +512,7 @@ public class Redis {
      * <p>
      * 时间复杂度o(N),其中N是被请求字段的数量<br>
      *
-     * @param key Key值
+     * @param key    Key值
      * @param fields 指定字段
      * @return 如果存在此字段，则返回所关联的值列表，否则返回空列表.
      */
@@ -524,7 +535,7 @@ public class Redis {
      * <p>
      * 时间复杂度o(1)<br>
      *
-     * @param key Key值
+     * @param key   Key值
      * @param field 指定字段
      * @return 如果存在此字段，则返回所关联的值，否则返回null
      */
@@ -545,7 +556,7 @@ public class Redis {
      * <p>
      * 时间复杂度o(1)<br>
      *
-     * @param key Key值
+     * @param key   Key值
      * @param field 指定字段
      * @return 如果存在此字段，则返回所关联的值，否则返回null
      */
@@ -648,7 +659,7 @@ public class Redis {
      * 如果指定字段不存在，则忽略处理，如果指定的Hash集不存在，应该指令返回0.<br>
      * 此指令可以返回被成功删除字段的数量，但目前没有需求，就不返回了.
      *
-     * @param key Key值
+     * @param key   Key值
      * @param field 指定要删除的字段集合
      */
     public void hdel(String key, String... field) {
@@ -670,7 +681,7 @@ public class Redis {
      * 如果指定字段不存在，则字段的值在该操作执行前被设计为0<br>
      * <b>注意：此命令支持的值范围限定在64位 有符号整数<b>
      *
-     * @param key Key值
+     * @param key   Key值
      * @param field 指定字段
      * @param value 要加的值
      * @return 增值操作执行后该字段的值
@@ -691,6 +702,7 @@ public class Redis {
     //
     // ------------------------------List 有序的相关命令------------------------------
     //
+
     /**
      * 删除列表里最右边的元素。
      * <p>
@@ -733,9 +745,9 @@ public class Redis {
      * 获得列表所有元素。
      * <p>
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param start 列表起始位置
-     * @param end 列表结束位置
+     * @param end   列表结束位置
      * @return 列表所有元素
      */
     public List<String> lrange(String key, long start, long end) {
@@ -768,7 +780,7 @@ public class Redis {
      * 返回列表key中，小标为index的元素
      * <p>
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param index VALUE值
      * @return 成员数量
      */
@@ -788,7 +800,7 @@ public class Redis {
      * 返回列表长度
      * <p>
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param value VALUE值
      * @param pivot 位于这个值之前或者之后
      * @return 成员数量
@@ -809,7 +821,7 @@ public class Redis {
      * 返回被移除的数量
      * <p>
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param value VALUE值
      * @return 被移除的数量
      */
@@ -829,7 +841,7 @@ public class Redis {
      * 从列表左边添加一个元素。
      * <p>
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param value VALUE值
      * @return 成员数量
      */
@@ -881,7 +893,9 @@ public class Redis {
         }
     }
 
-    /** 修剪到指定范围的列表 */
+    /**
+     * 修剪到指定范围的列表
+     */
     public void ltrim(byte[] key, int start, int end) {
         Jedis j = pool.getResource();
         try {
@@ -897,6 +911,7 @@ public class Redis {
     // --------------------------------Set相关命令
     // 无序--------------------------------
     //
+
     /**
      * SADD操作，添加Set类型数据.
      * <p>
@@ -904,7 +919,7 @@ public class Redis {
      * 如果在插入的过程中，参数中有的成员已存在，该成员将被忽略，其它成员正常插入。<br>
      * 如果执行命令之前，此KEY并不存在，将以此Key创建新的Set
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param value 成员列表
      * @return 本次操作实际插入的成员数量
      */
@@ -1025,6 +1040,7 @@ public class Redis {
     // ------------------------------Sorted set相关命令
     // 有序---------------------------
     //
+
     /**
      * 添加指定成员到Key对应的Set集合中.
      * <p>
@@ -1032,8 +1048,8 @@ public class Redis {
      * 每一个成员都有一个分数值，如果指定成员存在，那么其分数就会被更新成最新的。<br>
      * 如果不存在，则会创建一个新的。
      *
-     * @param key KEY值
-     * @param score 分数值
+     * @param key    KEY值
+     * @param score  分数值
      * @param member 指定成员
      * @return 返回添加到Set集合中的元素个数，不包括那种已存在只更新的分数的元素。
      */
@@ -1069,7 +1085,7 @@ public class Redis {
      * 其中Set集合成员按score值递增（由小到大）排列。<br>
      * <b>注意：排名以0为底，也就是说score值最小的成员排名为0.</b>
      *
-     * @param key KEY值
+     * @param key    KEY值
      * @param member 指定成员
      * @return 如果member是key对应Set集合中的成员，则返回member的排名值。
      */
@@ -1092,7 +1108,7 @@ public class Redis {
      * 其中Set集合成员按score值递增（由小到大）排列。<br>
      * <b>注意：排名以0为底，也就是说score值最小的成员排名为0.</b>
      *
-     * @param key KEY值
+     * @param key    KEY值
      * @param member 指定成员
      * @return 如果member是key对应Set集合中的成员，则返回member的排名值。
      */
@@ -1113,9 +1129,9 @@ public class Redis {
      * <p>
      * 其中成员按Score值递增来排序，具有相同值的成员按字典序来排列.<br>
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param start 开始下标 rank
-     * @param end 结束下标 rank
+     * @param end   结束下标 rank
      * @return 如果指定区间有成员，则返回此区间的成员集合.
      */
     public Set<String> zrange(String key, long start, long end) {
@@ -1137,9 +1153,9 @@ public class Redis {
      * <p>
      * 其中成员按Score值递减来排序，具有相同值的成员按字典序来排列.<br>
      *
-     * @param key KEY值
+     * @param key   KEY值
      * @param start 开始下标 rank
-     * @param end 结束下标 rank
+     * @param end   结束下标 rank
      * @return 如果指定区间有成员，则返回此区间的成员集合.
      */
     public Set<String> zrevrange(String key, long start, long end) {
@@ -1202,7 +1218,7 @@ public class Redis {
      * 返回指定排名区间的元素集合（按照score从大到小排序）
      *
      * @param start 开始下标 rank
-     * @param end 结束下标 rank
+     * @param end   结束下标 rank
      */
     public Set<Tuple> zrevrangeWithScore(String key, int start, int end) {
         Jedis j = pool.getResource();
@@ -1220,7 +1236,7 @@ public class Redis {
      * 返回指定排名区间的元素集合（按照score从小到大排序）
      *
      * @param start 开始下标 rank
-     * @param end 结束下标 rank
+     * @param end   结束下标 rank
      */
     public Set<Tuple> zrangeWithScore(String key, int start, int end) {
         Jedis j = pool.getResource();
@@ -1237,7 +1253,7 @@ public class Redis {
     /**
      * 获取指定Key的Set集合中成员member的值。
      *
-     * @param key KEY值
+     * @param key    KEY值
      * @param member 指定成员
      * @return 如果member是key对应Set集合中的成员，则返回member的排名值。
      */
@@ -1302,7 +1318,7 @@ public class Redis {
      * 删除指定Key对应的Set集合中指定的成员。
      * <p>
      *
-     * @param key KEY值
+     * @param key     KEY值
      * @param members 指定的成员
      * @return 返回被删除的元素的个数
      */
@@ -1389,12 +1405,13 @@ public class Redis {
     }
 
     // ------------------------------------------订阅/发布------------------------------------
+
     /**
      * 将信息 message 发送到指定的频道 channel 。
      *
-     * @version >= 2.0.0 时间复杂度： O(N+M)，其中 N 是频道channel 的订阅者数量，而 M
-     *          则是使用模式订阅(subscribed patterns)的客户端的数量。
      * @return 接收到信息 message 的订阅者数量。
+     * @version >= 2.0.0 时间复杂度： O(N+M)，其中 N 是频道channel 的订阅者数量，而 M
+     * 则是使用模式订阅(subscribed patterns)的客户端的数量。
      */
     public long publish(String channel, String message) {
         Jedis j = pool.getResource();
@@ -1411,8 +1428,8 @@ public class Redis {
     /**
      * 订阅给定的一个或多个频道的信息。
      *
-     * @version >= 2.0.0 时间复杂度： O(N)，其中 N 是订阅的频道的数量。
      * @return 接收到的信息(请参见下面的代码说明)。
+     * @version >= 2.0.0 时间复杂度： O(N)，其中 N 是订阅的频道的数量。
      */
     public void subscribe(JedisPubSub jedisPubSub, String... channel) {
         Jedis j = pool.getResource();
@@ -1427,12 +1444,12 @@ public class Redis {
 
     /**
      * 订阅一个或多个符合给定模式的频道。
-     *
+     * <p>
      * 每个模式以 * 作为匹配符，比如 it* 匹配所有以 it 开头的频道( it.news 、 it.blog 、 it.tweets 等等)，
      * news.* 匹配所有以 news. 开头的频道( news.it 、 news.global.today 等等)，诸如此类。
      *
-     * @version >= 2.0.0 时间复杂度： O(N)， N 是订阅的模式的数量。
      * @return 接收到的信息
+     * @version >= 2.0.0 时间复杂度： O(N)， N 是订阅的模式的数量。
      */
     public void psubscribe(JedisPubSub jedisPubSub, String... channel) {
         Jedis j = pool.getResource();
@@ -1448,6 +1465,7 @@ public class Redis {
     //
     // --------------------------------Server相关命令-----------------------------
     //
+
     /**
      * 清空当前数据库里的所有数据，这个命令永远不会失败，使用时请注意加小心。
      */
@@ -1485,7 +1503,7 @@ public class Redis {
 
     /**
      * 返回一个jedis实例，用于自己实现pipeline、multi、watch等
-     *
+     * <p>
      * 注意：必须调用{@link Redis#} 返回资源
      */
     public Jedis getJedis() {
@@ -1506,8 +1524,8 @@ public class Redis {
         Redis redis = new Redis("192.168.1.27", 6379, 2);
         Set<String> keys = redis.keys("*");
         for (String key : keys) {
-			System.out.println(key);
-		}
+            System.out.println(key);
+        }
 //        redis.hset("role1", "a", "1");
 //        redis.hset("role1", "b", "2");
 //        redis.hset("role2", "c", "1");

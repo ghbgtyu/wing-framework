@@ -15,15 +15,15 @@ public class FileResult {
     //private List<Object> initialPreviewThumbTags;*/
 
     /**
-     *  whether to append the content to the initialPreview if you already set an initialPreview on INIT.
-     *  If not set this defaults to true. If set to false, the plugin will overwrite the initialPreview content.
+     * whether to append the content to the initialPreview if you already set an initialPreview on INIT.
+     * If not set this defaults to true. If set to false, the plugin will overwrite the initialPreview content.
      */
     private boolean append;
     //自定义 已上传附件ID
     private String fileIds;
 
-    public FileResult(){
-        append=true;
+    public FileResult() {
+        append = true;
         //status=Status.SUCCESS;
     }
 
@@ -36,13 +36,15 @@ public class FileResult {
         Extra extra;
         Long size;
 
-        public static class Extra{
+        public static class Extra {
             String id;
-            public Extra(){
+
+            public Extra() {
 
             }
-            public Extra(String id){
-                this.id=id;
+
+            public Extra(String id) {
+                this.id = id;
             }
 
             public String getId() {

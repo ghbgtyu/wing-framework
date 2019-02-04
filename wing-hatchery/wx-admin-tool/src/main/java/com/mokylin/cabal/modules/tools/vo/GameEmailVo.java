@@ -27,6 +27,7 @@ public class GameEmailVo implements Serializable {
     public String getReceiverUserids() {
         return receiverUserids;
     }
+
     public void setReceiverUserids(String receiverUserids) {
         this.receiverUserids = receiverUserids;
     }
@@ -39,27 +40,67 @@ public class GameEmailVo implements Serializable {
         this.isGlobal = isGlobal;
     }
 
-    public String getServerId() {return serverId;}
-    public void setServerId(String serverId) {this.serverId = serverId;}
+    public String getServerId() {
+        return serverId;
+    }
 
-    public String getReceiverNames() {	return receiverNames;}
-    public void setReceiverNames(String receiverNames) {this.receiverNames = receiverNames;}
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
 
-    public String getTitle() {return title;}
-    public void setTitle(String title) {this.title = title;}
+    public String getReceiverNames() {
+        return receiverNames;
+    }
 
-    public String getContent() {return content;}
-    public void setContent(String content) {this.content = content;}
+    public void setReceiverNames(String receiverNames) {
+        this.receiverNames = receiverNames;
+    }
 
-    public int getJb() {return jb;}
-    public void setJb(int jb) {this.jb = jb;}
+    public String getTitle() {
+        return title;
+    }
 
-    public int getYb() {return yb;}
-    public void setYb(int yb) {this.yb = yb;}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public int getDelayHours() {return delayHours;}
-    public void setDelayHours(int delayHours) {this.delayHours = delayHours;}
+    public String getContent() {
+        return content;
+    }
 
-    public List<AttachmentGoods> getGoodsList() {return goodsList;}
-    public void setGoodsList(List<AttachmentGoods> goodsList) {this.goodsList = goodsList;}
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getJb() {
+        return jb;
+    }
+
+    public void setJb(int jb) {
+        this.jb = jb;
+    }
+
+    public int getYb() {
+        return yb;
+    }
+
+    public void setYb(int yb) {
+        this.yb = yb;
+    }
+
+    public int getDelayHours() {
+        return delayHours;
+    }
+
+    public void setDelayHours(int delayHours) {
+        this.delayHours = delayHours;
+    }
+
+    public List<AttachmentGoods> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<AttachmentGoods> goodsList) {
+        this.goodsList = goodsList;
+    }
 }
