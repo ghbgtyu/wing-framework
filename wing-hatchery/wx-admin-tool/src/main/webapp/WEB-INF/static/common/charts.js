@@ -1,7 +1,7 @@
 /**收入图表*/
-function initIncomeChart(id,title,datas){
+function initIncomeChart(id, title, datas) {
     $(function () {
-        $('#'+id).highcharts({
+        $('#' + id).highcharts({
             chart: {
                 zoomType: 'xy'
             },

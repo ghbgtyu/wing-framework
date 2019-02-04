@@ -12,9 +12,9 @@
  *
  */
 
-List.prototype.plugins.fuzzySearch = function(locals, options) {
+List.prototype.plugins.fuzzySearch = function (locals, options) {
     var self = this;
-    var searchFunction = function(text, pattern, options) {
+    var searchFunction = function (text, pattern, options) {
         // Aproximately where in the text is the pattern expected to be found?
         var Match_Location = options.location || 0;
 
@@ -29,7 +29,7 @@ List.prototype.plugins.fuzzySearch = function(locals, options) {
 
         // Set starting location at beginning text and initialise the alphabet.
         var loc = Match_Location,
-            s = (function() {
+            s = (function () {
                 var q = {};
 
                 for (var i = 0; i < pattern.length; i++) {
@@ -106,8 +106,8 @@ List.prototype.plugins.fuzzySearch = function(locals, options) {
                     rd[j] = ((rd[j + 1] << 1) | 1) & charMatch;
                 } else {    // Subsequent passes: fuzzy match.
                     rd[j] = (((rd[j + 1] << 1) | 1) & charMatch) |
-                                    (((last_rd[j + 1] | last_rd[j]) << 1) | 1) |
-                                    last_rd[j + 1];
+                        (((last_rd[j + 1] | last_rd[j]) << 1) | 1) |
+                        last_rd[j + 1];
                 }
                 if (rd[j] & matchmask) {
                     var score = match_bitapScore_(d, j - 1);
@@ -137,70 +137,71 @@ List.prototype.plugins.fuzzySearch = function(locals, options) {
     };
 
 
-    return (function() {
-        var func = function(searchString, columns) {
-            self.i = 1; // Reset paging
-            var searchArguments,
-                foundArgument,
-                matching = [],
-                found,
-                item,
-                text,
-                values,
-                is,
-                multiSearch = (typeof options.multiSearch !== 'boolean') ? true : options.multiSearch,
-                columns = (columns === undefined) ? self.items[0].values() : columns,
-                searchString = (searchString === undefined) ? "" : searchString,
-                target = searchString.target || searchString.srcElement; /* IE have srcElement */
+    return (function () {
+        var func = function (searchString, columns) {
+                self.i = 1; // Reset paging
+                var searchArguments,
+                    foundArgument,
+                    matching = [],
+                    found,
+                    item,
+                    text,
+                    values,
+                    is,
+                    multiSearch = (typeof options.multiSearch !== 'boolean') ? true : options.multiSearch,
+                    columns = (columns === undefined) ? self.items[0].values() : columns,
+                    searchString = (searchString === undefined) ? "" : searchString,
+                    target = searchString.target || searchString.srcElement;
+                /* IE have srcElement */
 
-            searchString = (target === undefined) ? (""+searchString).toLowerCase() : ""+target.value.toLowerCase();
-            is = self.items;
+                searchString = (target === undefined) ? ("" + searchString).toLowerCase() : "" + target.value.toLowerCase();
+                is = self.items;
 
-            // Substract arguments from the searchString or put searchString as only argument
-            searchArguments = multiSearch ? searchString.replace(/ +$/, '').split(/ +/) : [searchString];
+                // Substract arguments from the searchString or put searchString as only argument
+                searchArguments = multiSearch ? searchString.replace(/ +$/, '').split(/ +/) : [searchString];
 
-            locals.templater.clear();
-            if (searchString === "") {
-                locals.reset.search();
-                self.searched = false;
-                self.update();
-            } else {
-                self.searched = true;
+                locals.templater.clear();
+                if (searchString === "") {
+                    locals.reset.search();
+                    self.searched = false;
+                    self.update();
+                } else {
+                    self.searched = true;
 
-                for (var k = 0, kl = is.length; k < kl; k++) {
-                    found = true;
-                    item = is[k];
-                    values = item.values();
+                    for (var k = 0, kl = is.length; k < kl; k++) {
+                        found = true;
+                        item = is[k];
+                        values = item.values();
 
-                    for(var i = 0; i < searchArguments.length; i++) {
-                        foundArgument = false;
+                        for (var i = 0; i < searchArguments.length; i++) {
+                            foundArgument = false;
 
-                        for(var j in columns) {
-                            if(values.hasOwnProperty(j) && columns[j] !== null) {
-                                text = (values[j] != null) ? values[j].toString().toLowerCase() : "";
-                                if (searchFunction(text, searchArguments[i], options)) {
-                                    foundArgument = true;
+                            for (var j in columns) {
+                                if (values.hasOwnProperty(j) && columns[j] !== null) {
+                                    text = (values[j] != null) ? values[j].toString().toLowerCase() : "";
+                                    if (searchFunction(text, searchArguments[i], options)) {
+                                        foundArgument = true;
+                                    }
                                 }
                             }
+                            if (!foundArgument) found = false;
                         }
-                        if(!foundArgument) found = false;
+                        if (found) {
+                            item.found = true;
+                            matching.push(item);
+                        } else {
+                            item.found = false;
+                        }
                     }
-                    if (found) {
-                        item.found = true;
-                        matching.push(item);
-                    } else {
-                        item.found = false;
-                    }
+                    self.update();
                 }
-                self.update();
-            }
-            return self.visibleItems;
-        },
-        timeout;
+                return self.visibleItems;
+            },
+            timeout;
 
-        return function() {
+        return function () {
             var context = this, args = arguments;
-            var later = function() {
+            var later = function () {
                 timeout = null;
                 func.apply(context, args);
             };

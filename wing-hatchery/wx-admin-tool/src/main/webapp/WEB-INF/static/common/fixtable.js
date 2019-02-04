@@ -24,9 +24,9 @@ function FixTable(TableID, FixColumnNumber, width, height) {
     }
 
     $('<div id="' + TableID + '_tableFix"></div>'
-    + '<div id="' + TableID + '_tableHead"></div>'
-    + '<div id="' + TableID + '_tableColumn"></div>'
-    + '<div id="' + TableID + '_tableData"></div>').appendTo("#" + TableID + "_tableLayout");
+        + '<div id="' + TableID + '_tableHead"></div>'
+        + '<div id="' + TableID + '_tableColumn"></div>'
+        + '<div id="' + TableID + '_tableData"></div>').appendTo("#" + TableID + "_tableLayout");
 
 
     var oldtable = $("#" + TableID);
@@ -79,10 +79,33 @@ function FixTable(TableID, FixColumnNumber, width, height) {
         $("#" + TableID + "_tableColumn").scrollTop($("#" + TableID + "_tableData").scrollTop());
     });
 
-    $("#" + TableID + "_tableFix").css({ "overflow": "hidden", "position": "relative", "z-index": "50", "background-color": "Silver" });
-    $("#" + TableID + "_tableHead").css({ "overflow": "hidden", "width": width - 17, "position": "relative", "z-index": "45", "background-color": "Silver" });
-    $("#" + TableID + "_tableColumn").css({ "overflow": "hidden", "height": height - 17, "position": "relative", "z-index": "40", "background-color": "Silver" });
-    $("#" + TableID + "_tableData").css({ "overflow": "scroll", "width": width, "height": height, "position": "relative", "z-index": "35" });
+    $("#" + TableID + "_tableFix").css({
+        "overflow": "hidden",
+        "position": "relative",
+        "z-index": "50",
+        "background-color": "Silver"
+    });
+    $("#" + TableID + "_tableHead").css({
+        "overflow": "hidden",
+        "width": width - 17,
+        "position": "relative",
+        "z-index": "45",
+        "background-color": "Silver"
+    });
+    $("#" + TableID + "_tableColumn").css({
+        "overflow": "hidden",
+        "height": height - 17,
+        "position": "relative",
+        "z-index": "40",
+        "background-color": "Silver"
+    });
+    $("#" + TableID + "_tableData").css({
+        "overflow": "scroll",
+        "width": width,
+        "height": height,
+        "position": "relative",
+        "z-index": "35"
+    });
 
     if ($("#" + TableID + "_tableHead").width() > $("#" + TableID + "_tableFix table").width()) {
         $("#" + TableID + "_tableHead").css("width", $("#" + TableID + "_tableFix table").width());

@@ -1,7 +1,7 @@
-List.prototype.plugins.paging = function(locals, options) {
+List.prototype.plugins.paging = function (locals, options) {
     var list = this;
     var pagingList;
-    var init = function() {
+    var init = function () {
         options = options || {};
         pagingList = new List(list.listContainer.id, {
             listClass: options.pagingClass || 'paging',
@@ -14,7 +14,7 @@ List.prototype.plugins.paging = function(locals, options) {
         refresh();
     };
 
-    var refresh = function() {
+    var refresh = function () {
         var l = list.matchingItems.length,
             index = list.i,
             page = list.page,
@@ -33,7 +33,7 @@ List.prototype.plugins.paging = function(locals, options) {
 
             if (is.number(i, left, right, currentPage, innerWindow)) {
                 var item = pagingList.add({
-                    page: "<a class='"+className+"' href='javascript:function Z(){Z=\"\"}Z()'>"+(i)+"</a>",
+                    page: "<a class='" + className + "' href='javascript:function Z(){Z=\"\"}Z()'>" + (i) + "</a>",
                     dotted: false
                 })[0];
                 addEvent(item.elm, i, page);
@@ -47,27 +47,27 @@ List.prototype.plugins.paging = function(locals, options) {
     };
 
     var is = {
-        number: function(i, left, right, currentPage, innerWindow) {
-           return this.left(i, left) || this.right(i, right) || this.innerWindow(i, currentPage, innerWindow);
+        number: function (i, left, right, currentPage, innerWindow) {
+            return this.left(i, left) || this.right(i, right) || this.innerWindow(i, currentPage, innerWindow);
         },
-        left: function(i, left) {
+        left: function (i, left) {
             return (i <= left);
         },
-        right: function(i, right) {
+        right: function (i, right) {
             return (i > right);
         },
-        innerWindow: function(i, currentPage, innerWindow) {
-            return ( i >= (currentPage - innerWindow) && i <= (currentPage + innerWindow));
+        innerWindow: function (i, currentPage, innerWindow) {
+            return (i >= (currentPage - innerWindow) && i <= (currentPage + innerWindow));
         },
-        dotted: function(i, left, right, currentPage, innerWindow, currentPageItem) {
+        dotted: function (i, left, right, currentPage, innerWindow, currentPageItem) {
             return this.dottedLeft(i, left, right, currentPage, innerWindow)
-            || (this.dottedRight(i, left, right, currentPage, innerWindow, currentPageItem));
+                || (this.dottedRight(i, left, right, currentPage, innerWindow, currentPageItem));
         },
-        dottedLeft: function(i, left, right, currentPage, innerWindow) {
+        dottedLeft: function (i, left, right, currentPage, innerWindow) {
             return ((i == (left + 1)) && !this.innerWindow(i, currentPage, innerWindow) && !this.right(i, right))
         },
-        dottedRight: function(i, left, right, currentPage, innerWindow, currentPageItem) {
-            if (pagingList.items[currentPageItem-1].values().dotted) {
+        dottedRight: function (i, left, right, currentPage, innerWindow, currentPageItem) {
+            if (pagingList.items[currentPageItem - 1].values().dotted) {
                 return false
             } else {
                 return ((i == (right)) && !this.innerWindow(i, currentPage, innerWindow) && !this.right(i, right))
@@ -75,10 +75,10 @@ List.prototype.plugins.paging = function(locals, options) {
         }
     };
 
-    var addEvent = function(elm, i, page) {
-       ListJsHelpers.addEvent(elm, 'click', function() {
-           list.show((i-1)*page + 1, page);
-       });
+    var addEvent = function (elm, i, page) {
+        ListJsHelpers.addEvent(elm, 'click', function () {
+            list.show((i - 1) * page + 1, page);
+        });
     };
 
     init();
