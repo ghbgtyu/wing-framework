@@ -5,23 +5,23 @@
     <parent>
         <artifactId>wing-framework</artifactId>
         <groupId>com.wing</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.wing.center.client</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <artifactId>wing-center-client</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.wing.common</groupId>
             <artifactId>wing-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.wing.server.common</groupId>
             <artifactId>wing-server-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.3</version>
         </dependency>
 
 
