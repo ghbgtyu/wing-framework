@@ -19,21 +19,24 @@ import java.util.concurrent.Future;
 public abstract class AbsMultiThreadInsertTest extends AbsTimeTest {
 
 
-    public ExecutorService service ;
-    /**线程数*/
+    public ExecutorService service;
+    /**
+     * 线程数
+     */
     private int threadSize;
 
-    public AbsMultiThreadInsertTest(int threadSize){
-        this.threadSize  = threadSize;
-        service =  Executors.newFixedThreadPool(threadSize);
+    public AbsMultiThreadInsertTest(int threadSize) {
+        this.threadSize = threadSize;
+        service = Executors.newFixedThreadPool(threadSize);
     }
 
     public abstract String getVersion();
 
-    private class MyCallable implements Callable<StageResultVo>{
+    private class MyCallable implements Callable<StageResultVo> {
 
-        private IStage stage ;
-        MyCallable(IStage stage){
+        private IStage stage;
+
+        MyCallable(IStage stage) {
             this.stage = stage;
         }
 
@@ -54,8 +57,8 @@ public abstract class AbsMultiThreadInsertTest extends AbsTimeTest {
     public void run() {
 
         List<StageResultVo> stageResultVoList = new ArrayList<StageResultVo>();
-        List<MyCallable>runnableList = new ArrayList();
-        for(int i = 0;i<threadSize;i++){
+        List<MyCallable> runnableList = new ArrayList();
+        for (int i = 0; i < threadSize; i++) {
             IStage stage = getStage();
 
             MyCallable myCallable = new MyCallable(stage);
@@ -66,27 +69,25 @@ public abstract class AbsMultiThreadInsertTest extends AbsTimeTest {
         try {
             StageResultVo stageResultVo = new StageResultVo();
             List<Future<StageResultVo>> futureList = service.invokeAll(runnableList);
-            for( Future<StageResultVo> future:futureList ){
+            for (Future<StageResultVo> future : futureList) {
                 stageResultVo.mergeResult(future.get());
 
             }
-            InsertStage stage = (InsertStage)getStage();
+            InsertStage stage = (InsertStage) getStage();
 
             //成功插入多少次
             int reslutNum = stage.getResult();
             int allNum = stageResultVo.getAllCount();
 
 
-
             LogUtil.info(stageResultVo.toString());
-            stageResultVo.toExcel(getLogPath(getStage()),reslutNum,allNum);
+            stageResultVo.toExcel(getLogPath(getStage()), reslutNum, allNum);
             LogUtil.info("test end");
 
-        }catch (Exception e){
-            LogUtil.error("AbsMultiThreadTest"+e);
+        } catch (Exception e) {
+            LogUtil.error("AbsMultiThreadTest" + e);
         }
         service.shutdown();
-
 
 
     }

@@ -13,10 +13,9 @@ import com.test.jdbc.pool.test.AbsTimeTest;
 public class QueryTest extends AbsTimeTest {
 
 
-
     private IDataSource dataSource;
 
-    public QueryTest(IDataSource dataSource){
+    public QueryTest(IDataSource dataSource) {
         this.dataSource = dataSource;
     }
 

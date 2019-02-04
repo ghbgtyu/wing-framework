@@ -9,6 +9,4 @@ public interface IAnalysis {
     public AnalysisResultData execute(AnalysisResultData data);
 
 
-
-
 }

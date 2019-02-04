@@ -22,6 +22,7 @@ public class StageResultVo {
     private float min = 0;
     private float max = 0;
     private int exceptionCount = 0;
+
     class TimeResultVo {
         private float time;
         private float value;
@@ -29,7 +30,7 @@ public class StageResultVo {
         private int allCount;
         private float costTime;
 
-        TimeResultVo(float time,float value,int count,float costTime){
+        TimeResultVo(float time, float value, int count, float costTime) {
             this.time = time;
             this.value = value;
             this.allCount = count;
@@ -70,8 +71,8 @@ public class StageResultVo {
     }
 
 
-    public void addResult(float time,float value,int count,float costTime){
-        resultList.add(new TimeResultVo(time,value,count,costTime));
+    public void addResult(float time, float value, int count, float costTime) {
+        resultList.add(new TimeResultVo(time, value, count, costTime));
     }
 
     public int getExceptionCount() {
@@ -85,10 +86,11 @@ public class StageResultVo {
     public List<TimeResultVo> getResultList() {
         return resultList;
     }
-    public int getAllCount(){
+
+    public int getAllCount() {
         int count = 0;
-        for(TimeResultVo vo :this.resultList){
-            count+=vo.getAllCount();
+        for (TimeResultVo vo : this.resultList) {
+            count += vo.getAllCount();
         }
 
 
@@ -115,14 +117,14 @@ public class StageResultVo {
         this.max = max;
     }
 
-    public void mergeResult(StageResultVo stageResultVo){
-        if(this.min>stageResultVo.getMin()||this.min==0){
+    public void mergeResult(StageResultVo stageResultVo) {
+        if (this.min > stageResultVo.getMin() || this.min == 0) {
             this.min = stageResultVo.getMin();
         }
-        if(this.max<stageResultVo.getMax()){
+        if (this.max < stageResultVo.getMax()) {
             this.max = stageResultVo.getMax();
         }
-        this.exceptionCount+=stageResultVo.getExceptionCount();
+        this.exceptionCount += stageResultVo.getExceptionCount();
         this.getResultList().addAll(stageResultVo.getResultList());
     }
 
@@ -136,37 +138,37 @@ public class StageResultVo {
                 .append("average:").append(getAverage()).append("\n")
                 .append("exceptionCount:").append(exceptionCount).append("\n")
         ;
-        for(TimeResultVo entry:resultList){
+        for (TimeResultVo entry : resultList) {
             stringBuffer
                     .append("时间（秒）:").append(entry.getTime()).append("\t")
                     .append("性能(每毫秒处理数):").append(entry.getValue()).append("\t")
                     .append("allCount:").append(entry.getAllCount()).append("\t")
                     .append("costTime:").append(entry.getCostTime()).append("\t")
 
-            .append("\n");
+                    .append("\n");
         }
 
 
         return stringBuffer.toString();
     }
 
-    private float getAverage(){
-        int num =0;
-        float allValue=0;
-        for(TimeResultVo vo:resultList){
-            if(vo.getValue()==this.min||vo.getValue()==this.max){
+    private float getAverage() {
+        int num = 0;
+        float allValue = 0;
+        for (TimeResultVo vo : resultList) {
+            if (vo.getValue() == this.min || vo.getValue() == this.max) {
                 continue;
             }
             num++;
-            allValue+=vo.getValue();
+            allValue += vo.getValue();
         }
 
 
-        return allValue/num;
+        return allValue / num;
     }
 
 
-    public void toExcel(String filePath,int resultNum,int allNum){
+    public void toExcel(String filePath, int resultNum, int allNum) {
         try {
             //创建新工作簿
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -187,7 +189,7 @@ public class StageResultVo {
             cell = row.createCell(3);
             cell.setCellValue("异常数量");
 
-            if(resultNum>0||allNum>0){
+            if (resultNum > 0 || allNum > 0) {
                 cell = row.createCell(5);
                 cell.setCellValue("执行次数");
                 cell = row.createCell(6);
@@ -197,8 +199,6 @@ public class StageResultVo {
 
 
             }
-
-
 
 
             row = sheet.createRow(1);
@@ -211,7 +211,7 @@ public class StageResultVo {
             cell = row.createCell(3);
             cell.setCellValue(exceptionCount);
 
-            if(resultNum>0||allNum>0) {
+            if (resultNum > 0 || allNum > 0) {
 
                 cell = row.createCell(5);
                 cell.setCellValue(allNum);
@@ -221,8 +221,6 @@ public class StageResultVo {
                 cell.setCellValue(allNum - resultNum);
 
             }
-
-
 
 
             row = sheet.createRow(3);
@@ -237,7 +235,7 @@ public class StageResultVo {
 
 
             int rowNum = 4;
-            for(TimeResultVo entry:resultList){
+            for (TimeResultVo entry : resultList) {
                 row = sheet.createRow(rowNum++);
                 cell = row.createCell(0);
                 cell.setCellValue(entry.getTime());
@@ -250,14 +248,12 @@ public class StageResultVo {
             }
 
 
-
-
             //输出到磁盘中
             FileOutputStream fos = new FileOutputStream(new File(filePath));
             workbook.write(fos);
 
             fos.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

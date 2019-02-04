@@ -11,9 +11,9 @@ public class MyHikariDataSource extends AbsDataSource<HikariDataSource> {
 
 
     @Override
-    public HikariDataSource  createDataSource() throws Exception {
+    public HikariDataSource createDataSource() throws Exception {
 
-        HikariDataSource  dataSource = new HikariDataSource ();
+        HikariDataSource dataSource = new HikariDataSource();
         try {
             dataSource.setDriverClassName(JdcbConstants.JDBC_DRIVER);
 
@@ -33,7 +33,6 @@ public class MyHikariDataSource extends AbsDataSource<HikariDataSource> {
 //        dataSource.setMaxLifetime(2000);
 
         dataSource.validate();
-
 
 
         return dataSource;

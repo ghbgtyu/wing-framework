@@ -9,13 +9,11 @@ import com.test.jdbc.pool.business.IBusinessService;
 public class InsertPoolAnalysis extends AbsPoolAnalysis {
 
 
-
-    public String name ;
+    public String name;
     public String version;
 
 
-
-    public InsertPoolAnalysis(IBusinessService businessService,String name ,String version){
+    public InsertPoolAnalysis(IBusinessService businessService, String name, String version) {
         super(businessService);
         this.name = name;
         this.version = version;
@@ -23,10 +21,9 @@ public class InsertPoolAnalysis extends AbsPoolAnalysis {
 
     @Override
     public void startBusiness(IBusinessService businessService) throws Exception {
-        businessService.businessInsert("insert into pool (NAME,VERSION) values(\""+name+"\",\"" + version + "\");");
+        businessService.businessInsert("insert into pool (NAME,VERSION) values(\"" + name + "\",\"" + version + "\");");
 
     }
-
 
 
     @Override

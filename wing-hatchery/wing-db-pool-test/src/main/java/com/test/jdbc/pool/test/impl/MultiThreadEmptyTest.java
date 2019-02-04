@@ -13,7 +13,7 @@ public class MultiThreadEmptyTest extends AbsMultiThreadTest {
 
     private IDataSource dataSource;
 
-    public MultiThreadEmptyTest(IDataSource dataSource,int threadSize){
+    public MultiThreadEmptyTest(IDataSource dataSource, int threadSize) {
 
         super(threadSize);
         this.dataSource = dataSource;

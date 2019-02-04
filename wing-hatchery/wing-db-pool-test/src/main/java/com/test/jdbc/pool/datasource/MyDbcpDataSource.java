@@ -31,12 +31,8 @@ public class MyDbcpDataSource extends AbsDataSource<BasicDataSource> {
         dataSource.setMaxIdle(JdcbConstants.MAX_ACTIVE);
 
 
-
-
         dataSource.setMinIdle(JdcbConstants.MIN_IDLE);
         dataSource.setValidationQuery(JdcbConstants.VALIDATION_QUERY);
-
-
 
 
         return dataSource;

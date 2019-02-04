@@ -5,7 +5,7 @@
     <parent>
         <artifactId>wing-hatchery</artifactId>
         <groupId>com.wing</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -63,7 +63,6 @@
             <artifactId>tomcat-juli</artifactId>
             <version>8.0.47</version>
         </dependency>
-
 
 
         <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
@@ -148,7 +147,6 @@
             <artifactId>quartz</artifactId>
             <version>2.3.0</version>
         </dependency>
-
 
 
     </dependencies>

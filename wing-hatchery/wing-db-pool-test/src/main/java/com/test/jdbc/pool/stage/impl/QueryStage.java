@@ -12,12 +12,12 @@ import com.test.jdbc.pool.stage.AbsTimeStage;
 /**
  * Created by nijia on 2017/11/11.
  */
-public  class QueryStage extends AbsTimeStage {
+public class QueryStage extends AbsTimeStage {
 
 
-    private IAnalysis analysis ;
+    private IAnalysis analysis;
 
-    public QueryStage(IDataSource dataSource){
+    public QueryStage(IDataSource dataSource) {
         analysis = new QueryPoolAnalysis(new BaseBusinessService(new BaseDao(dataSource)));
     }
 
@@ -31,7 +31,6 @@ public  class QueryStage extends AbsTimeStage {
     public IAnalysis getAnalysis() {
         return analysis;
     }
-
 
 
 }

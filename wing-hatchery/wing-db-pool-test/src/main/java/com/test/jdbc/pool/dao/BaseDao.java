@@ -10,18 +10,18 @@ import java.sql.ResultSet;
 /**
  * Created by nijia on 2017/11/9.
  */
-public class BaseDao implements  IDao{
+public class BaseDao implements IDao {
 
     private IDataSource dataSource;
 
-    public BaseDao(IDataSource dataSource){
+    public BaseDao(IDataSource dataSource) {
         this.dataSource = dataSource;
     }
 
 
     public void insert(String sql) throws Exception {
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt =  connection.prepareStatement(sql);
+        PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.execute(sql);
 
         pstmt.close();
@@ -29,14 +29,13 @@ public class BaseDao implements  IDao{
     }
 
     public int query(String sql) throws Exception {
-        int result=  0;
+        int result = 0;
         Connection connection = dataSource.getConnection();
-        PreparedStatement pstmt =  connection.prepareStatement(sql);
+        PreparedStatement pstmt = connection.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
-        if(rs.next()){
-            result= rs.getInt(1);
+        if (rs.next()) {
+            result = rs.getInt(1);
         }
-
 
 
         rs.close();

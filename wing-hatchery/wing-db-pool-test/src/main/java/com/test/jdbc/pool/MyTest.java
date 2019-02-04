@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 public class MyTest {
 
 
-    public static final void main(String[]args){
+    public static final void main(String[] args) {
 
         MyDruidDataSource myDruidDataSource = new MyDruidDataSource();
         MyC3p0DataSource myC3p0DataSource = new MyC3p0DataSource();
@@ -35,7 +35,7 @@ public class MyTest {
 
         //单线程测试（获取连接、关闭连接）
 
-        EmptyTest druidEmptyTest = new EmptyTest(myDruidDataSource );
+        EmptyTest druidEmptyTest = new EmptyTest(myDruidDataSource);
 
 
         EmptyTest c3p0EmptyTest = new EmptyTest(myC3p0DataSource);
@@ -60,31 +60,26 @@ public class MyTest {
 
         //多线程并发测试（获取连接、关闭连接）
 
-        MultiThreadEmptyTest c3p0MultiThreadEmptyTest = new MultiThreadEmptyTest(myC3p0DataSource,threadSize);
-        MultiThreadEmptyTest druidMultiThreadEmptyTest = new MultiThreadEmptyTest(myDruidDataSource,threadSize);
-        MultiThreadEmptyTest hikariMultiThreadEmptyTest = new MultiThreadEmptyTest(myHikariDataSource,threadSize);
-        MultiThreadEmptyTest tomcatJdbcMultiThreadEmptyTest = new MultiThreadEmptyTest(myTomcatJdbcDataSource,threadSize);
+        MultiThreadEmptyTest c3p0MultiThreadEmptyTest = new MultiThreadEmptyTest(myC3p0DataSource, threadSize);
+        MultiThreadEmptyTest druidMultiThreadEmptyTest = new MultiThreadEmptyTest(myDruidDataSource, threadSize);
+        MultiThreadEmptyTest hikariMultiThreadEmptyTest = new MultiThreadEmptyTest(myHikariDataSource, threadSize);
+        MultiThreadEmptyTest tomcatJdbcMultiThreadEmptyTest = new MultiThreadEmptyTest(myTomcatJdbcDataSource, threadSize);
 
         //多线程并发测试（插入数据）
 
-        MultiThreadInsertTest c3p0MultiThreadInsertTest = new MultiThreadInsertTest(myC3p0DataSource,threadSize);
-        MultiThreadInsertTest druidMultiThreadInsertTest = new MultiThreadInsertTest(myDruidDataSource,threadSize);
-        MultiThreadInsertTest hikariMultiThreadInsertTest = new MultiThreadInsertTest(myHikariDataSource,threadSize);
-        MultiThreadInsertTest tomcatJdbcMultiThreadInsertTest = new MultiThreadInsertTest(myTomcatJdbcDataSource,threadSize);
+        MultiThreadInsertTest c3p0MultiThreadInsertTest = new MultiThreadInsertTest(myC3p0DataSource, threadSize);
+        MultiThreadInsertTest druidMultiThreadInsertTest = new MultiThreadInsertTest(myDruidDataSource, threadSize);
+        MultiThreadInsertTest hikariMultiThreadInsertTest = new MultiThreadInsertTest(myHikariDataSource, threadSize);
+        MultiThreadInsertTest tomcatJdbcMultiThreadInsertTest = new MultiThreadInsertTest(myTomcatJdbcDataSource, threadSize);
 
 
-
-        ExecutorService service =  Executors.newFixedThreadPool(10);
-
-
+        ExecutorService service = Executors.newFixedThreadPool(10);
 
 
         //service.execute(druidEmptyTest);
         //service.execute(c3p0EmptyTest);
 //        service.execute(hikariEmptyTest);
-       // service.execute(tomcatJdbcEmptyTest);
-
-
+        // service.execute(tomcatJdbcEmptyTest);
 
 
 //          service.execute(druidEmptyTest);
@@ -93,10 +88,10 @@ public class MyTest {
 //          service.execute(tomcatJdbcEmptyTest);
 
 
-            //service.execute(druidQueryTest);
-            //service.execute(c3p0QueryTest);
-            //service.execute(hikariQueryTest);
-            //service.execute(tomcatJdbcQueryTest);
+        //service.execute(druidQueryTest);
+        //service.execute(c3p0QueryTest);
+        //service.execute(hikariQueryTest);
+        //service.execute(tomcatJdbcQueryTest);
 
 //        service.execute(druidQueryTest);
 //        service.execute(c3p0QueryTest);
@@ -113,7 +108,7 @@ public class MyTest {
         //service.execute(c3p0MultiThreadEmptyTest);
         //service.execute(druidMultiThreadEmptyTest);
 //        service.execute(hikariMultiThreadEmptyTest);
-   //     service.execute(tomcatJdbcMultiThreadEmptyTest);
+        //     service.execute(tomcatJdbcMultiThreadEmptyTest);
 
 
         service.execute(c3p0MultiThreadInsertTest);

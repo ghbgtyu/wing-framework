@@ -18,19 +18,22 @@ import java.util.concurrent.Future;
 public abstract class AbsMultiThreadTest extends AbsTimeTest {
 
 
-    public ExecutorService service ;
-    /**线程数*/
+    public ExecutorService service;
+    /**
+     * 线程数
+     */
     private int threadSize;
 
-    public AbsMultiThreadTest(int threadSize){
-        this.threadSize  = threadSize;
-        service =  Executors.newFixedThreadPool(threadSize);
+    public AbsMultiThreadTest(int threadSize) {
+        this.threadSize = threadSize;
+        service = Executors.newFixedThreadPool(threadSize);
     }
 
-    private class MyCallable implements Callable<StageResultVo>{
+    private class MyCallable implements Callable<StageResultVo> {
 
-        private IStage stage ;
-        MyCallable(IStage stage){
+        private IStage stage;
+
+        MyCallable(IStage stage) {
             this.stage = stage;
         }
 
@@ -51,8 +54,8 @@ public abstract class AbsMultiThreadTest extends AbsTimeTest {
     public void run() {
 
         List<StageResultVo> stageResultVoList = new ArrayList<StageResultVo>();
-        List<MyCallable>runnableList = new ArrayList();
-        for(int i = 0;i<threadSize;i++){
+        List<MyCallable> runnableList = new ArrayList();
+        for (int i = 0; i < threadSize; i++) {
             IStage stage = getStage();
             stage.execute();//先执行一次，初始化消耗去掉
             MyCallable myCallable = new MyCallable(stage);
@@ -63,19 +66,18 @@ public abstract class AbsMultiThreadTest extends AbsTimeTest {
         try {
             StageResultVo stageResultVo = new StageResultVo();
             List<Future<StageResultVo>> futureList = service.invokeAll(runnableList);
-            for( Future<StageResultVo> future:futureList ){
+            for (Future<StageResultVo> future : futureList) {
                 stageResultVo.mergeResult(future.get());
             }
 
             LogUtil.info(stageResultVo.toString());
-            stageResultVo.toExcel(getLogPath(getStage()),0,0);
+            stageResultVo.toExcel(getLogPath(getStage()), 0, 0);
             LogUtil.info("test end");
 
-        }catch (Exception e){
-            LogUtil.error("AbsMultiThreadTest"+e);
+        } catch (Exception e) {
+            LogUtil.error("AbsMultiThreadTest" + e);
         }
         service.shutdown();
-
 
 
     }

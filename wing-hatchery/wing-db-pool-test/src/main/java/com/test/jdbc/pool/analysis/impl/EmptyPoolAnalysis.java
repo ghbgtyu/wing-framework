@@ -9,7 +9,7 @@ import com.test.jdbc.pool.business.IBusinessService;
 public class EmptyPoolAnalysis extends AbsPoolAnalysis {
 
 
-    public EmptyPoolAnalysis(IBusinessService businessService){
+    public EmptyPoolAnalysis(IBusinessService businessService) {
         super(businessService);
     }
 
@@ -17,7 +17,6 @@ public class EmptyPoolAnalysis extends AbsPoolAnalysis {
     public void startBusiness(IBusinessService businessService) throws Exception {
         businessService.businessEmpty();
     }
-
 
 
     @Override

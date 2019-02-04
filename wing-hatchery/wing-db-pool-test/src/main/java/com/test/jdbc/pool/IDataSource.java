@@ -9,9 +9,9 @@ import java.sql.SQLException;
 public interface IDataSource {
 
 
-    public Connection getConnection()throws SQLException;
+    public Connection getConnection() throws SQLException;
 
-    public void close() throws  SQLException;
+    public void close() throws SQLException;
 
     public String getName();
 }

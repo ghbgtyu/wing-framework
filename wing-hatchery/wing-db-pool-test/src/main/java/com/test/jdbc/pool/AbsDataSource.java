@@ -12,32 +12,33 @@ public abstract class AbsDataSource<D extends DataSource> implements IDataSource
 
     private DataSource dataSource;
 
-    public AbsDataSource(){
+    public AbsDataSource() {
         try {
             this.dataSource = this.createDataSource();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
 
+    /**
+     * 创建连接池dataSource
+     */
+    public abstract D createDataSource() throws Exception;
 
-    /**创建连接池dataSource*/
-    public abstract D createDataSource()throws Exception;
 
-
-    public Connection getConnection()throws SQLException {
+    public Connection getConnection() throws SQLException {
 
 
         return dataSource.getConnection();
     }
 
-    public void close() throws  SQLException {
+    public void close() throws SQLException {
         dataSource.getConnection().close();
     }
 
-    public abstract  String getName();
+    public abstract String getName();
 
     @Override
     public String toString() {

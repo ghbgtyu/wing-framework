@@ -9,13 +9,13 @@ import com.test.jdbc.pool.business.IBusinessService;
 public class QueryPoolAnalysis extends AbsPoolAnalysis {
 
 
-    public QueryPoolAnalysis(IBusinessService businessService){
+    public QueryPoolAnalysis(IBusinessService businessService) {
         super(businessService);
     }
 
     @Override
     public void startBusiness(IBusinessService businessService) throws Exception {
-      //  businessService.businessQuery("select count(1) from pool");
+        //  businessService.businessQuery("select count(1) from pool");
         businessService.businessQuery("select 1");
     }
 

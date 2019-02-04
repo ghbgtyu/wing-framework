@@ -13,26 +13,22 @@ import com.test.jdbc.pool.stage.AbsTimeStage;
 /**
  * Created by nijia on 2017/11/11.
  */
-public  class InsertStage extends AbsFixedTimeStage {
+public class InsertStage extends AbsFixedTimeStage {
 
 
-
-    private IAnalysis analysis ;
-
+    private IAnalysis analysis;
 
 
-    private String querySql ;
+    private String querySql;
 
 
-
-    private IBusinessService businessService ;
-
+    private IBusinessService businessService;
 
 
-    public InsertStage(IDataSource dataSource,String name,String version){
+    public InsertStage(IDataSource dataSource, String name, String version) {
         businessService = new BaseBusinessService(new BaseDao(dataSource));
-        analysis = new InsertPoolAnalysis(businessService,name,version);
-        querySql = "select count(1) from pool where version='"+version+"' and"+" name='"+name+"';";
+        analysis = new InsertPoolAnalysis(businessService, name, version);
+        querySql = "select count(1) from pool where version='" + version + "' and" + " name='" + name + "';";
 
     }
 
@@ -42,11 +38,9 @@ public  class InsertStage extends AbsFixedTimeStage {
         return 500;
     }
 
-    public int getResult()throws  Exception{
+    public int getResult() throws Exception {
         return businessService.businessQuery(querySql);
     }
-
-
 
 
     @Override

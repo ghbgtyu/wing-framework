@@ -6,17 +6,17 @@ import com.test.jdbc.pool.dao.IDao;
 /**
  * Created by nijia on 2017/11/9.
  */
-public class BaseBusinessService implements IBusinessService{
+public class BaseBusinessService implements IBusinessService {
 
 
     private IDao dao;
 
-    public BaseBusinessService(IDao dao){
+    public BaseBusinessService(IDao dao) {
         this.dao = dao;
     }
 
 
-    public int businessQuery(String sql)throws Exception {
+    public int businessQuery(String sql) throws Exception {
         return dao.query(sql);
     }
 

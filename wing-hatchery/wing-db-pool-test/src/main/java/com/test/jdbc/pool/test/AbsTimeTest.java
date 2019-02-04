@@ -22,7 +22,7 @@ public abstract class AbsTimeTest implements Runnable {
     }
 
 
-    public IStage exec(){
+    public IStage exec() {
         IStage stage = getStage();
 
         int allSecond = 60;
@@ -46,17 +46,17 @@ public abstract class AbsTimeTest implements Runnable {
         return stage;
     }
 
-    public void log(IStage stage){
+    public void log(IStage stage) {
         LogUtil.info(stage.toString());
         LogUtil.info(stage.getStageResult().toString());
-        stage.getStageResult().toExcel(getLogPath(stage),0,0);
+        stage.getStageResult().toExcel(getLogPath(stage), 0, 0);
     }
 
-    public String getLogPath(IStage stage){
+    public String getLogPath(IStage stage) {
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
         String fileName = stage.toString() + "_" + Thread.currentThread().getName() + "_" + df.format(new Date()) + ".xls";
 
-        return  "C:\\Users\\Administrator\\Desktop\\分享\\数据库连接池分享\\数据分析\\"+fileName;
+        return "C:\\Users\\Administrator\\Desktop\\分享\\数据库连接池分享\\数据分析\\" + fileName;
     }
 }

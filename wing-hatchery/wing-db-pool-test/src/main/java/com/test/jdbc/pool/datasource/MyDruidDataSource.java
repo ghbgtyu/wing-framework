@@ -42,10 +42,7 @@ public class MyDruidDataSource extends AbsDataSource<DruidDataSource> {
         dataSource.setMaxPoolPreparedStatementPerConnectionSize(100);
 
 
-
-
         //dataSource.setTestWhileIdle(JdcbConstants.TEST_WHILE_IDLE);
-
 
 
         dataSource.init();

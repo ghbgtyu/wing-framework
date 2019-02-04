@@ -31,12 +31,8 @@ public class MyProxoolDataSource extends AbsDataSource<ProxoolDataSource> {
         dataSource.setMaximumConnectionCount(JdcbConstants.MAX_ACTIVE);
 
 
-
-
         dataSource.setMinimumConnectionCount(JdcbConstants.MIN_IDLE);
         dataSource.setHouseKeepingTestSql(JdcbConstants.VALIDATION_QUERY);
-
-
 
 
         return dataSource;

@@ -5,12 +5,11 @@
     <parent>
         <artifactId>wing-hatchery</artifactId>
         <groupId>com.wing</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>my-glassfish-jersey</artifactId>
-
 
 
     <dependencies>

@@ -5,7 +5,7 @@ package com.hatchery.test.protobuf;
  */
 public class TestProtoMap {
 
-    public static void main(String[]args){
+    public static void main(String[] args) {
         MapPro.TestObject.Builder builder = MapPro.TestObject.newBuilder();
 
         MapPro.TestObject.MapVaule.Builder mapBuilder = MapPro.TestObject.MapVaule.newBuilder();
@@ -15,13 +15,13 @@ public class TestProtoMap {
         mapBuilder2.setMapValue(122);
 
 
-        builder.putMap("mapKey",mapBuilder.build());
-        builder.putMap("mapKey2",mapBuilder2.build());
+        builder.putMap("mapKey", mapBuilder.build());
+        builder.putMap("mapKey2", mapBuilder2.build());
 
 
         byte[] bytes = builder.build().toByteArray();
 
-        System.err.println("map序列化长度："+bytes.length);
+        System.err.println("map序列化长度：" + bytes.length);
 
 
 //        MapPro.TestObject.MapVaule.Builder mapBuilder2 = MapPro.TestObject.MapVaule.newBuilder();

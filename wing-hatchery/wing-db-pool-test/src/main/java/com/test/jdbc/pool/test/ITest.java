@@ -6,5 +6,4 @@ package com.test.jdbc.pool.test;
 public interface ITest {
 
 
-
 }

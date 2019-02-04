@@ -42,7 +42,6 @@ public class MyTomcatJdbcDataSource extends AbsDataSource<DataSource> {
         dataSource.testIdle();
 
 
-
         return dataSource;
     }
 

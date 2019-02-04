@@ -5,11 +5,17 @@ package com.test.jdbc.pool.analysis;
  */
 public class AnalysisResultData {
 
-    /**执行数量*/
+    /**
+     * 执行数量
+     */
     private int count;
-    /**执行花费时间*/
+    /**
+     * 执行花费时间
+     */
     private float time;
-    /**异常数量*/
+    /**
+     * 异常数量
+     */
     private int exceptionCount;
 
 

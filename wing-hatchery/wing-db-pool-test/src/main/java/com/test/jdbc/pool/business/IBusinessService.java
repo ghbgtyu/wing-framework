@@ -5,7 +5,9 @@ package com.test.jdbc.pool.business;
  */
 public interface IBusinessService {
 
-    /**业务查询*/
+    /**
+     * 业务查询
+     */
     public int businessQuery(String sql) throws Exception;
 
 

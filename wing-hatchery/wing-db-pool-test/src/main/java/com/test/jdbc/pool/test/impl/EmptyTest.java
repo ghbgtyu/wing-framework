@@ -13,7 +13,7 @@ public class EmptyTest extends AbsTimeTest {
 
     private IDataSource dataSource;
 
-    public EmptyTest(IDataSource dataSource){
+    public EmptyTest(IDataSource dataSource) {
         this.dataSource = dataSource;
     }
 

@@ -12,10 +12,6 @@ public class JdcbConstants {
     public static final String MYSQL_PASS_WORD = "root123";
 
 
-
-
-
-
     public static final int MAX_ACTIVE = 10;
     public static final int INITIAL_SIZE = 4;
     public static final int MIN_IDLE = 4;
@@ -30,7 +26,6 @@ public class JdcbConstants {
     public static final boolean TEST_ON_RETURN = true;
 
     public static final boolean TEST_WHILE_IDLE = true;
-
 
 
 }

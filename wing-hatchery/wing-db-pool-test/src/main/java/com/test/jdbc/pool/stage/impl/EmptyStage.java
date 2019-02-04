@@ -11,13 +11,12 @@ import com.test.jdbc.pool.stage.AbsTimeStage;
 /**
  * Created by nijia on 2017/11/11.
  */
-public  class EmptyStage extends AbsTimeStage {
+public class EmptyStage extends AbsTimeStage {
 
 
+    private IAnalysis analysis;
 
-    private IAnalysis analysis ;
-
-    public EmptyStage(IDataSource dataSource){
+    public EmptyStage(IDataSource dataSource) {
         analysis = new EmptyPoolAnalysis(new BaseBusinessService(new BaseDao(dataSource)));
     }
 
@@ -26,8 +25,6 @@ public  class EmptyStage extends AbsTimeStage {
     public int getNum() {
         return 10000;
     }
-
-
 
 
     @Override

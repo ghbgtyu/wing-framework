@@ -11,9 +11,9 @@ import com.test.jdbc.pool.test.AbsMultiThreadInsertTest;
 public class MultiThreadInsertTest extends AbsMultiThreadInsertTest {
 
     private IDataSource dataSource;
-    private String version ;
+    private String version;
 
-    public MultiThreadInsertTest(IDataSource dataSource, int threadSize){
+    public MultiThreadInsertTest(IDataSource dataSource, int threadSize) {
 
         super(threadSize);
         this.dataSource = dataSource;
@@ -26,7 +26,7 @@ public class MultiThreadInsertTest extends AbsMultiThreadInsertTest {
     }
 
     public InsertStage getStage() {
-        return new InsertStage(dataSource,dataSource.getName(),version);
+        return new InsertStage(dataSource, dataSource.getName(), version);
     }
 
 

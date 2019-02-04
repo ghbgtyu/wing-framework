@@ -5,8 +5,13 @@ package com.test.jdbc.pool.stage;
  */
 public interface IStage {
 
-    /**执行*/
+    /**
+     * 执行
+     */
     public void execute();
-    /**得到分析结果*/
+
+    /**
+     * 得到分析结果
+     */
     public StageResultVo getStageResult();
 }
