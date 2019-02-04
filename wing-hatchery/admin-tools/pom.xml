@@ -597,7 +597,6 @@
         </dependency>
 
 
-
         <!-- TEST begin -->
         <dependency>
             <groupId>junit</groupId>
@@ -759,24 +758,24 @@
                  <log.jdbc.username>lingyu</log.jdbc.username>
                  <log.jdbc.password>123.com,.</log.jdbc.password>
                 <-->
-                 <log.level>info</log.level>
-             </properties>
-             <activation>
-                 <activeByDefault>true</activeByDefault>
-             </activation>
-         </profile>
-         <profile>
-             <id>test</id>
-             <properties>
-                 <lan>zh_CN</lan>
-                 <jdbc.url>jdbc:mysql://localhost:3306/analysis?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
-                 <!--><global.jdbc.url>jdbc:mysql://192.168.1.27:3306/zmm-global?useUnicode=true&amp;characterEncoding=utf-8</global.jdbc.url>
-                <log.jdbc.url>jdbc:mysql://192.168.1.66:5029/fengshen_log?useUnicode=true&amp;characterEncoding=utf-8</log.jdbc.url>
-                 <global.jdbc.username>linyu</global.jdbc.username>
-                <global.jdbc.password>123456</global.jdbc.password>
-                <log.jdbc.username>lingyu</log.jdbc.username>
-                <log.jdbc.password>123.com</log.jdbc.password>
-                <-->
+                <log.level>info</log.level>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <lan>zh_CN</lan>
+                <jdbc.url>jdbc:mysql://localhost:3306/analysis?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+                <!--><global.jdbc.url>jdbc:mysql://192.168.1.27:3306/zmm-global?useUnicode=true&amp;characterEncoding=utf-8</global.jdbc.url>
+               <log.jdbc.url>jdbc:mysql://192.168.1.66:5029/fengshen_log?useUnicode=true&amp;characterEncoding=utf-8</log.jdbc.url>
+                <global.jdbc.username>linyu</global.jdbc.username>
+               <global.jdbc.password>123456</global.jdbc.password>
+               <log.jdbc.username>lingyu</log.jdbc.username>
+               <log.jdbc.password>123.com</log.jdbc.password>
+               <-->
                 <jdbc.username>root</jdbc.username>
                 <jdbc.password>root123</jdbc.password>
 
@@ -799,8 +798,8 @@
                     <-->
                 <jdbc.username>root</jdbc.username>
                 <jdbc.password>root123</jdbc.password>
-                 <log.level>info</log.level>
-             </properties>
-         </profile>
-     </profiles>
- </project>
+                <log.level>info</log.level>
+            </properties>
+        </profile>
+    </profiles>
+</project>
